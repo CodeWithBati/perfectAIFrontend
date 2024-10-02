@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+.border-right-except-last > *:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.border-bottom-except-last > *:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
