@@ -83,7 +83,7 @@ const BlogList = () => {
                     <div className="text-center mb-16 flex flex-col justify-center items-center">
                         <h1 className="text-5xl font-bold">Welcome to our blogs</h1>
                         <p className="text-2xl mt-4 max-w-[900px] text-center">
-                            Don't know which AI tool to use for your task? MyPerfectAI recommends the best AI tools for your task,
+                            Don&apos;t know which AI tool to use for your task? MyPerfectAI recommends the best AI tools for your task,
                             by giving step-by-step, personalized instructions.
                         </p>
                     </div>
@@ -187,7 +187,7 @@ const BlogList = () => {
                         {/* Smaller cards as in the existing design */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] mt-[80px]">
                             {blogData.slice(3).map((blog, index) => (
-                                <BlogCard blog={blog} />
+                                <BlogCard blog={blog} key={index} />
                             ))}
                         </div>
                     </div>

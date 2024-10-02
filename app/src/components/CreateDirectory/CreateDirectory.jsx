@@ -2,7 +2,6 @@
 import Header from "../../layout/Header/HeaderNew"
 import { useState } from "react";
 import Footer from "../../layout/FooterNew";
-import ImgVid from "./ImgVid";
 
 function CreateDirectory() {
 

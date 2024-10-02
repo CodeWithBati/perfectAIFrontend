@@ -32,7 +32,7 @@ const PrivacyPolicy = ({ isOpen, onClose }) => {
         <p className="text-white text-sm">Last updated August 08, 2024</p>
         <div className="mt-6 text-sm space-y-4 border-t border-[rgba(255,255,255,0.5)] pt-4">
           <p className='text-sm'>
-            This privacy notice for MYPERFECTAI LTD (doing business as MyPerfectAI) ('we', 'us', or 'our'), describes how and why we might collect, store, use, and/or share ('process') your information when you use our services ('Services'), such as when you:
+            This privacy notice for MYPERFECTAI LTD (doing business as MyPerfectAI) (&apos;we&apos;, &apos;us&apos;, or &apos;our&apos;), describes how and why we might collect, store, use, and/or share (&apos;process&apos;) your information when you use our services (&apos;Services&apos;), such as when you:
             <ul className='list-disc ml-4'>
               <li>Visit our website at <Link href='#' className="text-[#BF96E4]">https://www.myperfectai.app</Link>, or any website of ours that links to this privacy notice</li>
               <li>Engage with us in other related ways, including any sales, marketing, or events</li>

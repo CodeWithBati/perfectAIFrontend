@@ -99,7 +99,7 @@ const BlogDetail = () => {
 
                         <h2 className="text-2xl font-semibold mb-4">Impact of Visual Search on Online Shopping</h2>
                         <p>
-                            Visual search has significantly improved online shoppers' shopping experience. From finding the right products to comparing prices and reading reviews, it offers many benefits. Let's have a look at a few of them.
+                            Visual search has significantly improved online shoppers&apos; shopping experience. From finding the right products to comparing prices and reading reviews, it offers many benefits. Let&apos;s have a look at a few of them.
                         </p>
                     </div>
                 </div>

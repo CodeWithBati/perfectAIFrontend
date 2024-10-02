@@ -167,7 +167,7 @@ function ChatBotResult() {
                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 16.5C3.5625 16.5 0 12.9375 0 8.5C0 4.09375 3.5625 0.5 8 0.5C12.4062 0.5 16 4.09375 16 8.5C16 12.9375 12.4062 16.5 8 16.5ZM9.46875 6.5L8 3.5L6.53125 6.5L3.21875 6.96875L5.625 9.28125L5.0625 12.5625L8 11L10.9375 12.5625L10.375 9.28125L12.75 6.96875L9.46875 6.5Z" fill="white" />
                     </svg>
-                    <h3 className="text-2xl font-semibold">Why it's Perfect for your task</h3>
+                    <h3 className="text-2xl font-semibold">Why it&apos;s Perfect for your task</h3>
                   </div>
                   <ul className="list-disc space-y-4 text-sm ml-6">
                     <li>AI-driven content generation with a focus on creativity</li>

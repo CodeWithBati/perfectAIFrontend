@@ -216,7 +216,7 @@ const VerifyEmail = () => {
               </button>
 
               <p className="text-white text-sm mt-8">
-                Don't received any email?{' '}
+                Don&apos;t received any email?{' '}
                 <Link href="/login" className="text-additional-purple underline">Resend code</Link>{' '} | {' '}
                 <Link href="/login" className="text-additional-purple underline">Change email address</Link>
               </p>

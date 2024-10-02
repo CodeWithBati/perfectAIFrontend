@@ -26,7 +26,7 @@ function AboutUs() {
               <p className="text-lg mt-4">
                 Although online shopping was already convenient and stress-free, the incorporation of modern technologies,
                 especially visual search, has made it much easier than ever. This article will discuss visual search
-                technology and how it’s transforming the online shopping experience.
+                technology and how it&apos;s transforming the online shopping experience.
               </p>
             </section>
 
@@ -75,7 +75,7 @@ function AboutUs() {
               <h3 className="text-xl font-bold mb-6" >1. Discover Reviews</h3>
               <p className="text-lg mb-4 ">
 
-                Online shoppers can easily find authentic and detailed reviews about different products using a modern reverse im search tool. Generally, e-commerce store owners add fake reviews to their websites to win consumers' trust. These
+                Online shoppers can easily find authentic and detailed reviews about different products using a modern reverse im search tool. Generally, e-commerce store owners add fake reviews to their websites to win consumer&apos;s trust. These
               </p>
             </section>
           </div>

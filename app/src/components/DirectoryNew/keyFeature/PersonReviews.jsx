@@ -141,7 +141,7 @@ export default function PersonReviews() {
 
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((review, index) => (
-              <div className="p-6 bg-[#323639] rounded-lg border border-[rgba(255,255,255,0.2)] text-white">
+              <div key={index} className="p-6 bg-[#323639] rounded-lg border border-[rgba(255,255,255,0.2)] text-white">
                 {/* Star rating */}
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -162,7 +162,7 @@ export default function PersonReviews() {
 
                 {/* Description */}
                 <p className="text-white text-sm mb-4 line-clamp-5">
-                  In my opinion, GetGenie AI has the ability to completely revolutionize the WordPress community. I'm hoping for them to release Boss Mode and give GetGenie a unique selling point since I believe it's a big deal.
+                  In my opinion, GetGenie AI has the ability to completely revolutionize the WordPress community. I&apos;m hoping for them to release Boss Mode and give GetGenie a unique selling point since I believe it&apos;s a big deal.
                 </p>
 
                 {/* Author section */}
@@ -172,7 +172,7 @@ export default function PersonReviews() {
                     src="https://via.placeholder.com/40" // Replace with actual image URL
                     alt="Theresa Webb"
                   />
-                  <div className="text-base font-semibold">Theresa Webb</div>
+                  <div className="text-base font-semibold">There is a Webb</div>
                 </div>
               </div>
 

@@ -54,7 +54,7 @@ const PasswordResetFormSuccess = () => {
             {/* Resend and Change Email Links */}
             <div className="text-white text-sm">
               <p>
-                Didn't receive any email?{' '}
+                Didn&apos;t receive any email?{' '}
                 <Link href="/forget-password" className="text-additional-purple underline">Resend instruction</Link> |{' '}
                 <Link href="/forget-password" className="text-additional-purple underline">Change email address</Link>
               </p>

@@ -43,7 +43,7 @@ const SubScriptionSection = () => {
                     }}
                 ></div>
                 <div className="max-w-4xl absolute top-0 left-0 right-0 text-white py-[55px] px-[70px]">
-                    <h2 className="text-5xl font-bold mb-4">There's An AI For That</h2>
+                    <h2 className="text-5xl font-bold mb-4">There&apos;s An AI For That</h2>
                     <p className="text-base mb-8">Stay up to date with the latest AI tools, by the #1 AI aggregator.</p>
 
                     <div className="flex justify-start items-center">

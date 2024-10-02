@@ -33,19 +33,19 @@ const Terms = ({ isOpen, onClose }) => {
         <div className="mt-6 text-sm space-y-4 border-t border-[rgba(255,255,255,0.5)]">
           <h3 className="text-lg font-semibold pt-8">AGREEMENT TO OUR LEGAL TERMS</h3>
           <p>
-            We are MYPERFECTAI LTD, doing business as MyPerfectAI ("Company", "we", "us", or "our"), a company registered in England at 20 Wenlock Road, London N1 7GU.
+            We are MYPERFECTAI LTD, doing business as MyPerfectAI (&quot;Company&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a company registered in England at 20 Wenlock Road, London N1 7GU.
           </p>
           <p>
-            We operate the website <Link href="https://www.myperfectai.app" className="underline text-[#BF96E4]">https://www.myperfectai.app</Link> (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").
+            We operate the website <Link href="https://www.myperfectai.app" className="underline text-[#BF96E4]">https://www.myperfectai.app</Link> (the &quot;Site&quot;), as well as any other related products and services that refer or link to these legal terms (the &quot;Legal Terms&quot;) (collectively, the &quot;Services&quot;).
           </p>
           <p>
             You can contact us by email at contact@myperfectai.app or by mail to 20 Wenlock Road, London N1 7GU, England.
           </p>
           <p>
-            These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), and MYPERFECTAI LTD, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
+            These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;), and MYPERFECTAI LTD, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
           </p>
           <p>
-            Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Legal Terms from time to time. We will alert you about any changes by updating the "Last updated" date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
+            Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Legal Terms from time to time. We will alert you about any changes by updating the &quot;Last updated&quot; date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
           </p>
           <p>
             The Services are intended for users who are at least 18 years old. Persons under the age of 18 are not permitted to use or register for the Services.
