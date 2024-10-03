@@ -106,7 +106,7 @@ const PasswordChangeForm = () => {
   return (
     <div className="flex h-screen bg-[#181C1F]">
       {/* Left Side with AI Info */}
-      <div className="w-1/3 bg-cover bg-center flex justify-center items-center" style={{ backgroundImage: "url('/images/auth_bg.png')" }}>
+      <div className="w-1/3 bg-cover bg-center flex justify-center items-center" style={{ backgroundImage: "url('/images/authBg.png')" }}>
         <div className="text-center text-white px-8">
           <p className="bg-main-purple text-xs px-[10px] py-[5px] mb-4 font-semibold inline-block rounded-[5px]">DID YOU KNOW?</p>
           <h1 className="text-[32px] font-bold mb-4">AI can improve customer service</h1>

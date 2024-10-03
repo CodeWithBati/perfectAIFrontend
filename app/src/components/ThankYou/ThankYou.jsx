@@ -8,7 +8,7 @@ function ThankYou() {
       <div className='bg-slate-800' >
         <Header />
         <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pb-16 text-white bg-no-repeat bg-cover" style={{
-          backgroundImage: `url('/images/all_bg.jpeg')`
+          backgroundImage: `url('/images/someBg.png')`
         }}>
           <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">

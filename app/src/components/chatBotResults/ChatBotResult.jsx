@@ -40,7 +40,7 @@ function ChatBotResult() {
     <div>
       <Header />
       <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-cover" style={{
-        backgroundImage: `url('/images/all_bg.jpeg')`
+        backgroundImage: `url('/images/allPageBg.png')`
       }}>
         <h4 className="text-2xl font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<span className="text-[#BF96E4] font-bold"> Learn more</span> </h4>
         <div className="px-[135px] mt-8 rounded-lg text-white">

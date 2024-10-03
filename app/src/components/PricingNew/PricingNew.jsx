@@ -56,7 +56,7 @@ function PricingNew() {
     <>
       <Header />
       <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-cover" style={{
-        backgroundImage: `url('/images/all_bg.jpeg')`
+        backgroundImage: `url('/images/someBg.png')`
       }}>
         <div className=" text-white py-10 px-[135px]">
           <h1 className="text-5xl font-bold mb-8 text-center">Pricing</h1>

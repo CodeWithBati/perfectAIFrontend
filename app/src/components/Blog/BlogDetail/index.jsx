@@ -53,7 +53,7 @@ const BlogDetail = () => {
         <>
             <Header />
             <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-cover" style={{
-                backgroundImage: `url('/images/all_bg.jpeg')`
+                backgroundImage: `url('/images/allPageBg.png')`
             }}>
                 <div className="container max-w-4xl mx-auto px-8 md:px-16">
                     {/* Blog Title Section */}

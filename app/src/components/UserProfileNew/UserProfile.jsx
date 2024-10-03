@@ -86,7 +86,7 @@ const UserProfile = () => {
       <Header />
       <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-26 pb-16 text-white bg-no-repeat bg-cover"
         style={{
-          backgroundImage: `url('/images/all_bg.jpeg')`
+          backgroundImage: `url('/images/allPageBg.png')`
         }}>
 
 

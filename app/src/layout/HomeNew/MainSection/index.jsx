@@ -30,7 +30,7 @@ const MainSection = () => {
             <HeaderNew />
 
             <section className="relative flex flex-col items-center justify-center min-w-screen sm:pt-32 pt-20 pb-8 bg-no-repeat bg-cover" style={{
-                backgroundImage: `linear-gradient(360deg, #181C1F 20.09%, rgba(24, 28, 31, 0) 116.67%), url('/images/main_bg.jpeg')`
+                backgroundImage: `url('/images/homeBgFull.png')`
             }}>
                 <h1 className="text-[32px] sm:text-[80px] font-bold text-center">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
                 <h5 className="text-base sm:text-2xl sm:font-bold text-center mb-8 w-[85%] sm:w-[570px]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>

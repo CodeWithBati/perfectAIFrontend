@@ -214,9 +214,30 @@ const Header = ({ className }) => {
                 <div />
               </div>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
-              <Link href="/" className="block py-2 hover:text-purple-500 px-[30px] py-[20px]">Home</Link>
-              <Link href="/about" className="block py-2 hover:text-purple-500 px-[30px] py-[10px]">About</Link>
-              <Link href="/blogs" className="block py-2 hover:text-purple-500 px-[30px] py-[20px]">Blogs</Link>
+              <Link href="/" className="block py-2 hover:text-purple-500 px-[30px] py-[20px] flex items-center justify-between">
+                <p>Home</p>
+                <p>
+                  <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
+                  </svg>
+                </p>
+              </Link>
+              <Link href="/about" className="block py-2 hover:text-purple-500 px-[30px] py-[10px] flex items-center justify-between">
+                <p>About</p>
+                <p>
+                  <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
+                  </svg>
+                </p>
+              </Link>
+              <Link href="/blogs" className="block py-2 hover:text-purple-500 px-[30px] py-[20px] flex items-center justify-between">
+                <p>Blog</p>
+                <p>
+                  <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
+                  </svg>
+                </p>
+              </Link>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
               <div className="flex items-center justify-center w-full p-[20px] gap-[10px]">
                 <Link href="/login" className="block py-2 bg-[#1e1e1e] text-center rounded-[5px] border border-[rgba(255,255,255,0.2)] font-bold w-full">Sign in</Link>
@@ -233,32 +254,46 @@ const Header = ({ className }) => {
                   &times;
                 </button>
                 <p className="flex text-white text-center items-center justify-center font-bold text-2xl">
-                {
-                  user?.profile ? (
-                    <Image
-                      src={user?.profile}
-                      className="object-cover rounded-[6.5px]"
-                      alt="avatar"
-                      width={40}
-                      height={40}
-                    />
-                  ) : (
-                    <Image
-                      src="/images/avatar.svg"
-                      className="object-cover rounded-[6.5px]"
-                      alt="No Profile Image Avatar"
-                      width={40}
-                      height={40}
-                    />
-                  )
-                }
-                <span className="text-white ml-4">{user?.name || "User"}</span>
+                  {
+                    user?.profile ? (
+                      <Image
+                        src={user?.profile}
+                        className="object-cover rounded-[6.5px]"
+                        alt="avatar"
+                        width={40}
+                        height={40}
+                      />
+                    ) : (
+                      <Image
+                        src="/images/avatar.svg"
+                        className="object-cover rounded-[6.5px]"
+                        alt="No Profile Image Avatar"
+                        width={40}
+                        height={40}
+                      />
+                    )
+                  }
+                  <span className="text-white ml-4">{user?.name || "User"}</span>
                 </p>
                 <div />
               </div>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
-              <Link href="/directory" className="block py-2 hover:text-purple-500 px-[30px] pt-[20px] pb-[15px]">Directory Manager</Link>
-              <Link href="/profile" className="block py-2 hover:text-purple-500 px-[30px] pt-[15px] pb-[20px]">Profile</Link>
+              <Link href="/directory" className="block py-2 hover:text-purple-500 px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
+                <p>Directory Manager</p>
+                <p>
+                  <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
+                  </svg>
+                </p>
+              </Link>
+              <Link href="/profile" className="block py-2 hover:text-purple-500 px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
+                <p>Profile</p>
+                <p>
+                  <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
+                  </svg>
+                </p>
+              </Link>
               <Link href="/logout" className="block text-center font-bold px-[30px] py-[20px] border-t border-[rgba(255,255,255,0.2)]">Log out</Link>
             </div>
           </div>
