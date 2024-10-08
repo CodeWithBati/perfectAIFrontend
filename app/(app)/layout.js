@@ -1,23 +1,27 @@
+"use client";
+
 import "./globals.css";
 import HeaderNew from "@/app/src/layout/Header/HeaderNew";
-import Footer from "@/app/src/layout/Footer";
+import Footer from "@/app/src/layout/FooterNew";
+import AuthFooter from "../src/components/form/AuthFooter";
 import StoreProvider from "./StoreProvider";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ThemeProvider from "../src/layout/provider";
 import Script from 'next/script';
 import '@pathscale/fonts-sansation'
+import { usePathname } from "next/navigation";
 
 
-export const metadata = {
-  title: {
-    default: "MyPerfectAI - Instant, Personalized AI Tool Recommendations",
-    template: "%s - MyPerfectAI"
-  },
-  description: "Our AI chatbot provides accurate, task-specific AI tool & app recommendations. Also, explore the best AI tools in the MyPerfectAI Directory.",
-}
+
+const isAuthRoute = (pathname) => {
+  return ["/login", "/register", "/forget-password", "/registerCreate", "/registerCreatePartner", "/reset-password", "/reset-password-success", "/verify-email", "/forget-password-success", ].includes(pathname);
+};
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  console.log(pathname)
+  const isAuthPage = isAuthRoute(pathname);
 
   return (
     <html lang="en">
@@ -46,12 +50,10 @@ export default function RootLayout({ children }) {
                 },
               }}  position="top-right" />
             <div className="flex flex-col min-h-screen overflow-x-hidden max-w-full">
-              {/* <HeaderNew /> */}
-              {/* <main className="flex flex-grow mt-14 bg-slate-200 justify-center dark:bg-slate-900 "> */}
+              {!isAuthPage && <HeaderNew />}
                 {children}
                 <SpeedInsights />
-              {/* </main> */}
-              {/* <Footer /> */}
+                {!isAuthPage && <Footer />}
             </div>
           </StoreProvider>
         </body>

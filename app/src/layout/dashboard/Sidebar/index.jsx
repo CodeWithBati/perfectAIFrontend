@@ -34,7 +34,7 @@ function Sidebar({ mobile, visibility, setVisibility, className }) {
               ) : (
                 <Image
                   alt="website Logo"
-                  src={"/images/LightLogo.png"}
+                  src={"/images/defaulticon4.png"}
                   width={200}
                   height={200}
                   className="!h-11"

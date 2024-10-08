@@ -2,9 +2,9 @@
 export default function Pricing() {
     return (
       <section className="text-white">
-        <h1 className="text-2xl font-bold">Pricing Information</h1>
+        <h1 className="text-lg lg:text-2xl font-bold">Pricing Information</h1>
         <p className="mb-4 font-bold">GetGenie AI offers several pricing plans:</p>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           <div className="bg-[#323639] p-5 rounded">
             <h3 className="font-bold text-lg mb-2">Free Plan</h3>
             <p className="text-md">

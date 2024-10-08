@@ -88,13 +88,13 @@ const Header = ({ className }) => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
-    <header className="fixed w-full bg-transparent z-10">
+    <header className="absolute w-full bg-transparent z-10">
       <nav className="flex items-center justify-between py-4 px-[30px] sm:px-[135px]">
         {/* Logo */}
         <div className="sm:hidden">
           <button onClick={toggleMenu} className="text-white focus:outline-none">
-            <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            <svg width="21" height="18" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.25 0H17.75V1.875H0.25V0ZM0.25 6.25H17.75V8.125H0.25V6.25ZM17.75 12.5V14.375H0.25V12.5H17.75Z" fill="white" />
             </svg>
           </button>
         </div>
@@ -137,20 +137,20 @@ const Header = ({ className }) => {
 
         {/* Links */}
         <div className="hidden sm:flex items-center space-x-6 text-white">
-          <Link href="/" className="font-semibold hover:text-purple-500">Home</Link>
-          <Link href="/about" className="hover:text-purple-500">About</Link>
-          <Link href="/blogs" className="hover:text-purple-500">Blogs</Link>
-          <Link href="/pricing" className="hover:text-purple-500">Pricing</Link>
+          <Link href="/" className="font-semibold hover:text-additional-purple tracking-wider text-sm">Home</Link>
+          <Link href="/about" className="hover:text-additional-purple tracking-wider text-sm">About</Link>
+          <Link href="/blogs" className="hover:text-additional-purple tracking-wider text-sm">Blogs</Link>
+          <Link href="/pricing" className="hover:text-additional-purple tracking-wider text-sm">Pricing</Link>
         </div>
 
         {/* Authenticated or Non-Authenticated Actions */}
         <div className="hidden sm:flex items-center space-x-4">
           {isAuthenticated ? (
             <>
-              <Link href="/login" className="text-white font-semibold hover:bg-gray-800 px-4 py-2 rounded-lg">
+              <Link href="/login" className="text-white font-semibold hover:bg-gray-800 px-4 py-2 rounded-lg tracking-wider text-sm">
                 Sign in
               </Link>
-              <Link href="/register" className="text-white bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-lg">
+              <Link href="/register" className="text-white bg-additional-purple hover:bg-additional-purple px-4 py-2 rounded-lg tracking-wider text-sm">
                 Sign up
               </Link>
             </>
@@ -177,7 +177,7 @@ const Header = ({ className }) => {
                     />
                   )
                 }
-                <span className="text-white text-sm">{user?.name || "User"}</span>
+                <span className="text-white text-sm tracking-wider text-sm">{user?.name || "User"}</span>
                 <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.5 1.42593L4.25 5.17593L8 1.42593V0.675934H0.5V1.42593Z" fill="white" />
                 </svg>
@@ -186,9 +186,9 @@ const Header = ({ className }) => {
               {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-[#323639] border border-[rgba(255,255,255,0.2)] text-white text-sm rounded-lg shadow-lg">
-                  <Link href="/directory" className="block px-4 py-2 hover:bg-gray-700">Directory Manager</Link>
-                  <Link href="/profile" className="block px-4 py-2 hover:bg-gray-700">Profile</Link>
-                  <Link href="/logout" className="block px-4 py-2 hover:bg-gray-700">Log out</Link>
+                  <Link href="/directory" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Directory Manager</Link>
+                  <Link href="/profile" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Profile</Link>
+                  <Link href="/logout" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Log out</Link>
                 </div>
               )}
             </div>
@@ -214,24 +214,24 @@ const Header = ({ className }) => {
                 <div />
               </div>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
-              <Link href="/" className="block py-2 hover:text-purple-500 px-[30px] py-[20px] flex items-center justify-between">
-                <p>Home</p>
+              <Link href="/" className="block py-2 hover:text-additional-purple px-[30px] py-[20px] flex items-center justify-between">
+                <p className="tracking-wider text-sm">Home</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
                   </svg>
                 </p>
               </Link>
-              <Link href="/about" className="block py-2 hover:text-purple-500 px-[30px] py-[10px] flex items-center justify-between">
-                <p>About</p>
+              <Link href="/about" className="block py-2 hover:text-additional-purple px-[30px] py-[10px] flex items-center justify-between">
+                <p className="tracking-wider text-sm">About</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
                   </svg>
                 </p>
               </Link>
-              <Link href="/blogs" className="block py-2 hover:text-purple-500 px-[30px] py-[20px] flex items-center justify-between">
-                <p>Blog</p>
+              <Link href="/blogs" className="block py-2 hover:text-additional-purple px-[30px] py-[20px] flex items-center justify-between">
+                <p className="tracking-wider text-sm">Blog</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
@@ -240,8 +240,8 @@ const Header = ({ className }) => {
               </Link>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
               <div className="flex items-center justify-center w-full p-[20px] gap-[10px]">
-                <Link href="/login" className="block py-2 bg-[#1e1e1e] text-center rounded-[5px] border border-[rgba(255,255,255,0.2)] font-bold w-full">Sign in</Link>
-                <Link href="/register" className="block py-2 bg-purple-500 text-center rounded-[5px] font-bold w-full">Sign up</Link>
+                <Link href="/login" className="block py-2 bg-[#1e1e1e] text-center rounded-[5px] border border-[rgba(255,255,255,0.2)] font-bold w-full tracking-wider text-sm">Sign in</Link>
+                <Link href="/register" className="block py-2 bg-additional-purple text-center rounded-[5px] font-bold w-full tracking-wider text-sm">Sign up</Link>
               </div>
             </div>
           </div>
@@ -278,23 +278,23 @@ const Header = ({ className }) => {
                 <div />
               </div>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
-              <Link href="/directory" className="block py-2 hover:text-purple-500 px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
-                <p>Directory Manager</p>
+              <Link href="/directory" className="block py-2 hover:text-additional-purple px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
+                <p className="tracking-wider text-sm">Directory Manager</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
                   </svg>
                 </p>
               </Link>
-              <Link href="/profile" className="block py-2 hover:text-purple-500 px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
-                <p>Profile</p>
+              <Link href="/profile" className="block py-2 hover:text-additional-purple px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
+                <p className="tracking-wider text-sm">Profile</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
                   </svg>
                 </p>
               </Link>
-              <Link href="/logout" className="block text-center font-bold px-[30px] py-[20px] border-t border-[rgba(255,255,255,0.2)]">Log out</Link>
+              <Link href="/logout" className="block text-center font-bold px-[30px] py-[20px] border-t border-[rgba(255,255,255,0.2)] tracking-wider text-sm">Log out</Link>
             </div>
           </div>
         )}

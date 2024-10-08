@@ -15,9 +15,9 @@ const BlogCard = ({blog}) => {
                 width={200}
             />
             <div className="h-[150px]">
-            <h3 className="font-semibold text-lg text-white mb-2 line-clamp-3">{blog?.title}</h3>
+            <h3 className="font-semibold text-lg text-white mb-2 line-clamp-2 lg:line-clamp-3">{blog?.title}</h3>
 
-            <p className="text-sm text-white mb-4 line-clamp-3">{blog?.description}</p>
+            <p className="text-sm text-white mb-4 line-clamp-2 lg:line-clamp-3">{blog?.description}</p>
             </div>
             <div className="flex items-center justify-between">
                 <p className="text-sm text-white">{blog?.date}</p>

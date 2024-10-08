@@ -83,40 +83,36 @@ const UserProfile = () => {
 
   return (
     <>
-      <Header />
-      <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-26 pb-16 text-white bg-no-repeat bg-cover"
-        style={{
-          backgroundImage: `url('/images/allPageBg.png')`
-        }}>
+      <section className="relative flex flex-col items-center justify-start min-w-screen pt-16 lg:pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
 
 
-        <h1 className="text-5xl font-bold mb-8 text-center">Profile</h1>
+        <h1 className="text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center">Profile</h1>
 
-        <div className="flex flex-col justify-center items-center px-[135px]">
+        <div className="flex flex-col justify-center items-center px-[30px] w-full max-w-screen-xl lg:px-[135px]">
 
           {/* Tabs Section */}
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center gap-[10px] w-full lg:w-auto">
             <div className="flex justify-center items-center border border-[rgba(255,255,255,0.2)] mb-8 bg-[#1E1E1E] rounded-md p-2">
               <button
-                className={`px-4 py-2 ${activeTab === 'Overview' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
+                className={`px-[10px] py-[5px] ${activeTab === 'Overview' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
                 onClick={() => handleTabChange('Overview')}
               >
                 Overview
               </button>
               <button
-                className={`px-4 py-2 ${activeTab === 'Settings' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
+                className={`px-[10px] py-[5px] ${activeTab === 'Settings' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
                 onClick={() => handleTabChange('Settings')}
               >
                 Settings
               </button>
               <button
-                className={`px-4 py-2 ${activeTab === 'Chats' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
+                className={`px-[10px] py-[5px] ${activeTab === 'Chats' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
                 onClick={() => handleTabChange('Chats')}
               >
                 Chats
               </button>
               <button
-                className={`px-4 py-2 ${activeTab === 'Top rated' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
+                className={`px-[10px] py-[5px] ${activeTab === 'Top rated' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
                 onClick={() => handleTabChange('Top rated')}
               >
                 Top rated
@@ -130,7 +126,6 @@ const UserProfile = () => {
           {activeTab === 'Chats' && <UserChatsLog user={user} token={token} imageUrl={imageUrl} handleImageChange={handleImageChange} spinner={spinner} setSpinner={setSpinner} />}
         </div>
       </section>
-      <Footer />
     </>
   );
 };

@@ -18,6 +18,8 @@ import Label from '../Label';
 import SnackBar from '../../global/Snackbar';
 import ErrorIcon from '@/app/src/icons/errorIcon';
 import CountdownTimer from '../../global/CountdownTimer';
+import AuthFooter from '../AuthFooter';
+import SideBar from '../SideBar';
 
 const VerifyEmail = () => {
   const router = useRouter();
@@ -65,7 +67,7 @@ const VerifyEmail = () => {
         Cookies.set('user', JSON.stringify(response.data.user), {
           expires: 35,
         });
-        
+
         router.push('/', { scroll: false });
       }
     } catch (error) {
@@ -160,76 +162,68 @@ const VerifyEmail = () => {
         severity={snackbar.severity}
         onClose={handleCloseSnackbar}
       />
-      <div className="flex h-screen bg-[#181C1F]">
-        {/* Left Side with AI Info */}
-        <div className="w-1/3 bg-cover bg-center flex justify-center items-center" style={{ backgroundImage: "url('/images/authBg.png')" }}>
-          <div className="text-center text-white px-8">
+      <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
+      
+        <SideBar />
+        {/* Right Side with Sign-Up Options */}
+        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
+          {/* Top Part (Logo and Sign Up Buttons) */}
+          <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
+            <Image
+              alt="website Logo"
+              src={"/images/defaulticon4.png"}
+              width={40}
+              height={40}
+              className="mx-auto rounded-[6.5px] mr-[10px]"
+            /> myPerfectAI
+          </p>
+
+          <div className="space-y-4 text-center w-full lg:w-auto flex flex-col items-center">
+            <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Verify Your Account</h2>
+            <div className="flex justify-evenly mb-6 w-full lg:w-[370px]">
+              <input
+                type="text"
+                maxLength="1"
+                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <input
+                type="text"
+                maxLength="1"
+                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <input
+                type="text"
+                maxLength="1"
+                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <input
+                type="text"
+                maxLength="1"
+                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+
+            {/* Confirm Button */}
+            <button className="text-white bg-purple-500 px-4 py-2 rounded-md text-sm font-semibold hover:bg-purple-600 transition-all">
+              Confirm
+            </button>
+
+            <p className="text-white text-sm mt-8">
+              Don&apos;t received any email?{' '}
+              <br className='lg:hidden' />
+              <Link href="/login" className="text-additional-purple underline">Resend code</Link>{' '} | {' '}
+              <Link href="/login" className="text-additional-purple underline">Change email address</Link>
+            </p>
+          </div>
+
+          <div className="block lg:hidden text-center text-white mt-20 mb-12">
             <p className="bg-main-purple text-xs px-[10px] py-[5px] mb-4 font-semibold inline-block rounded-[5px]">DID YOU KNOW?</p>
-            <h1 className="text-[32px] font-bold mb-4">AI can improve customer service</h1>
-            <p className="text-lg">
+            <h1 className="text-lg font-bold mb-4">AI can improve customer service</h1>
+            <p className="text-xs">
               AI-powered chatbots and virtual assistants can improve customer service by providing quick and accurate responses to customer inquiries.
             </p>
           </div>
-        </div>
-
-        {/* Right Side with Sign-Up Options */}
-        <div className="w-2/3 h-screen bg-dark-bg flex flex-col justify-between items-center">
-            {/* Top Part (Logo and Sign Up Buttons) */}
-            <p className='flex text-white text-center items-center justify-center mt-[68px] mb-8 font-bold text-2xl'>
-              <Image
-                alt="website Logo"
-                src={"/images/defaulticon4.png"}
-                width={40}
-                height={40}
-                className="mx-auto rounded-[6.5px] mr-[10px]"
-              /> myPerfectAI
-            </p>
-
-            <div className="space-y-4 text-center">
-              <h2 className="text-white text-5xl font-bold mb-8">Verify Your Account</h2>
-              <div className="flex justify-evenly mb-6">
-                <input
-                  type="text"
-                  maxLength="1"
-                  className="w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-                <input
-                  type="text"
-                  maxLength="1"
-                  className="w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-                <input
-                  type="text"
-                  maxLength="1"
-                  className="w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-                <input
-                  type="text"
-                  maxLength="1"
-                  className="w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
-
-              {/* Confirm Button */}
-              <button className="text-white bg-purple-500 px-4 py-2 rounded-md text-sm font-semibold hover:bg-purple-600 transition-all">
-                Confirm
-              </button>
-
-              <p className="text-white text-sm mt-8">
-                Don&apos;t received any email?{' '}
-                <Link href="/login" className="text-additional-purple underline">Resend code</Link>{' '} | {' '}
-                <Link href="/login" className="text-additional-purple underline">Change email address</Link>
-              </p>
-            </div>
-
-            {/* Bottom Links */}
-            <div className="text-center font-semibold mb-8 text-white flex justify-center space-x-4 text-xs">
-              <p className="text-xs">
-                © 2024. Crafted By <Link href="/" className="text-additional-purple underline">MyPerfectAI</Link>
-              </p>
-              <Link href="#" className="text-white text-xs mt-0">Privacy Policy</Link>
-              <Link href="#" className="text-white text-xs mt-0">Terms and Conditions</Link>
-            </div>
+          <AuthFooter />
         </div>
       </div>
     </>

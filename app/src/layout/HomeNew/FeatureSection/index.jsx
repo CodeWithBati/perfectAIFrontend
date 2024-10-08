@@ -177,30 +177,30 @@ const FeatureSection = () => {
 
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
                 {/* Tabs */}
-                <div className="flex items-center justify-between space-x-2 border border-[rgba(255,255,255,0.2)] rounded-md py-[5px] px-[10px] sm:py-[10px] sm:px-[15px] w-full sm:w-auto">
+                <div className="flex items-center justify-between space-x-[10px] bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] rounded-md py-[5px] px-[10px] sm:py-[10px] sm:px-[15px] w-full sm:w-auto">
                     <button
-                        className={`text-xs text-center px-2 sm:px-[4] py-2 rounded-md ${activeTab === "Featured" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
+                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "Featured" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
                             }`}
                         onClick={() => handleTabClick("Featured")}
                     >
                         Featured
                     </button>
                     <button
-                        className={`text-xs text-center px-2 sm:px-[4] py-2 rounded-md ${activeTab === "New" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
+                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "New" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
                             }`}
                         onClick={() => handleTabClick("New")}
                     >
                         New
                     </button>
                     <button
-                        className={`text-xs text-center px-2 sm:px-[4] py-2 rounded-md ${activeTab === "Popular" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
+                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "Popular" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
                             }`}
                         onClick={() => handleTabClick("Popular")}
                     >
                         Popular
                     </button>
                     <button
-                        className={`text-xs text-center px-2 sm:px-[4] py-2 ${activeTab === "Top rated" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639] sm:border-none border-r border-[rgba(255,255,255,0.2)]"
+                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "Top rated" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639] sm:border-none border-r border-[rgba(255,255,255,0.2)]"
                             }`}
                         onClick={() => handleTabClick("Top rated")}
                     >
@@ -217,13 +217,13 @@ const FeatureSection = () => {
                 </div>
 
                 {/* Filter Options */}
-                <div className="hidden sm:flex items-center bg-[#323639] text-white rounded-md py-[10px] px-[20px] mt-4 sm:mt-0">
+                <div className="hidden sm:flex items-center bg-[#323639] border border-[rgba(255,255,255,0.2)] text-white rounded-md py-[10px] px-[20px] mt-4 sm:mt-0">
                     {/* Verified Toggle */}
                     <div className="hidden sm:flex items-center pr-4 border-r border-[rgba(255,255,255,0.2)]">
                         <span className="mr-2 text-xs">Verified</span>
                         <label className="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" className="sr-only peer" />
-                            <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                            <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
                         </label>
                     </div>
 
@@ -270,7 +270,7 @@ const FeatureSection = () => {
                                     <UseCaseMultiSelect />
 
                                     {/* Apply Filter Button */}
-                                    <button className="w-full py-2 mt-4 text-white bg-[#8B60B2] rounded-md">Apply filter</button>
+                                    <button className="w-full py-2 mt-4 text-white bg-[#8B60B2] rounded-md font-bold">Apply filter</button>
                                 </div>
                             </div>
                         )}
@@ -282,7 +282,7 @@ const FeatureSection = () => {
                     <>
                         <div className="fixed sm:hidden inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50" onClick={toggleFilter} />
                         <div className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-300px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg shadow-lg z-50 w-full sm:w-64">
-                            <div className="flex justify-between items-center text-white font-semibold text-lg mb-4 border-b border-[rgba(255,255,255,0.2)] pb-2">
+                            <div className="flex justify-between items-center text-white font-semibold text-lg border-b border-[rgba(255,255,255,0.2)] pb-2">
                                 <p>Filter</p>
                                 <div className="flex justify-center items-center">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -293,6 +293,13 @@ const FeatureSection = () => {
                             </div>
 
                             {/* Price Filter */}
+                            <div className="flex items-center py-[20px] border-r border-[rgba(255,255,255,0.2)]">
+                                <span className="mr-2 text-base">Verified</span>
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" className="sr-only peer" />
+                                    <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
+                                </label>
+                            </div>
                             <div className="mb-4 bg-[#323639] rounded-md border border-[rgba(255,255,255,0.2)] p-2">
                                 <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1">PRICE</label>
                                 <select className="w-full p-0 bg-[#323639] border-none text-white rounded-md">
@@ -307,7 +314,7 @@ const FeatureSection = () => {
                             <UseCaseMultiSelect />
 
                             {/* Apply Filter Button */}
-                            <button className="w-full py-2 mt-4 text-white bg-[#8B60B2] rounded-md">Apply filter</button>
+                            <button className="w-full py-2 mt-4 text-white bg-[#8B60B2] rounded-md font-bold">Apply filter</button>
                         </div>
                     </>
                 )}

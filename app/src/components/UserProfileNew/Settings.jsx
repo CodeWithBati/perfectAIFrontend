@@ -191,10 +191,10 @@ const Settings = () => {
         severity={snackbar.severity}
         onClose={handleCloseSnackbar}
       />
-      <div className="p-8 flex jusitfy-center items-center flex-col rounded-lg shadow-lg w-[600px]">
+      <div className="lg:p-8 flex jusitfy-center items-center flex-col rounded-lg w-full lg:w-[600px]">
         {/* Profile Form */}
-        <div className="space-y-[20px] mt-[40px]">
-          <div className="relative w-[600px]">
+        <div className="space-y-[20px] mt-[20px] w-full lg:mt-[40px]">
+          <div className="relative w-full">
             <input
               type="password"
               id="current_password"
@@ -237,7 +237,7 @@ const Settings = () => {
             </label>
           </div>
         </div>
-        <button onClick={handlePasswordUpdate} className="bg-main-purple text-sm font-semibold text-white h-[38px] mt-[30px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+        <button onClick={handlePasswordUpdate} className="bg-main-purple text-sm font-semibold text-white w-full lg:w-auto mt-[30px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
           Update changes
         </button>
       </div>

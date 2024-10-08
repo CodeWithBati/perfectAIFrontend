@@ -1,13 +1,20 @@
 'use client'
+import { useState } from 'react';
 import Footer from "../../layout/FooterNew"
 import Header from "../../layout/Header/HeaderNew"
 import FAQ from "./FAQ"
 import PriceCard from "./PriceCard"
 
 function PricingNew() {
+  const [openIndex, setOpenIndex] = useState("1");
+
+  const toggleOpen = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   const pricePlans = [
     {
+      "id": "1",
       "plan": "Bronze Partnership",
       "planType": "bronze",
       "price": "$4.99",
@@ -23,6 +30,7 @@ function PricingNew() {
       ]
     },
     {
+      "id": "2",
       "plan": "Silver Partnership",
       "planType": "silver",
       "price": "Custom Pricing",
@@ -37,6 +45,7 @@ function PricingNew() {
       ]
     },
     {
+      "id": "3",
       "plan": "Gold Partnership",
       "planType": "gold",
       "price": "Custom Pricing",
@@ -54,21 +63,17 @@ function PricingNew() {
 
   return (
     <>
-      <Header />
-      <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-cover" style={{
-        backgroundImage: `url('/images/someBg.png')`
-      }}>
-        <div className=" text-white py-10 px-[135px]">
-          <h1 className="text-5xl font-bold mb-8 text-center">Pricing</h1>
-          <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-16 lg:pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
+        <div className=" text-white mb-8 lg:mb-10 px-[30px] lg:px-[135px] w-full lg:w-auto">
+          <h1 className="text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center">Pricing</h1>
+          <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 w-full lg:w-auto">
             {pricePlans?.map((plan, index) => (
-              <PriceCard detail={plan} key={index} />
+              <PriceCard detail={plan} key={index} toggleOpen={toggleOpen} openIndex={openIndex} />
             ))}
           </div>
         </div>
         <FAQ />
       </section>
-      <Footer />
     </>
   )
 }

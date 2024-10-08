@@ -55,48 +55,10 @@ const Overview = ({ setSelectedIndex }) => {
   }
 
   return (
-    <div className="p-6">
-      <div className="flex flex-wrap">
-        <div className="relative md:hidden w-36 xs:w-28 sm:w-40 flex-shrink-0 mb-3">
-          {spinner ? (
-            <div className=" h-full flex justify-center items-center">
-              <Spinner />
-            </div>
-          ) : (
-            <>
-              <div className="relative inline-flex flex-shrink-0 w-full rounded-lg overflow-hidden">
-                {user && user.profile ? (
-                  <Image src={user.profile} alt="" height={200} width={400} />
-                ) : (
-                  <Image
-                    src="/images/avatar.svg"
-                    alt=""
-                    height={200}
-                    width={400}
-                  />
-                )}
-              </div>
-              <div className=" absolute top-1 right-1">
-                <label
-                  className=" cursor-pointer flex items-center justify-center min-w-7 min-h-7 bg-white border dark:text-slate-200 border-blue-500 rounded-full text-blue-600 dark:bg-slate-950 font-bold"
-                  onChange={handleImageChange}
-                  htmlFor="mobileImageUpload"
-                >
-                  <input
-                    name=""
-                    type="file"
-                    accept="image/*"
-                    id="mobileImageUpload"
-                    hidden
-                  />
-                  <FontAwesomeIcon className=" text-sm" icon={faPen} />
-                </label>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="p-8 flex jusitfy-center items-center flex-col rounded-lg shadow-lg min-w-[570px]">
-          <div className="text-center flex justify-center items-center gap-[30px]">
+    <div className="lg:p-6 w-full lg:w-auto">
+      <div className="flex flex-wrap w-full lg:w-auto">
+        <div className="lg:p-8 flex jusitfy-center items-center flex-col rounded-lg lg:min-w-[600px] w-full lg:w-auto">
+          <div className="text-center flex flex-col lg:flex-row justify-center items-center gap-[30px]">
             <div className="relative w-[150px] h-[150px]">
               <Image
                 src="/images/avatar.svg"
@@ -105,7 +67,7 @@ const Overview = ({ setSelectedIndex }) => {
                 height={150}
                 className="rounded-full mb-4"
               />
-              <div className=" absolute bottom-1 right-1">
+              <div className="absolute bottom-1 right-1">
                 <label
                   className=" cursor-pointer flex items-center justify-center min-w-7 min-h-7 bg-[#1E1E1E] p-2 border border-gray-700 rounded-md font-bold"
                   onChange={handleImageChange}
@@ -124,23 +86,22 @@ const Overview = ({ setSelectedIndex }) => {
                 </label>
               </div>
             </div>
-            {!editProfile && <div className="flex flex-col justify-center items-start">
+            {!editProfile && <div className="flex flex-col justify-center items-center lg:items-start">
               <h2 className="text-[32px] font-semibold">Kristin Watson</h2>
               <button className="px-4 py-2 bg-[#323639] text-white font-bold rounded-md hover:bg-gray-600 border border-[rgba(255,255,255,0.2)] mt-4" onClick={() => setEditProfile(true)}>
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block mr-2">
                   <path d="M0.5 16L0.8125 14.4062L1.5 11L11.4375 1.0625L12.5 0L13.5312 1.0625L15.4375 2.9375L16.5 4L15.4375 5.0625L5.5 15L2.09375 15.6875L0.5 16ZM4.75 13.625L12.4375 5.96875L10.5625 4.0625L2.875 11.75L2.40625 14.0938L4.75 13.625Z" fill="white" />
                 </svg>
-
                 Edit profile
               </button>
             </div>}
           </div>
 
           {/* Profile Form */}
-          <div className="space-y-[20px] mt-[40px]">
-            <div className="flex space-x-[20px] w-[600px]">
+          <div className="space-y-[20px] mt-[40px] w-full lg:w-auto">
+            <div className="flex flex-col lg:flex-row space-y-[20px] lg:space-y-0 lg:space-x-[20px] lg:w-full">
               {/* First Name */}
-              <div className="relative flex-1">
+              <div className="relative">
                 <input
                   type="text"
                   id="first_name"
@@ -156,7 +117,7 @@ const Overview = ({ setSelectedIndex }) => {
               </div>
 
               {/* Last Name */}
-              <div className="relative flex-1">
+              <div className="relative">
                 <input
                   type="text"
                   id="last_name"
@@ -188,7 +149,7 @@ const Overview = ({ setSelectedIndex }) => {
               </label>
             </div>
           </div>
-          {editProfile && <button onClick={handleChanges} className="bg-main-purple text-sm font-semibold text-white h-[38px] mt-[30px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+          {editProfile && <button onClick={handleChanges} className="bg-main-purple text-sm font-semibold w-full lg:w-auto text-white mt-[30px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
             Update changes
           </button>}
         </div>

@@ -2,27 +2,21 @@
 
 import Link from 'next/link';
 import Image from "next/image";
+import AuthFooter from '../AuthFooter';
+import SideBar from '../SideBar';
 
 const PasswordChangeSuccess = () => {
   return (
     <>
 
-      <div className="flex h-screen bg-[#181C1F]">
-        {/* Left Side with AI Info */}
-        <div className="w-1/3 bg-cover bg-center flex justify-center items-center" style={{ backgroundImage: "url('/images/authBg.png')" }}>
-          <div className="text-center text-white px-8">
-            <p className="bg-main-purple text-xs px-[10px] py-[5px] mb-4 font-semibold inline-block rounded-[5px]">DID YOU KNOW?</p>
-            <h1 className="text-[32px] font-bold mb-4">AI can improve customer service</h1>
-            <p className="text-lg">
-              AI-powered chatbots and virtual assistants can improve customer service by providing quick and accurate responses to customer inquiries.
-            </p>
-          </div>
-        </div>
+      <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
+        
+        <SideBar />
 
         {/* Right Side with Sign-Up Options */}
-        <div className="w-2/3 h-screen bg-dark-bg flex flex-col justify-between items-center">
+        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
           {/* Top Part (Logo and Sign Up Buttons) */}
-          <p className='flex text-white text-center items-center justify-center mt-[68px] mb-8 font-bold text-2xl'>
+          <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
               src={"/images/defaulticon4.png"}
@@ -32,7 +26,7 @@ const PasswordChangeSuccess = () => {
             /> myPerfectAI
           </p>
 
-          <div className="space-y-4 text-center">
+          <div className="space-y-4 text-center flex flex-col justify-center items-center mt-20 lg:mt-0">
             <div className="flex items-center justify-center mb-6">
               <svg className="rounded-full border-4 border-white bg-white" width="65" height="64" viewBox="0 0 65 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-outside-1_598_3608" maskUnits="userSpaceOnUse" x="-9.5" y="-10" width="84" height="84" fill="black">
@@ -47,24 +41,25 @@ const PasswordChangeSuccess = () => {
             <h2 className="text-white text-5xl font-bold mb-4">Password reseted!</h2>
 
             {/* Instruction Message */}
-            <p className="text-white text-lg mb-6">
+            <p className="text-white text-lg mb-6 w-[300px] lg:w-auto">
               Your password is reseted. Please login with new password.
             </p>
 
-            <Link href="/login" className="inline-block mt-6 bg-main-purple text-sm font-semibold text-white rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+            <Link href="/login" className="inline-block mt-6 bg-main-purple text-sm font-semibold text-white w-full lg:w-auto rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
               Login Now
             </Link>
 
           </div>
 
-          {/* Bottom Links */}
-          <div className="text-center mb-8 text-white font-semibold flex justify-center space-x-4 text-xs">
+          <div className="block lg:hidden text-center text-white mt-20 mb-12">
+            <p className="bg-main-purple text-xs px-[10px] py-[5px] mb-4 font-semibold inline-block rounded-[5px]">DID YOU KNOW?</p>
+            <h1 className="text-lg font-bold mb-4">AI can improve customer service</h1>
             <p className="text-xs">
-              © 2024. Crafted By <Link href="/" className="text-additional-purple underline">MyPerfectAI</Link>
+              AI-powered chatbots and virtual assistants can improve customer service by providing quick and accurate responses to customer inquiries.
             </p>
-            <Link href="#" className="text-white text-xs mt-0">Privacy Policy</Link>
-            <Link href="#" className="text-white text-xs mt-0">Terms and Conditions</Link>
           </div>
+
+          <AuthFooter />
         </div>
       </div>
     </>

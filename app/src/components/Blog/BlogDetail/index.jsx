@@ -51,18 +51,15 @@ const BlogDetail = () => {
 
     return (
         <>
-            <Header />
-            <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-cover" style={{
-                backgroundImage: `url('/images/allPageBg.png')`
-            }}>
-                <div className="container max-w-4xl mx-auto px-8 md:px-16">
+            <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-20 lg:pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
+                <div className="container max-w-4xl mx-auto px-8 md:px-16 text-center lg:text-left">
                     {/* Blog Title Section */}
 
                     <p className="text-sm mb-4">29 Jul 2024</p>
-                    <h1 className="text-[40px] md:text-5xl font-bold mb-4">Best AI Art Generators In 2024</h1>
+                    <h1 className="text-[32px] md:text-5xl font-bold mb-4">Best AI Art Generators In 2024</h1>
                     <p className="text-base">The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons of modern AI-powered and advanced tools that help us quickly and efficiently perform hectic tasks.</p>
                     {/* Date and Author */}
-                    <div className="flex items-center mt-4 mb-8">
+                    <div className="flex items-center justify-center mt-4 mb-8">
                         <div className="flex items-center">
                             <Image
                                 src="/images/avatar.svg"
@@ -87,7 +84,7 @@ const BlogDetail = () => {
                     </div>
 
                     {/* Blog Content */}
-                    <div className="text-sx leading-relaxed">
+                    <div className="text-sx text-left leading-relaxed">
                         <p className="mb-8">
                             Moreover, technological marvels have transformed our behavior. For instance, many of us now prefer online shopping over buying products from brick-and-mortar stores. Basically, people don’t have enough time to physically visit local markets, explore dozens of shops, and purchase the required products. Although online shopping was already convenient and stress-free, the incorporation of modern technologies, especially visual search, has made it much easier than ever. This article will discuss visual search technology and how it’s transforming the online shopping experience.
                         </p>
@@ -104,9 +101,9 @@ const BlogDetail = () => {
                     </div>
                 </div>
             </section>
-            <div className="px-[135px] bg-[#181C1F]">
+            <div className="px-[30px] lg:px-[135px] bg-[#181C1F]">
                 <section className="py-16 border-t border-[rgba(255,255,255,0.2)]">
-                    <h2 className="text-5xl text-white font-bold mb-8 text-center">Related Blogs</h2>
+                    <h2 className="hidden lg:block text-5xl text-white font-bold mb-8 text-center">Related Blogs</h2>
 
                     <div className="relative">
                         <Swiper
@@ -119,6 +116,16 @@ const BlogDetail = () => {
                             }}
                             onSlideChange={() => console.log('slide change')}
                             onSwiper={(swiper) => console.log(swiper)}
+                            breakpoints={{
+                                200: {
+                                    slidesPerView: 1.2,
+                                    spaceBetween: 20,
+                                },
+                                1024: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 50,
+                                },
+                            }}
                         >
                             {blogData.map((blog, index) => (
                                 <SwiperSlide key={index}>
@@ -126,7 +133,7 @@ const BlogDetail = () => {
                                 </SwiperSlide>
                             ))}
                         </Swiper>
-                        <div className="absolute left-[-80px] top-1/2 transform -translate-y-1/2 z-10">
+                        <div className="absolute left-[-80px] top-1/2 transform -translate-y-1/2 z-10 lg:block hidden">
                             <button className="swiper-button-prev-custom bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] text-white p-4 rounded-[6.56px] shadow-md hover:bg-gray-700 focus:outline-none">
                                 <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.953205 8.83069L0.289143 8.16663L0.953205 7.50256L6.92977 1.526L7.59383 0.861938L8.92196 2.19006L8.25789 2.85413L3.88289 7.22913H16.8126H17.7501V9.10413H16.8126H3.88289L8.25789 13.5182L8.92196 14.1823L7.59383 15.5104L6.92977 14.8463L0.953205 8.83069Z" fill="white" />
@@ -134,7 +141,7 @@ const BlogDetail = () => {
                             </button>
                         </div>
 
-                        <div className="absolute right-[-80px] top-1/2 transform -translate-y-1/2 z-10">
+                        <div className="absolute right-[-80px] top-1/2 transform -translate-y-1/2 z-10 lg:block hidden">
                             <button className="swiper-button-next-custom bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] text-white p-4 rounded-[6.56px] shadow-md hover:bg-gray-700 focus:outline-none">
                                 <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.0078 8.83069L11.0313 14.8463L10.3672 15.5104L9.03908 14.1823L9.70314 13.5182L14.0781 9.10413H1.18752H0.250019V7.22913H1.18752H14.0781L9.70314 2.85413L9.03908 2.19006L10.3672 0.861938L11.0313 1.526L17.0078 7.50256L17.6719 8.16663L17.0078 8.83069Z" fill="white" />
@@ -144,12 +151,11 @@ const BlogDetail = () => {
                     </div>
 
                     {/* View More Button */}
-                    <div className="flex justify-center mt-8">
+                    <div className="hidden lg:flex justify-center mt-8">
                         <button className="px-[20px] py-[10px] bg-none text-white rounded-[5px] border border-gray-500 ">View More</button>
                     </div>
                 </section >
             </div >
-            <Footer />
         </>
 
     );

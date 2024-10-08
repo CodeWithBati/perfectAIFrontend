@@ -4,13 +4,8 @@ import Footer from '../../layout/FooterNew'
 
 function ThankYou() {
   return (
-    <>
-      <div className='bg-slate-800' >
-        <Header />
-        <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pb-16 text-white bg-no-repeat bg-cover" style={{
-          backgroundImage: `url('/images/someBg.png')`
-        }}>
-          <div className="min-h-screen flex items-center justify-center">
+        <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
+          <div className="flex items-center justify-center px-[30px] lg:px-[50px]">
             <div className="text-center">
               {/* Icon */}
               <div className="flex items-center justify-center rounded-full">
@@ -46,10 +41,6 @@ function ThankYou() {
 
 
         </section>
-
-      </div>
-      <Footer />
-    </>
   )
 }
 

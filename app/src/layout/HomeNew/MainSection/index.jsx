@@ -26,14 +26,10 @@ const MainSection = () => {
     const closeModal = () => setIsOpen(false);
 
     return (
-        <div className="bg-[#181C1F] text-white">
-            <HeaderNew />
-
-            <section className="relative flex flex-col items-center justify-center min-w-screen sm:pt-32 pt-20 pb-8 bg-no-repeat bg-cover" style={{
-                backgroundImage: `url('/images/homeBgFull.png')`
-            }}>
-                <h1 className="text-[32px] sm:text-[80px] font-bold text-center">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
-                <h5 className="text-base sm:text-2xl sm:font-bold text-center mb-8 w-[85%] sm:w-[570px]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>
+        <section className="text-white bg-cover bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull.png')]" >
+            <div className="relative flex flex-col items-center justify-center min-w-screen sm:pt-32 pt-20 pb-8">
+                <h1 className="text-[32px] sm:text-[80px] font-bold text-center tracking-tighter">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
+                <h5 className="text-base sm:text-2xl text-center mb-8 w-[85%] sm:w-[35%]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>
 
                 {/* Search and Prompt Guidelines */}
                 <div className="flex items-center bg-[#1e1e1e] rounded-md w-full border border-[rgba(255,255,255,0.2)] max-w-[85%] sm:max-w-[570px] p-2 mb-8">
@@ -117,7 +113,7 @@ const MainSection = () => {
                 </CustomModel>
 
                 {/* Desktop version: Full content */}
-                <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last">
+                <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last h-[250px] overflow-hidden">
                     <div className="p-4 sm:col-span-1">
                         <h5 className="font-semibold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
                         <p className="text-sm mb-4">to relieve accurate, use-case specific AI tool recommendations </p>
@@ -145,16 +141,14 @@ const MainSection = () => {
                     </div>
                 </div>
 
-                <p className="text-center text-sm sm:text-lg mt-4 sm:mt-8 mx-[30px] sm:w-[670px] block">We only include high-quality, business-grade AI tools & software in our directory. Learn about our rigorous approval and verification process</p>
-
-            </section>
+                <p className="text-center text-sm sm:text-lg mt-4 sm:mt-8 mx-[30px] sm:w-[45%] block tracking-wider font-bold">We only include high-quality, business-grade AI tools & software in our directory. <span className="text-main-purple">Learn more</span> about our rigorous approval and verification process</p>
+            </div>
             <div className="px-[30px] sm:px-[135px]">
                 <FeatureSection />
                 <BlogSection />
                 <SubScriptionSection />
             </div>
-            <FooterNew />
-        </div>
+        </section>
     );
 };
 

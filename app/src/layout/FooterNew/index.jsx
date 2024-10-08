@@ -26,7 +26,7 @@ const Footer = () => {
 
   return (
     <footer className="text-white sm:px-[135px] bg-[#181C1F] ">
-      <div className="mx-auto flex-col sm:flex-row justify-center items-center flex sm:justify-between items-start py-8 border-t border-[rgba(255,255,255,0.2)]">
+      <div className="mx-auto flex-col sm:flex-row justify-center items-center flex sm:justify-between items-start px-[30px] lg:px-0 py-8 border-t border-[rgba(255,255,255,0.2)]">
         {/* Left Side - Logo and Description */}
         <div className="flex flex-col sm:items-start items-center">
           <div className="flex items-center mb-4">

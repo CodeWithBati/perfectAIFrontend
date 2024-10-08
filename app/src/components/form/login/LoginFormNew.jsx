@@ -14,6 +14,8 @@ import { setUser } from '@/lib/features/auth/authSlice';
 // import SnackBar from '../../global/Snackbar';
 import ErrorIcon from '@/app/src/icons/errorIcon';
 import { toast } from 'react-hot-toast';
+import SideBar from '../SideBar';
+import AuthFooter from '../AuthFooter';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -138,22 +140,14 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#181C1F]">
+    <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
       {/* Left Side with AI Info */}
-      <div className="w-1/3 bg-cover bg-center flex justify-center items-center" style={{ backgroundImage: "url('/images/authBg.png')" }}>
-        <div className="text-center text-white px-8">
-          <p className="bg-main-purple text-xs px-[10px] py-[5px] mb-4 font-semibold inline-block rounded-[5px]">DID YOU KNOW?</p>
-          <h1 className="text-[32px] font-bold mb-4">AI can improve customer service</h1>
-          <p className="text-lg">
-            AI-powered chatbots and virtual assistants can improve customer service by providing quick and accurate responses to customer inquiries.
-          </p>
-        </div>
-      </div>
+      <SideBar />
 
       {/* Right Side with Sign-Up Options */}
-      <div className="w-2/3 h-screen bg-dark-bg flex flex-col justify-between items-center">
+      <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
           {/* Top Part (Logo and Sign Up Buttons) */}
-          <p className='flex text-white text-center items-center justify-center mt-[68px] mb-8 font-bold text-2xl'>
+          <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
               src={"/images/defaulticon4.png"}
@@ -163,11 +157,11 @@ const LoginForm = () => {
             /> myPerfectAI
           </p>
 
-          <div className="space-y-4 text-center">
-            <h2 className="text-white text-5xl font-bold mb-8">Sign in</h2>
-            <div className="space-y-[20px]">
+          <div className="space-y-4 w-full text-center flex flex-col items-center">
+            <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Sign in</h2>
+            <div className="space-y-[20px] w-full flex flex-col items-center">
               {/* Email Input with Floating Label */}
-              <div className="relative w-[370px]">
+              <div className="relative w-full lg:w-[370px]">
                 <input
                   type="email"
                   id="email"
@@ -183,7 +177,7 @@ const LoginForm = () => {
               </div>
 
               {/* Password Input with Floating Label */}
-              <div className="relative w-[370px]">
+              <div className="relative w-full lg:w-[370px]">
                 <input
                   type="password"
                   id="password"
@@ -199,30 +193,31 @@ const LoginForm = () => {
               </div>
             </div>
 
-            <div className="text-right text-white text-xs mt-8">
+            <div className="text-right text-white text-xs mt-8 flex flex-col items-end w-full lg:w-[370px]">
               <a href="/forget-password" className="text-additional-purple underline">Forget password</a>
             </div>
 
-            <button className="bg-main-purple text-sm font-semibold text-white w-[94px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+            <button className="bg-main-purple text-sm font-semibold text-white w-full lg:w-[94px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
               Sign in
             </button>
 
 
 
-            <p className="text-white text-sm mt-8 font-semibold">
-              Already have an account?{' '}
+            <p className="text-white text-sm mt-8">
+              Don&apos;t have an account?{' '}
               <Link href="/register" className="text-additional-purple underline">Sign up</Link>
             </p>
           </div>
 
-          {/* Bottom Links */}
-          <div className="text-center mb-8 text-white font-semibold flex justify-center space-x-4 text-xs">
+          <div className="block lg:hidden text-center text-white mt-20 mb-12">
+            <p className="bg-main-purple text-xs px-[10px] py-[5px] mb-4 font-semibold inline-block rounded-[5px]">DID YOU KNOW?</p>
+            <h1 className="text-lg font-bold mb-4">AI can improve customer service</h1>
             <p className="text-xs">
-              © 2024. Crafted By <Link href="/" className="text-additional-purple underline">MyPerfectAI</Link>
+              AI-powered chatbots and virtual assistants can improve customer service by providing quick and accurate responses to customer inquiries.
             </p>
-            <Link href="#" className="text-white text-xs mt-0">Privacy Policy</Link>
-            <Link href="#" className="text-white text-xs mt-0">Terms and Conditions</Link>
           </div>
+
+          <AuthFooter />
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const Terms = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative max-w-4xl p-8 bg-[#323639] rounded-lg shadow-lg text-white overflow-y-auto max-h-[90vh]">
+      <div className="relative w-full mx-[30px] lg:max-w-4xl p-8 bg-[#323639] rounded-lg shadow-lg text-white overflow-y-auto max-h-[90vh]">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-white"
           onClick={onClose}

@@ -52,12 +52,12 @@ const FAQ = () => {
 
   return (
     <div className="text-white py-10">
-      <h2 className="text-[40px] font-bold text-center mb-10">FAQ</h2>
-      <div className="max-w-4xl mx-auto ">
+      <h2 className="text-[32px] lg:text-[40px] font-bold text-center mb-4 lg:mb-10">FAQ</h2>
+      <div className="max-w-4xl mx-[30px] lg:mx-auto">
         {faqs.map((faq, index) => (
-          <div key={index} className="mb-4">
+          <div key={index} className="mb-4 ">
             <div
-              className="border-b-[1px] border-gray-600 flex justify-between w-[770px] items-center cursor-pointer p-4 "
+              className="border-b-[1px] border-gray-600 flex justify-between lg:w-[770px] items-center cursor-pointer p-4 "
               onClick={() => toggleOpen(index)}
             >
               <h3 className="text-lg font-semibold">{faq.question}</h3>
@@ -72,7 +72,7 @@ const FAQ = () => {
               </span>
             </div>
             {openIndex === index && (
-              <div className=" border-b-[1px] border-gray-600 p-4 w-[770px] mt-2">
+              <div className=" border-b-[1px] border-gray-600 p-4 lg:w-[770px] mt-2">
                 <p className='text-sm'>{faq.answer}</p>
               </div>
             )}

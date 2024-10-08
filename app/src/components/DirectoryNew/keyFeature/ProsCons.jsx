@@ -2,9 +2,9 @@
 export default function ProsCons() {
     return (
       <section className="text-white">
-        <h2 className="text-2xl font-bold mb-5">Pros/Cons Comparison</h2>
-        <div className="grid grid-cols-2 gap-10">
-          <div className="border-r border-white" style={{ borderRightStyle: 'dashed' }}>
+        <h2 className="text-lg lg:text-2xl font-bold mb-5">Pros/Cons Comparison</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10">
+          <div className="lg:border-r border-white" style={{ borderRightStyle: 'dashed' }}>
             <h3 className="font-bold mb-2">Pros</h3>
             <ul className="list-disc ml-5 space-y-2">
               <li>Seamless integration with WordPress.</li>
