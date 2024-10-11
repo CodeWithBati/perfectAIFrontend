@@ -271,7 +271,7 @@ function ChatBotResult() {
               </p>
               <div className="hidden lg:flex items-center gap-4 mb-4">
                 {aiToolsData?.map((tool, i) => (
-                  <FeatureCard feature={tool} key={i} />
+                  <FeatureCard directory={tool} key={i} />
                 ))}
               </div>
               <div className="w-full lg:hidden mx-auto grid grid-cols-1 ">
@@ -302,7 +302,7 @@ function ChatBotResult() {
                     {aiToolsData.map((alt, index) => (
 
                       <SwiperSlide key={index}>
-                        <FeatureCard feature={alt} key={index} />
+                        <FeatureCard directory={alt} key={index} />
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -327,7 +327,7 @@ function ChatBotResult() {
 
             <div className="hidden lg:flex flex-col w-1/4">
               {aiToolsData?.map((tool, i) => (
-                <FeatureCard feature={tool} key={i} />
+                <FeatureCard directory={tool} key={i} />
               ))}
               <Cards />
             </div>

@@ -14,6 +14,8 @@ import TermsAndConditionModal from "@/app/src/ui/TermsAndConditionModal";
 import PrivacyPolicyModal from "@/app/src/ui/PrivacyPolicyModal";
 import SideBar from "../SideBar";
 import AuthFooter from "../AuthFooter";
+import InputNew from "../InputNew";
+import Button from "../Button";
 
 const RegisterFormCreate = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +33,7 @@ const RegisterFormCreate = () => {
     isChecked: false,
     role: "user",
   });
+  
   const [touched, setTouched] = useState({
     firstName: false,
     lastName: false,
@@ -265,81 +268,81 @@ const RegisterFormCreate = () => {
               <div className="flex space-x-[20px] w-full lg:w-[370px]">
                 {/* First Name */}
                 <div className="relative w-full lg:w-[178px]">
-                  <input
+                  <InputNew
                     type="text"
-                    id="first_name"
+                    id="firstName"
+                    name="firstName"
                     placeholder=" "
-                    className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                    onChange={(e) => handleChange(e)}
+                    onBlur={() => handleBlur('firstName')}
+                    error={errors.firstName}
+                    label="FIRST NAME"
+                    className="mb-4"
+                    labelClassName="text-[rgba(255,255,255,0.5)]"
                   />
-                  <label
-                    htmlFor="first_name"
-                    className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-                  >
-                    FIRST NAME
-                  </label>
                 </div>
 
                 {/* Last Name */}
                 <div className="relative w-full lg:w-[178px]">
-                  <input
+                  <InputNew
                     type="text"
-                    id="last_name"
+                    id="lastName"
+                    name="lastName"
                     placeholder=" "
-                    className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                    onChange={(e) => handleChange(e)}
+                    onBlur={() => handleBlur('lastName')}
+                    error={errors.lastName}
+                    label="LAST NAME"
+                    className="mb-4"
+                    labelClassName="text-[rgba(255,255,255,0.5)]"
                   />
-                  <label
-                    htmlFor="last_name"
-                    className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-                  >
-                    LAST NAME
-                  </label>
                 </div>
               </div>
 
               {/* Email Input with Floating Label */}
               <div className="relative w-full lg:w-[370px]">
-                <input
+                <InputNew
                   type="email"
                   id="email"
+                  name="email"
                   placeholder=" "
-                  className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                  onChange={(e) => handleChange(e)}
+                  onBlur={() => handleBlur('email')}
+                  error={errors.email}
+                  label="EMAIL ADDRESS"
+                  className="mb-4"
+                  labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
-                <label
-                  htmlFor="email"
-                  className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-                >
-                  EMAIL ADDRESS
-                </label>
               </div>
 
               {/* Password Input with Floating Label */}
               <div className="relative w-full lg:w-[370px]">
-                <input
+                <InputNew
                   type="password"
                   id="password"
+                  name="password"
                   placeholder=" "
-                  className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                  onChange={(e) => handleChange(e)}
+                  onBlur={() => handleBlur('password')}
+                  error={errors.password}
+                  label="PASSWORD"
+                  className="mb-4"
+                  labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
-                <label
-                  htmlFor="password"
-                  className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-                >
-                  PASSWORD
-                </label>
               </div>
               <div className="relative w-full lg:w-[370px]">
-                <input
+                <InputNew
                   type="password"
-                  id="conf_password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   placeholder=" "
-                  className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                  onChange={(e) => handleChange(e)}
+                  onBlur={() => handleBlur('confirmPassword')}
+                  error={errors.confirmPassword}
+                  label="CONFIRM PASSWORD"
+                  className="mb-4"
+                  labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
-                <label
-                  htmlFor="conf_password"
-                  className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-                >
-                  CONFIRM PASSWORD
-                </label>
               </div>
             </div>
 
@@ -361,9 +364,9 @@ const RegisterFormCreate = () => {
               </label>
             </div>
 
-            <button className="bg-main-purple text-sm font-semibold text-white w-full lg:w-[94px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
-              Sign up
-            </button>
+            <Button onClick={handleSubmit} variant="primary" size="small">
+              Sign Up
+            </Button>
 
             <p className="text-white text-sm mt-8">
               Already have an account?{' '}

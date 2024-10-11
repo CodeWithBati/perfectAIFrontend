@@ -1,9 +1,37 @@
-import { useEffect, useState, useRef } from "react";
-import FeatureCard from "./FeatureCard";
-import UseCaseMultiSelect from "./UseCaseMultiSelect";
+import { useEffect, useState, useRef, useCallback } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
+import Link from "next/link";
+import FeatureCard from "./FeatureCard";
+import {
+    directoryType,
+    directoryCategory,
+    directoryFilterSortBy,
+} from "@/lib/form";
+import MultipleSelectNew from "@/app/src/components/global/MultipleSelectNew";
+import SelectNew from "@/app/src/components/global/SelectNew";
+import Spinner from "@/app/src/ui/Spinner";
+
+
+const defaultFilters = {
+    type: "",
+    sortBy: "Featured",
+    categories: [],
+    isVerified: false,
+    search: "",
+};
 
 const FeatureSection = () => {
+    const [directories, setDirectories] = useState([]);
+    const [extractMoreSpinner, setExtractMoreSpinner] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const listRef = useRef(null);
+    const loadingRef = useRef(false);
+    const [categories, setCategories] = useState([]);
+    const [filters, setFilters] = useState(defaultFilters);
+    const { token } = useSelector((state) => state.auth);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("Featured");
 
@@ -21,156 +49,119 @@ const FeatureSection = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+
+    const generateFilterUrl = useCallback(() => {
+        const { type, sortBy, categories, isVerified, search } = filters;
+        const filterParams = [];
+
+        if (type) filterParams.push(`type=${type}`);
+        if (sortBy) filterParams.push(`sortBy=${sortBy}`);
+        if (categories.length > 0) {
+            categories.forEach((cat) => filterParams.push(`category=${cat}`));
+        }
+        if (isVerified !== undefined) filterParams.push(`isVerified=${isVerified}`);
+        if (search.length !== 0) filterParams.push(`search=${search}`);
+
+        const filterQueryString = filterParams.join("&");
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/directories?page=${page}&limit=15`;
+        const finalUrl = filterQueryString
+            ? `${apiUrl}&${filterQueryString}`
+            : apiUrl;
+
+        return finalUrl;
+    }, [filters, page]);
+
+    const fetchSites = useCallback(async () => {
+        if (page > totalPages || loadingRef.current) return;
+
+        setExtractMoreSpinner(true);
+        loadingRef.current = true;
+        try {
+            const url = generateFilterUrl();
+            const config = {};
+            if (token) {
+                config.headers = {
+                    Authorization: `Bearer ${token}`,
+                };
+            }
+
+            const response = await axios.get(url, config);
+            if (response.status === 200) {
+                setDirectories((prevSites) =>
+                    page === 1
+                        ? response?.data?.results
+                        : [...prevSites, ...response.data.results]
+                );
+                setTotalPages(
+                    response?.data?.pagination?.totalPages === 0
+                        ? 1
+                        : response?.data?.pagination?.totalPages
+                );
+            } else {
+                console.error("error-->", response);
+            }
+        } catch (error) {
+            loadingRef.current = false;
+            console.error(error);
+        } finally {
+            setExtractMoreSpinner(false);
+            loadingRef.current = false;
+        }
+    }, [page, totalPages, generateFilterUrl, token]);
+
+    const handleScroll = useCallback(() => {
+        if (listRef.current && !loadingRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = listRef.current;
+            if (scrollHeight - scrollTop <= clientHeight + 100) {
+                setPage((prevPage) => prevPage + 1);
+            }
+        }
+    }, []);
+
+
+    useEffect(() => {
+        console.log("asdsadasd")
+        fetchSites();
+    }, [page, fetchSites, filters.search]);
+
+    const applyFilter = (key, value) => {
+        const updatedFilters = {
+            ...filters,
+            [key]: value,
+        };
+        setPage(1);
+        setFilters(updatedFilters);
+    };
+
+    const setCategoiesFilter = (newCategories) => {
+        console.log(newCategories);
+        const categories = newCategories.map((cat) => cat.name);
+        setCategories((prevState) => {
+            const updatedState = categories;
+            setPage(1);
+            setFilters({
+                ...filters,
+                categories: categories,
+            });
+            return updatedState;
+        });
+    };
+
+    const clearFilter = () => {
+        setPage(1);
+        setTotalPages(1);
+        setCategories([]);
+        setFilters(defaultFilters);
+    };
+
     const toggleFilter = () => {
         setIsFilterOpen(!isFilterOpen);
     };
 
-    const handleTabClick = (buttonName) => {
-        setActiveTab(buttonName);
-    };
-
-    const aiToolsData = [
-        {
-            id: 1,
-            title: "GetGenie",
-            description: "GetGenie is an AI-powered tool for content creation and SEO, offering over 30 templates for various use cases.",
-            pricing: "Freemium",
-            rating: 5,
-            reviews: 100,
-            featured: true,
-            verified: true,
-            badge: "Featured",
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 2,
-            title: "Devin AI",
-            description: "Devin AI, developed by Cognition Labs, is an advanced AI model that autonomously handles software engineering tasks.",
-            pricing: "Free",
-            rating: 5,
-            reviews: 100,
-            featured: true,
-            verified: false,
-            badge: "Featured",
-            imageUrl: "/images/feat2.jpeg"
-        },
-        {
-            id: 3,
-            title: "Taranis",
-            description: "Taranis is an AI-powered crop intelligence platform that provides high-resolution aerial imagery and data-driven insights to support precision farming.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 4,
-            title: "Agremo",
-            description: "Agremo is an AI-powered crop analysis platform designed to provide detailed insights into crop health and yield prediction.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 5,
-            title: "Comma",
-            description: "Comma.ai is an autonomous driving technology company that provides open-source software and hardware for enhancing vehicle automation.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 6,
-            title: "Jupiter AI",
-            description: "Jupiter AI is a robust AI platform that provides predictive analytics and risk management solutions to various industries.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: true,
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 7,
-            title: "ClimateAI",
-            description: "ClimateAI is an AI-powered platform that provides climate risk forecasting and adaptation solutions to businesses and governments.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat2.jpeg"
-        },
-        {
-            id: 8,
-            title: "DeepL",
-            description: "DeepL is an AI-powered translation tool designed to provide highly accurate and nuanced translation services in various languages.",
-            pricing: "Free",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat2.jpeg"
-        },
-        {
-            id: 9,
-            title: "Sift",
-            description: "Sift is a digital trust and safety platform that uses machine learning to detect and prevent fraud across the internet.",
-            pricing: "Freemium",
-            rating: 5,
-            reviews: 100,
-            featured: true,
-            verified: true,
-            badge: "Featured",
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 10,
-            title: "Cylance",
-            description: "Cylance is a cybersecurity company that utilizes artificial intelligence to provide advanced threat detection and prevention solutions.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat2.jpeg"
-        },
-        {
-            id: 11,
-            title: "Darktrace",
-            description: "Darktrace is a cybersecurity company that uses AI and machine learning to detect and respond to sophisticated cyber threats in real time.",
-            pricing: "Paid",
-            rating: 5,
-            reviews: 100,
-            featured: true,
-            verified: true,
-            badge: "Featured",
-            imageUrl: "/images/feat1.jpeg"
-        },
-        {
-            id: 12,
-            title: "AssemblyAI",
-            description: "AssemblyAI is an AI-powered speech-to-text API that provides highly accurate transcription services and integrates easily into applications.",
-            pricing: "Freemium",
-            rating: 5,
-            reviews: 100,
-            featured: false,
-            verified: false,
-            imageUrl: "/images/feat2.jpeg"
-        }
-    ];
-
 
     // Slice data for mobile view
-    const displayedTools = isMobile ? aiToolsData.slice(0, 4) : aiToolsData;
+    const displayedTools = isMobile ? directories.slice(0, 4) : directories.slice(0, 12) ;
+
 
     return (
         <section className="py-8 border-t border-[rgba(255,255,255,0.2)]">
@@ -178,34 +169,18 @@ const FeatureSection = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
                 {/* Tabs */}
                 <div className="flex items-center justify-between space-x-[10px] bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] rounded-md py-[5px] px-[10px] sm:py-[10px] sm:px-[15px] w-full sm:w-auto">
-                    <button
-                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "Featured" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
-                            }`}
-                        onClick={() => handleTabClick("Featured")}
-                    >
-                        Featured
-                    </button>
-                    <button
-                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "New" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
-                            }`}
-                        onClick={() => handleTabClick("New")}
-                    >
-                        New
-                    </button>
-                    <button
-                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "Popular" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639]"
-                            }`}
-                        onClick={() => handleTabClick("Popular")}
-                    >
-                        Popular
-                    </button>
-                    <button
-                        className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${activeTab === "Top rated" ? "bg-[#8B60B2] text-white font-bold" : "bg-transparent text-white hover:bg-[#323639] sm:border-none border-r border-[rgba(255,255,255,0.2)]"
-                            }`}
-                        onClick={() => handleTabClick("Top rated")}
-                    >
-                        Top rated
-                    </button>
+                    {directoryFilterSortBy.map((tab, index) => (
+                        <button
+                            key={index}
+                            className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${filters.sortBy === tab.name
+                                ? "bg-[#8B60B2] text-white font-bold"
+                                : "bg-transparent text-white hover:bg-[#323639]"
+                                }`}
+                            onClick={() => applyFilter("sortBy", tab.name)}
+                        >
+                            {tab.name}
+                        </button>
+                    ))}
 
                     <div className="sm:hidden border-l border-[rgba(255,255,255,0.2)] h-full"></div>
 
@@ -222,7 +197,7 @@ const FeatureSection = () => {
                     <div className="hidden sm:flex items-center pr-4 border-r border-[rgba(255,255,255,0.2)]">
                         <span className="mr-2 text-xs">Verified</span>
                         <label className="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" value="" className="sr-only peer" />
+                            <input type="checkbox" value="" className="sr-only peer" checked={filters.isVerified} onChange={(e) => applyFilter("isVerified", !filters.isVerified)} />
                             <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
                         </label>
                     </div>
@@ -243,35 +218,31 @@ const FeatureSection = () => {
 
 
                         {isFilterOpen && (
-                            <div className="fixed sm:absolute inset-0 z-50 flex items-end justify-center bg-black bg-opacity-50 sm:bg-trasparent sm:bg-opacity-0" onClick={toggleFilter}>
-                                <div className="relative inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-300px] sm:absolute sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg shadow-lg z-60 w-full sm:w-64">
-                                    <div className="flex justify-between items-center text-white font-semibold text-lg mb-4 border-b border-[rgba(255,255,255,0.2)] pb-2">
-                                        <p>Filter</p>
-                                        <div className="flex justify-center items-center">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.32812 3.35156C2.92969 3.77344 2.625 4.24219 2.46094 4.75781L1.03125 4.26562C1.28906 3.53906 1.71094 2.85938 2.27344 2.29688C4.33594 0.257812 7.64062 0.257812 9.70312 2.29688L11.0625 0.9375L11.625 1.5V5.25H7.875L7.3125 4.6875L8.64844 3.35156C7.17188 1.89844 4.80469 1.89844 3.32812 3.35156ZM3.32812 8.67188C4.80469 10.125 7.17188 10.125 8.64844 8.67188C9.04688 8.25 9.35156 7.78125 9.53906 7.26562L10.9453 7.75781C10.6875 8.48438 10.2891 9.14062 9.70312 9.72656C7.66406 11.7656 4.33594 11.7656 2.27344 9.72656L0.9375 11.0625L0.375 10.5V6.75H4.125L4.6875 7.3125L3.32812 8.67188Z" fill="white" />
-                                            </svg>
-                                            <p className="text-xs ml-[5px]">Remove filter</p>
-                                        </div>
+                            <div className="z-50 absolute mt-2 right-[-20px] bg-[#1E1E1E] p-4 rounded-lg w-64">
+                                <div className="flex justify-between items-center text-white font-semibold text-lg mb-4 border-b border-[rgba(255,255,255,0.2)] pb-2">
+                                    <p>Filter</p>
+                                    <div className="flex justify-center items-center cursor-pointer" onClick={clearFilter}>
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3.32812 3.35156C2.92969 3.77344 2.625 4.24219 2.46094 4.75781L1.03125 4.26562C1.28906 3.53906 1.71094 2.85938 2.27344 2.29688C4.33594 0.257812 7.64062 0.257812 9.70312 2.29688L11.0625 0.9375L11.625 1.5V5.25H7.875L7.3125 4.6875L8.64844 3.35156C7.17188 1.89844 4.80469 1.89844 3.32812 3.35156ZM3.32812 8.67188C4.80469 10.125 7.17188 10.125 8.64844 8.67188C9.04688 8.25 9.35156 7.78125 9.53906 7.26562L10.9453 7.75781C10.6875 8.48438 10.2891 9.14062 9.70312 9.72656C7.66406 11.7656 4.33594 11.7656 2.27344 9.72656L0.9375 11.0625L0.375 10.5V6.75H4.125L4.6875 7.3125L3.32812 8.67188Z" fill="white" />
+                                        </svg>
+                                        <p className="text-xs ml-[5px]">Remove filter</p>
                                     </div>
-
-                                    {/* Price Filter */}
-                                    <div className="mb-4 bg-[#323639] rounded-md border border-[rgba(255,255,255,0.2)] p-2">
-                                        <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1">PRICE</label>
-                                        <select className="w-full p-0 bg-[#323639] border-none text-white rounded-md">
-                                            <option value="">All pricing</option>
-                                            <option value="free">Free</option>
-                                            <option value="paid">Paid</option>
-                                            <option value="freemium">Freemium</option>
-                                        </select>
-                                    </div>
-
-                                    {/* Use Case Filter */}
-                                    <UseCaseMultiSelect />
-
-                                    {/* Apply Filter Button */}
-                                    <button className="w-full py-2 mt-4 text-white bg-[#8B60B2] rounded-md font-bold">Apply filter</button>
                                 </div>
+
+                                <SelectNew
+                                    options={directoryType}
+                                    id="directoryType"
+                                    onChange={(e) => applyFilter("type", e.name)}
+                                    selected={{ name: filters.type }}
+                                    label="PRICE"
+                                />
+                                <MultipleSelectNew
+                                    options={directoryCategory}
+                                    selected={filters.categories.map((name) => ({ name }))}
+                                    onChange={(e) => setCategoiesFilter(e)}
+                                    Name="USE CASE"
+                                    id="categories"
+                                />
                             </div>
                         )}
 
@@ -280,56 +251,87 @@ const FeatureSection = () => {
 
                 {isFilterOpen && (
                     <>
-                        <div className="fixed sm:hidden inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50" onClick={toggleFilter} />
-                        <div className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-300px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg shadow-lg z-50 w-full sm:w-64">
+                        <div
+                            className="fixed sm:hidden inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50"
+                            onClick={toggleFilter}
+                        />
+                        <div className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-800px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg z-50 w-full sm:w-64">
                             <div className="flex justify-between items-center text-white font-semibold text-lg border-b border-[rgba(255,255,255,0.2)] pb-2">
                                 <p>Filter</p>
-                                <div className="flex justify-center items-center">
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.32812 3.35156C2.92969 3.77344 2.625 4.24219 2.46094 4.75781L1.03125 4.26562C1.28906 3.53906 1.71094 2.85938 2.27344 2.29688C4.33594 0.257812 7.64062 0.257812 9.70312 2.29688L11.0625 0.9375L11.625 1.5V5.25H7.875L7.3125 4.6875L8.64844 3.35156C7.17188 1.89844 4.80469 1.89844 3.32812 3.35156ZM3.32812 8.67188C4.80469 10.125 7.17188 10.125 8.64844 8.67188C9.04688 8.25 9.35156 7.78125 9.53906 7.26562L10.9453 7.75781C10.6875 8.48438 10.2891 9.14062 9.70312 9.72656C7.66406 11.7656 4.33594 11.7656 2.27344 9.72656L0.9375 11.0625L0.375 10.5V6.75H4.125L4.6875 7.3125L3.32812 8.67188Z" fill="white" />
+                                <div
+                                    className="flex justify-center items-center cursor-pointer"
+                                    onClick={clearFilter}
+                                >
+                                    <svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 12 12"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M3.32812 3.35156C2.92969 3.77344 2.625 4.24219 2.46094 4.75781L1.03125 4.26562C1.28906 3.53906 1.71094 2.85938 2.27344 2.29688C4.33594 0.257812 7.64062 0.257812 9.70312 2.29688L11.0625 0.9375L11.625 1.5V5.25H7.875L7.3125 4.6875L8.64844 3.35156C7.17188 1.89844 4.80469 1.89844 3.32812 3.35156ZM3.32812 8.67188C4.80469 10.125 7.17188 10.125 8.64844 8.67188C9.04688 8.25 9.35156 7.78125 9.53906 7.26562L10.9453 7.75781C10.6875 8.48438 10.2891 9.14062 9.70312 9.72656C7.66406 11.7656 4.33594 11.7656 2.27344 9.72656L0.9375 11.0625L0.375 10.5V6.75H4.125L4.6875 7.3125L3.32812 8.67188Z"
+                                            fill="white"
+                                        />
                                     </svg>
                                     <p className="text-xs ml-[5px]">Remove filter</p>
                                 </div>
                             </div>
 
                             {/* Price Filter */}
-                            <div className="flex items-center py-[20px] border-r border-[rgba(255,255,255,0.2)]">
+                            <div className="flex items-center py-[20px] border-b border-[rgba(255,255,255,0.2)] mb-4">
                                 <span className="mr-2 text-base">Verified</span>
                                 <label className="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" value="" className="sr-only peer" />
                                     <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
                                 </label>
                             </div>
-                            <div className="mb-4 bg-[#323639] rounded-md border border-[rgba(255,255,255,0.2)] p-2">
-                                <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1">PRICE</label>
-                                <select className="w-full p-0 bg-[#323639] border-none text-white rounded-md">
-                                    <option value="">All pricing</option>
-                                    <option value="free">Free</option>
-                                    <option value="paid">Paid</option>
-                                    <option value="freemium">Freemium</option>
-                                </select>
-                            </div>
 
-                            {/* Use Case Filter */}
-                            <UseCaseMultiSelect />
+                            {/* Select for Price */}
+                            <SelectNew
+                                options={directoryType}
+                                id="directoryType"
+                                onChange={(e) => applyFilter("type", e.name)}
+                                selected={filters.type ? { name: filters.type } : null}
+                                label="PRICE"
+                            />
 
-                            {/* Apply Filter Button */}
-                            <button className="w-full py-2 mt-4 text-white bg-[#8B60B2] rounded-md font-bold">Apply filter</button>
+                            {/* Multiple Select for Use Case */}
+                            <MultipleSelectNew
+                                options={directoryCategory}
+                                selected={filters.categories.map((name) => ({ name }))}
+                                onChange={(e) => setCategoiesFilter(e)}
+                                Name="USE CASE"
+                                id="categories"
+                            />
                         </div>
                     </>
                 )}
+
             </div>
 
             {/* AI Tools Grid */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {displayedTools.map((tool) => (
-                    <FeatureCard feature={tool} key={tool.id} />
+                    <FeatureCard directory={tool} key={tool.id} />
                 ))}
             </div>
 
             {/* View More Button */}
+
+            {extractMoreSpinner && (
+                <div className="flex justify-center items-center py-4 w-full my-4 lg:col-span-3 md:col-span-2 col-span-1">
+                    <Spinner />
+                </div>
+            )}
+            {directories?.length === 0 && !extractMoreSpinner && (
+                <p className="flex justify-center items-center py-4 w-full my-4 lg:col-span-3 md:col-span-2 col-span-1 text-white text-xl md:text-3xl">
+                    No Directories found
+                </p>
+            )}
+
             <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
-                <button className="px-[20px] py-[10px] bg-none text-white rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e]">View More</button>
+                <Link href="/directory" className="px-[20px] py-[10px] bg-none text-white rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e]">View More</Link>
             </div>
         </section>
     );

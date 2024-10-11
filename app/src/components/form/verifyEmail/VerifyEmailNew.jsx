@@ -20,6 +20,7 @@ import ErrorIcon from '@/app/src/icons/errorIcon';
 import CountdownTimer from '../../global/CountdownTimer';
 import AuthFooter from '../AuthFooter';
 import SideBar from '../SideBar';
+import Button from '../Button';
 
 const VerifyEmail = () => {
   const router = useRouter();
@@ -100,6 +101,7 @@ const VerifyEmail = () => {
     setCode(value);
   };
 
+
   const handleCloseSnackbar = () => {
     setSnackbar((prevSnackbar) => ({ ...prevSnackbar, open: false }));
   };
@@ -163,11 +165,9 @@ const VerifyEmail = () => {
         onClose={handleCloseSnackbar}
       />
       <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
-      
+
         <SideBar />
-        {/* Right Side with Sign-Up Options */}
         <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
-          {/* Top Part (Logo and Sign Up Buttons) */}
           <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
@@ -180,39 +180,40 @@ const VerifyEmail = () => {
 
           <div className="space-y-4 text-center w-full lg:w-auto flex flex-col items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Verify Your Account</h2>
-            <div className="flex justify-evenly mb-6 w-full lg:w-[370px]">
-              <input
-                type="text"
-                maxLength="1"
-                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-              <input
-                type="text"
-                maxLength="1"
-                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-              <input
-                type="text"
-                maxLength="1"
-                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-              <input
-                type="text"
-                maxLength="1"
-                className="w-[70px] lg:w-[60px] h-[60px] text-center text-xl text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
+            <ReactCodeInput
+              fields={6}
+              type='text'
+              name='code'
+              value={code}
+              onChange={handleChange}
+              onKeyDown={(e) => {
+                if (!/^\d$/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              inputStyle={{
+                color: 'white',
+                borderRadius: '5px',
+                border: '1px solid [rgba(255,255,255,0.2)]',
+                margin: '2px',
+                width: '50px',
+                height: '60px',
+                fontSize: '20px',
+                textAlign: 'center',
+                backgroundColor: '#323639'
+              }}
+            />
 
             {/* Confirm Button */}
-            <button className="text-white bg-purple-500 px-4 py-2 rounded-md text-sm font-semibold hover:bg-purple-600 transition-all">
+            <Button onClick={handleSubmit} variant="primary" size="small">
               Confirm
-            </button>
+            </Button>
 
             <p className="text-white text-sm mt-8">
               Don&apos;t received any email?{' '}
               <br className='lg:hidden' />
-              <Link href="/login" className="text-additional-purple underline">Resend code</Link>{' '} | {' '}
-              <Link href="/login" className="text-additional-purple underline">Change email address</Link>
+              <span onClick={handleResendEmail} className="text-additional-purple underline cursor-pointer">Resend code</span>{' '} | {' '}
+              <Link href="/register" className="text-additional-purple underline">Change email address</Link>
             </p>
           </div>
 

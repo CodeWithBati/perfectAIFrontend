@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { capitalizeAllWords } from "@/app/src/utilities/helperfunctions";
 import Head from "next/head";
 import axios from "axios";
+import Directory from "@/app/src/components/DirectoryNew/Directory";
 
 export async function generateMetadata({ params: { directoryName } }) {
   const response = await axios.get(
@@ -26,7 +27,8 @@ export async function generateMetadata({ params: { directoryName } }) {
 const DirectivePage = () => {
   return (
     <>
-      <DirectivesOverview />
+      <Directory />
+      {/* <DirectivesOverview /> */}
     </>
   );
 };

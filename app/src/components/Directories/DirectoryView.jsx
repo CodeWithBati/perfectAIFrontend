@@ -5,7 +5,6 @@ import Spinner from "../../ui/Spinner";
 import DirectoryCarousel from "./DirectoryCarousel";
 import StarsRating from "../../ui/StarsRating";
 import Link from "next/link";
-import { capitalizeAllWords } from "../../utilities/helperfunctions";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useSelector } from "react-redux";

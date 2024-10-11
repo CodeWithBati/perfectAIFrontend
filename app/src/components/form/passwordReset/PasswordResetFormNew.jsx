@@ -13,6 +13,8 @@ import SnackBar from '../../global/Snackbar';
 import ErrorIcon from '@/app/src/icons/errorIcon';
 import SideBar from '../SideBar';
 import AuthFooter from '../AuthFooter';
+import Button from '../Button';
+import InputNew from '../InputNew';
 
 const PasswordResetForm = () => {
   const router = useRouter();
@@ -88,7 +90,7 @@ const PasswordResetForm = () => {
       );
 
       if (response.status === 200) {
-        router.push('/', { scroll: false });
+        router.push('/forget-password-success', { scroll: false });
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -142,7 +144,7 @@ const PasswordResetForm = () => {
       />
 
       <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
-        
+
         <SideBar />
 
         {/* Right Side with Sign-Up Options */}
@@ -164,24 +166,24 @@ const PasswordResetForm = () => {
             <div className="space-y-[20px] w-full flex flex-col items-center">
               {/* Email Input with Floating Label */}
               <div className="relative w-full lg:w-[370px]">
-                <input
+                <InputNew
                   type="email"
                   id="email"
+                  name="email"
                   placeholder=" "
-                  className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                  onChange={(e) => handleChange(e)}
+                  onBlur={() => handleBlur('email')}
+                  error={errors.email}
+                  label="EMAIL ADDRESS"
+                  className="mb-4"
+                  labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
-                <label
-                  htmlFor="email"
-                  className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-                >
-                  EMAIL ADDRESS
-                </label>
               </div>
             </div>
 
-            <button className="bg-main-purple text-sm font-semibold text-white w-full lg:w-auto rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+            <Button onClick={handleSubmit} variant="primary" size="small">
               Send Reset Instructions
-            </button>
+            </Button>
           </div>
 
           <div className="block lg:hidden text-center text-white mt-20 mb-12">

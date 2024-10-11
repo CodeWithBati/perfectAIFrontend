@@ -111,7 +111,7 @@ const Header = ({ className }) => {
           </p>
         </div>
 
-        {!isAuthenticated ? <button onClick={toggleMenuAuth} className="sm:hidden flex items-center space-x-2 text-sm focus:outline-none">
+        {isAuthenticated ? <button onClick={toggleMenuAuth} className="sm:hidden flex items-center space-x-2 text-sm focus:outline-none">
           {
             user?.profile ? (
               <Image
@@ -145,7 +145,7 @@ const Header = ({ className }) => {
 
         {/* Authenticated or Non-Authenticated Actions */}
         <div className="hidden sm:flex items-center space-x-4">
-          {isAuthenticated ? (
+          {!isAuthenticated ? (
             <>
               <Link href="/login" className="text-white font-semibold hover:bg-gray-800 px-4 py-2 rounded-lg tracking-wider text-sm">
                 Sign in
@@ -186,9 +186,9 @@ const Header = ({ className }) => {
               {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-[#323639] border border-[rgba(255,255,255,0.2)] text-white text-sm rounded-lg shadow-lg">
-                  <Link href="/directory" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Directory Manager</Link>
+                  <Link href="/create-directory" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Directory Manager</Link>
                   <Link href="/profile" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Profile</Link>
-                  <Link href="/logout" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Log out</Link>
+                  <span onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm cursor-pointer">Log out</span>
                 </div>
               )}
             </div>
@@ -246,7 +246,7 @@ const Header = ({ className }) => {
             </div>
           </div>
         )}
-        {menuOpenAuth && !isAuthenticated && (
+        {menuOpenAuth && isAuthenticated && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 sm:hidden" onClick={toggleMenuAuth}>
             <div className="bg-[#323639] absolute w-full text-white z-60">
               <div className="flex items-center justify-between px-[30px] py-[20px]">
@@ -278,7 +278,7 @@ const Header = ({ className }) => {
                 <div />
               </div>
               <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
-              <Link href="/directory" className="block py-2 hover:text-additional-purple px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
+              <Link href="/create-directory" className="block py-2 hover:text-additional-purple px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
                 <p className="tracking-wider text-sm">Directory Manager</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -294,7 +294,7 @@ const Header = ({ className }) => {
                   </svg>
                 </p>
               </Link>
-              <Link href="/logout" className="block text-center font-bold px-[30px] py-[20px] border-t border-[rgba(255,255,255,0.2)] tracking-wider text-sm">Log out</Link>
+              <span onClick={handleLogout} className="block text-center font-bold px-[30px] py-[20px] border-t border-[rgba(255,255,255,0.2)] tracking-wider text-sm cursor-pointer">Log out</span>
             </div>
           </div>
         )}

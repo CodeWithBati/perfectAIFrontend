@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Input from '../form/Input';
 import Label from '../form/Label';
-import Button from '../global/Button';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { useEffect, useState } from 'react';
@@ -13,6 +12,8 @@ import SnackBar from '../global/Snackbar';
 import { setUser } from '@/lib/features/auth/authSlice';
 import ErrorIcon from '../../icons/errorIcon';
 import SuccessCheckIcon from '../../icons/successCheckIcon';
+import InputNew from '../form/InputNew';
+import Button from '../form/Button';
 
 const Settings = () => {
   const router = useRouter();
@@ -20,8 +21,6 @@ const Settings = () => {
   const { user, token } = useAppSelector((state) => state.auth);
 
   const [formValue, setFormValue] = useState({
-    firstName: user?.firstName ? user?.firstName : '',
-    lastName: user?.lastName ? user?.lastName : '',
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
@@ -33,52 +32,12 @@ const Settings = () => {
     severity: 'success',
   });
   const [errors, setErrors] = useState({
-    firstName: false,
-    lastName: false,
     currentPassword: false,
     newPassword: false,
     confirmPassword: false,
   });
   const dispatch = useAppDispatch();
 
-  const handleUpdateProfile = async () => {
-    const { firstName, lastName } = formValue;
-    try {
-      if (token) {
-        const response = await axios.patch(
-          `${process.env.NEXT_PUBLIC_API_URL}/users/update-user`,
-          JSON.stringify({
-            firstName,
-            lastName,
-          }),
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          dispatch(setUser({ user: response.data.user }));
-          setFormValue({
-            firstName: response.data.user.firstName,
-            lastName: response.data.user.lastName,
-          });
-          router.push('/profile', { scroll: false });
-        }
-      }
-    } catch (error) {
-      if (error.response.status === 400) {
-        setSnackbar({
-          open: true,
-          message: error.response.data.message,
-          icon: <ErrorIcon />,
-          severity: 'error',
-        });
-      }
-    }
-  };
   const handleCloseSnackbar = () => {
     setSnackbar((prevSnackbar) => ({ ...prevSnackbar, open: false }));
   };
@@ -121,6 +80,8 @@ const Settings = () => {
     } else if (confirmPassword !== newPassword) {
       formErrors.confirmPassword = "Passwords don't match";
     }
+
+    console.log(formValue)
 
     setErrors(formErrors);
 
@@ -195,51 +156,51 @@ const Settings = () => {
         {/* Profile Form */}
         <div className="space-y-[20px] mt-[20px] w-full lg:mt-[40px]">
           <div className="relative w-full">
-            <input
+            <InputNew
               type="password"
-              id="current_password"
+              id="currentPassword"
+              name="currentPassword"
               placeholder=" "
-              className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+              value={formValue.currentPassword}
+              onChange={handleChange}
+              error={errors.currentPassword}
+              label="CURRENT PASSWORD"
+              className="mb-4"
+              labelClassName="text-[rgba(255,255,255,0.5)]"
             />
-            <label
-              htmlFor="current_password"
-              className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-            >
-              CURRENT PASSWORD
-            </label>
           </div>
           <div className="relative w-full">
-            <input
+            <InputNew
               type="password"
-              id="password"
+              id="newPassword"
+              name="newPassword"
               placeholder=" "
-              className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+              value={formValue.newPassword}
+              onChange={handleChange}
+              error={errors.newPassword}
+              label="PASSWORD"
+              className="mb-4"
+              labelClassName="text-[rgba(255,255,255,0.5)]"
             />
-            <label
-              htmlFor="password"
-              className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-            >
-              NEW PASSWORD
-            </label>
           </div>
           <div className="relative w-full">
-            <input
+            <InputNew
               type="password"
-              id="conf_password"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder=" "
-              className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+              value={formValue.confirmPassword}
+              onChange={handleChange}
+              error={errors.confirmPassword}
+              label="CONFIRM PASSWORD"
+              className="mb-4"
+              labelClassName="text-[rgba(255,255,255,0.5)]"
             />
-            <label
-              htmlFor="conf_password"
-              className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-            >
-              CONFIRM NEW PASSWORD
-            </label>
           </div>
         </div>
-        <button onClick={handlePasswordUpdate} className="bg-main-purple text-sm font-semibold text-white w-full lg:w-auto mt-[30px] rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+        <Button onClick={handlePasswordUpdate} variant="primary" size="small">
           Update changes
-        </button>
+        </Button>
       </div>
     </>
   );

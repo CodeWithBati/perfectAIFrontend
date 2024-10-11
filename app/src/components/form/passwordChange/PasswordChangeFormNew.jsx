@@ -1,12 +1,16 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import Input from '../Input';
-import Label from '../Label';
-import Link from 'next/link';
+import axios from 'axios';
 import Image from "next/image";
 import AuthFooter from '../AuthFooter';
 import SideBar from '../SideBar';
+import Button from '../Button';
+import InputNew from '../InputNew';
+import { useSearchParams } from 'next/navigation';
+
+
+import { useRouter } from 'next/navigation';
 
 const PasswordChangeForm = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +28,10 @@ const PasswordChangeForm = () => {
     confirmPassword: '',
   });
 
-  const paragraphClass = 'text-slate-500 text-sm mb-1 py-3';
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const key = searchParams.get('key');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,7 +75,7 @@ const PasswordChangeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!password || !confirmPassword) {
+    if (!formData.password || !formData.confirmPassword) {
       setErrors({
         password: 'Password is required.',
         confirmPassword: 'Password confirmation is required.',
@@ -76,7 +83,7 @@ const PasswordChangeForm = () => {
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       setErrors({
         password: 'Passwords do not match.',
         confirmPassword: 'Passwords do not match.',
@@ -86,9 +93,9 @@ const PasswordChangeForm = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password?key=${router.query.key}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password?key=${key}`,
         JSON.stringify({
-          password,
+          password: formData.password
         }),
         {
           headers: {
@@ -98,7 +105,7 @@ const PasswordChangeForm = () => {
       );
 
       if (response.status === 200) {
-        router.push('/', { scroll: false });
+        router.push('/reset-password-success', { scroll: false });
       }
     } catch (error) {
       console.error('Error sending reset instructions:', error.message);
@@ -127,38 +134,38 @@ const PasswordChangeForm = () => {
           <h2 className="text-white text-sm lg:text-lg w-full lg:w-[550px] lg:font-semibold">Enter your new password</h2>
           <div className="space-y-[20px] w-full flex flex-col items-center">
             <div className="relative w-full lg:w-[370px]">
-              <input
-                type="password"
-                id="password"
-                placeholder=" "
-                className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
-              />
-              <label
-                htmlFor="password"
-                className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-              >
-                NEW PASSWORD
-              </label>
+                <InputNew
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder=" "
+                  onChange={(e) => handleChange(e)}
+                  onBlur={() => handleBlur('password')}
+                  error={errors.password}
+                  label="PASSWORD"
+                  className="mb-4"
+                  labelClassName="text-[rgba(255,255,255,0.5)]"
+                />
             </div>
             <div className="relative w-full lg:w-[370px]">
-              <input
+              <InputNew
                 type="password"
-                id="conf_password"
+                id="confirmPassword"
+                name="confirmPassword"
                 placeholder=" "
-                className="block px-[15px] pt-[20px] pb-[8px] w-full h-[56px] text-sm text-white bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[5px] appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                onChange={(e) => handleChange(e)}
+                onBlur={() => handleBlur('confirmPassword')}
+                error={errors.confirmPassword}
+                label="CONFIRM PASSWORD"
+                className="mb-4"
+                labelClassName="text-[rgba(255,255,255,0.5)]"
               />
-              <label
-                htmlFor="conf_password"
-                className="absolute text-sm text-[rgba(255,255,255,0.5)] duration-300 transform -translate-y-4 scale-100 top-[18px] left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[18px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-              >
-                CONFIRM NEW PASSWORD
-              </label>
             </div>
           </div>
 
-          <button className="bg-main-purple text-sm font-semibold text-white w-full lg:w-auto rounded-[5px] px-[20px] py-[10px] hover:bg-[#763b9a] focus:outline-none focus:ring-2 focus:ring-[#8B60B2]">
+          <Button onClick={handleSubmit} variant="primary" size="small">
             Reset password
-          </button>
+          </Button>
         </div>
 
         <div className="block lg:hidden text-center text-white mt-20 mb-12">

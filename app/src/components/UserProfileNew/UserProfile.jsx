@@ -85,10 +85,9 @@ const UserProfile = () => {
     <>
       <section className="relative flex flex-col items-center justify-start min-w-screen pt-16 lg:pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
 
-
         <h1 className="text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center">Profile</h1>
 
-        <div className="flex flex-col justify-center items-center px-[30px] w-full max-w-screen-xl lg:px-[135px]">
+        <div className="flex flex-col justify-center items-center px-[30px] w-full lg:px-[135px]">
 
           {/* Tabs Section */}
           <div className="flex justify-center items-center gap-[10px] w-full lg:w-auto">
