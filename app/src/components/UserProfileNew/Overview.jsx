@@ -11,7 +11,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import { setUser } from '@/lib/features/auth/authSlice';
 import { updateProfileImage } from "@/lib/features/auth/authSlice";
 import toast from "react-hot-toast";
-import UserChatsLog from "./UserChatsLog";
+import ErrorIcon from '@/app/src/icons/errorIcon';
 import Button from "../form/Button";
 import InputNew from "../form/InputNew";
 

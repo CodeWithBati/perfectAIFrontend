@@ -3,6 +3,7 @@
 import InputNew from "../form/InputNew";
 import Button from "../form/Button";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Label from "@/app/src/components/form/Label";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -27,6 +28,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 import MultipleSelectNew from "@/app/src/components/global/MultipleSelectNew";
 import TextArea from "../global/TextArea";
+
 
 
 const pricingSchema = Yup.object({
