@@ -1,4 +1,5 @@
 import ChatOverview from "@/app/src/components/chat/ChatOverview";
+import ChatBotResult from '@/app/src/components/chatBotResults/ChatBotResult';
 
 export const metadata = {
   title: 'AI Tool Recommendations'
@@ -6,7 +7,7 @@ export const metadata = {
 
 const ChatBotPage = (props) => {
   const { key } = props.params;
-  return <ChatOverview ChatKey={key} />;
+  return <ChatBotResult ChatKey={key} />;
 };
 
 export default ChatBotPage;

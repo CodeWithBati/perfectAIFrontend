@@ -47,7 +47,7 @@ const BlogSection = () => {
 
     return (
         <section className="py-8 sm:py-16">
-            <h2 className="text-[32px] sm:text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center">Blogs</h2>
+            <h2 className="text-[32px] sm:text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center tracking-wide">Blogs</h2>
 
             <div className="relative">
                 <Swiper
@@ -102,7 +102,7 @@ const BlogSection = () => {
 
             {/* View More Button */}
             <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
-                <button className="px-[20px] py-[10px] bg-none text-white rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e]">View More</button>
+                <button className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider">View More</button>
             </div>
         </section >
     );

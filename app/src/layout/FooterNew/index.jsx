@@ -39,7 +39,7 @@ const Footer = () => {
             />
             <span className="text-2xl font-semibold">myPerfectAI</span>
           </div>
-          <p className="text-xs text-center max-w-[350px]">
+          <p className="text-xs max-w-[390px] tracking-wider">
             FindMyAITool is a website dedicated to providing a comprehensive list of AI tools to assist individuals and businesses in finding the most suitable AI tool for their specific requirements.
           </p>
         </div>
@@ -47,7 +47,7 @@ const Footer = () => {
         {/* Right Side - Navigation and Social Icons */}
         <div className="flex flex-col items-center sm:justify-between space-y-6 sm:items-end h-full">
           {/* Navigation Links */}
-          <div className="flex sm:flex-row flex-col items-center sm:items-end sm:space-x-6 space-y-6 mb-4 mt-4 sm:mt-0">
+          <div className="flex sm:flex-row flex-col items-center sm:items-end sm:space-x-10 space-y-6 mb-4 mt-4 sm:mt-0  tracking-wide">
             <Link href="#" className="text-sm hover:underline">Home</Link>
             <Link href="#" className="text-sm hover:underline">About</Link>
             <Link href="#" className="text-sm hover:underline">Blogs</Link>
@@ -57,7 +57,7 @@ const Footer = () => {
           </div>
 
           {/* Social Icons */}
-          <div className="flex space-x-4 mb-4">
+          <div className="flex space-x-8 mb-4">
             <Link href="#" className="hover:text-purple-400">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 10C20 4.48 15.52 0 10 0C4.48 0 0 4.48 0 10C0 14.84 3.44 18.87 8 19.8V13H6V10H8V7.5C8 5.57 9.57 4 11.5 4H14V7H12C11.45 7 11 7.45 11 8V10H14V13H11V19.95C16.05 19.45 20 15.19 20 10Z" fill="white" />
@@ -79,8 +79,8 @@ const Footer = () => {
               </svg>
             </Link>
           </div>
-          <p className="text-sm text-white mt-4">
-            © 2024. Crafted By <Link href="#" className="text-purple-400 hover:underline">MyPerfectAI</Link>
+          <p className="text-sm text-white mt-4 tracking-wide">
+            © 2024 <Link href="#" className="text-purple-400 hover:underline">MyPerfectAI</Link>
           </p>
         </div>
       </div>

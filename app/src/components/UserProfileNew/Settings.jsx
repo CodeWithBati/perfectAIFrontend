@@ -163,6 +163,11 @@ const Settings = () => {
               placeholder=" "
               value={formValue.currentPassword}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  handlePasswordUpdate(e);
+                }
+              }}
               error={errors.currentPassword}
               label="CURRENT PASSWORD"
               className="mb-4"
@@ -177,6 +182,11 @@ const Settings = () => {
               placeholder=" "
               value={formValue.newPassword}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  handlePasswordUpdate(e);
+                }
+              }}
               error={errors.newPassword}
               label="PASSWORD"
               className="mb-4"
@@ -191,6 +201,11 @@ const Settings = () => {
               placeholder=" "
               value={formValue.confirmPassword}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  handlePasswordUpdate(e);
+                }
+              }}
               error={errors.confirmPassword}
               label="CONFIRM PASSWORD"
               className="mb-4"

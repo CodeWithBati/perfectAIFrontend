@@ -42,11 +42,14 @@ const SavedDiectories = () => {
           <Spinner />
         </div>
       ) : (
+        savedDirectories?.length > 0 ? 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {savedDirectories.map((tool) => (
-            <FeatureCard directory={tool.directory} key={tool.id} />
+            <FeatureCard directory={tool.directory} key={tool.id} saved={true} />
           ))}
         </div>
+        :
+        <h3 className="text-2xl font-bold text-white text-center mt-8">No saved directories found!</h3>
       )}
     </div>
   );

@@ -14,11 +14,52 @@ import FeatureSection from "../FeatureSection";
 import BlogSection from "../BlogSection";
 import SubScriptionSection from "../SubScriptionSection";
 import FooterNew from "../../FooterNew";
+import Spinner from "@/app/src/ui/Spinner";
 
 const MainSection = () => {
     const theme = useTheme();
     const router = useRouter();
+    const [input, setInput] = useState("");
     const { user, token } = useSelector((state) => state.auth);
+    const [spinner, setSpinner] = useState(false);
+
+    const handleChange = (evt) => {
+        const val = evt.target?.value;
+
+        setInput(val);
+    };
+
+    const handleSearchChatbot = async () => {
+        if (!user) {
+            toast.error(toastText.error.loginFirst);
+            return;
+        }
+
+        setSpinner(true);
+
+        const formData = {
+            input: input,
+        };
+
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/chat`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            if (response.status === 201) {
+                router.push(`/chat/${response.data.id}`);
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setSpinner(false);
+        }
+    };
     const [isOpen, setIsOpen] = useState(false);
 
 
@@ -26,12 +67,15 @@ const MainSection = () => {
     const closeModal = () => setIsOpen(false);
 
     return (
-        <section className="text-white bg-cover bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull.png')]" >
+        <section className="text-white bg-contain bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull.png')]" >
             <div className="relative flex flex-col items-center justify-center min-w-screen sm:pt-32 pt-20 pb-8">
-                <h1 className="text-[32px] sm:text-[80px] font-bold text-center tracking-tighter">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
-                <h5 className="text-base sm:text-2xl text-center mb-8 w-[85%] sm:w-[35%]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>
+                <h1 className="text-[32px] sm:text-[80px] font-bold text-center tracking-tight">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
+                <h5 className="text-base sm:text-2xl font-bold text-center mb-8 w-[85%] sm:w-[50%]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>
 
                 {/* Search and Prompt Guidelines */}
+                {spinner ? (
+                  <Spinner className="mb-8" />
+                ) : (
                 <div className="flex items-center bg-[#1e1e1e] rounded-md w-full border border-[rgba(255,255,255,0.2)] max-w-[85%] sm:max-w-[570px] p-2 mb-8">
                     {/* Search Icon */}
                     <svg
@@ -52,10 +96,20 @@ const MainSection = () => {
                     {/* Input Field */}
                     <input
                         type="text"
-                        placeholder="Describe your task or search for tool name..."
-                        className="bg-[#1e1e1e] focus:bg-transparent focus:outline-none focus:border-none text-gray-300 text-sm w-full outline-none border-none placeholder-gray-500"
+                        placeholder="Describe your AI tool use case in detail.."
+                        className="bg-[#1e1e1e] focus:bg-transparent focus:outline-none focus:border-none focus:ring-0 focus:shadow-none text-gray-300 text-sm w-full border-none placeholder-gray-500"
+                        onChange={handleChange}
+                        value={input}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSearchChatbot();
+                          }
+                        }}
                     />
+                    
                 </div>
+                )}
 
                 <div className="bg-[#323639] text-white p-[20px] mx-[30px] border border-[rgba(255,255,255,0.2)] rounded-lg max-w-full sm:hidden relative">
                     <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
@@ -113,11 +167,11 @@ const MainSection = () => {
                 </CustomModel>
 
                 {/* Desktop version: Full content */}
-                <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last h-[250px] overflow-hidden">
+                <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] tracking-wide sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last h-[250px] overflow-hidden">
                     <div className="p-4 sm:col-span-1">
                         <h5 className="font-semibold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
                         <p className="text-sm mb-4">to relieve accurate, use-case specific AI tool recommendations </p>
-                        <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <span className="text-main-purple">Learn more</span></p>
+                        <p className="text-[10px]">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <span className="text-main-purple">Learn more</span></p>
                     </div>
                     <div className="p-4 sm:col-span-1">
                         <div className="text-white inline-flex items-center justify-center border border-white rounded-full w-10 h-10 mb-2">1</div>
@@ -141,12 +195,12 @@ const MainSection = () => {
                     </div>
                 </div>
 
-                <p className="text-center text-sm sm:text-lg mt-4 sm:mt-8 mx-[30px] sm:w-[45%] block tracking-wider font-bold">We only include high-quality, business-grade AI tools & software in our directory. <span className="text-main-purple">Learn more</span> about our rigorous approval and verification process</p>
+                <p className="text-center text-sm sm:text-lg mt-4 sm:mt-8 mx-[30px] sm:w-[55%] block tracking-wider font-semibold">We only include high-quality, business-grade AI tools & software in our directory. <span className="text-main-purple">Learn more</span> about our rigorous approval and verification process</p>
             </div>
             <div className="px-[30px] sm:px-[135px]">
                 <FeatureSection />
                 <BlogSection />
-                <SubScriptionSection />
+                {/* <SubScriptionSection /> */}
             </div>
         </section>
     );

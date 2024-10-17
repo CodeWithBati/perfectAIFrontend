@@ -52,14 +52,6 @@ const UserChatsLog = () => {
     fetchSites();
   }, [page, fetchSites]);
 
-  const handleScroll = useCallback(() => {
-    if (listRef.current && !loadingRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = listRef.current;
-      if (scrollHeight - scrollTop <= clientHeight + 100) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    }
-  }, []);
 
   const chatData = [
     {
@@ -97,7 +89,7 @@ const UserChatsLog = () => {
         </h2>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {chatData.map((chat, i) => (
+          {chatHistoryLog?.map((chat, i) => (
             <ChatShareCard chat={chat} key={i} />
           ))}
         </div>

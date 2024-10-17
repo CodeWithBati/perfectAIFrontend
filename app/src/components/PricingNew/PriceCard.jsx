@@ -108,9 +108,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                     <ul className="lg:hidden space-y-4">
                         {detail?.features.map((feature, index) => (
                             <li key={index} className="flex items-start">
-                                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '14px', height: '15px', flexShrink: 0, border: '1px solid white', borderRadius: '50%', marginTop: '5px' }}>
-                                    <path d="M7 14.75C3.11719 14.75 0 11.6328 0 7.75C0 3.89453 3.11719 0.75 7 0.75C10.8555 0.75 14 3.89453 14 7.75C14 11.6328 10.8555 14.75 7 14.75ZM10.0898 6.46484H10.0625L10.5273 6L9.625 5.07031L9.16016 5.53516L6.125 8.59766L4.83984 7.3125L4.375 6.84766L3.44531 7.75L3.91016 8.21484L5.66016 9.96484L6.125 10.4297L6.58984 9.96484L10.0898 6.46484Z" fill="#8B60B2" />
-                                </svg>
+                                <Image width={14} height={14} src='/images/check.png' alt='check' />
                                 <span className='ml-4'>{feature}</span>
                             </li>
                         ))}
@@ -119,9 +117,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                 <ul className="lg:block hidden space-y-4">
                     {detail?.features.map((feature, index) => (
                         <li key={index} className="flex items-start">
-                            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '14px', height: '15px', flexShrink: 0, border: '1px solid white', borderRadius: '50%', marginTop: '5px' }}>
-                                <path d="M7 14.75C3.11719 14.75 0 11.6328 0 7.75C0 3.89453 3.11719 0.75 7 0.75C10.8555 0.75 14 3.89453 14 7.75C14 11.6328 10.8555 14.75 7 14.75ZM10.0898 6.46484H10.0625L10.5273 6L9.625 5.07031L9.16016 5.53516L6.125 8.59766L4.83984 7.3125L4.375 6.84766L3.44531 7.75L3.91016 8.21484L5.66016 9.96484L6.125 10.4297L6.58984 9.96484L10.0898 6.46484Z" fill="#8B60B2" />
-                            </svg>
+                            <Image width={20} height={20} src='/images/check.png' alt='check' className='rounded-full' style={{ width: '14px', height: '15px', flexShrink: 0, border: '1px solid white', borderRadius: '50%', marginTop: '5px' }} />
                             <span className='ml-4'>{feature}</span>
                         </li>
                     ))}

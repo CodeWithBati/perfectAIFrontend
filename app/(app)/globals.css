@@ -53,3 +53,82 @@ body {
 .parent-container {
   overflow: visible;
 }
+
+
+/* Custom Quill editor styling */
+.quill-editor-custom .ql-toolbar {
+  background-color: #333333;
+  border: none !important;
+  background: #323639 !important;
+  color: #ffffff;
+  border-radius: 6.56px 6.56px 0 0;
+}
+
+/* Set toolbar icons to white */
+.quill-editor-custom .ql-toolbar button,
+.quill-editor-custom .ql-toolbar select {
+  color: #ffffff;
+}
+
+/* Change the hover and active states for the icons */
+.quill-editor-custom .ql-toolbar button:hover,
+.quill-editor-custom .ql-toolbar button:focus,
+.quill-editor-custom .ql-toolbar button.ql-active {
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+
+/* Editor container styles */
+.quill-editor-custom .ql-container {
+  height: 150px;
+  margin: 0px 10px 0 10px;
+  border: none !important;
+  border-top: 1px solid rgba(255,255,255,0.2) !important;
+  background: #323639 !important;
+  border-radius: 0 0 6.56px 6.56px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #2a2a2a;
+}
+
+/* Style the text inside the editor */
+.quill-editor-custom .ql-container .ql-editor {
+  height: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Placeholder text styling */
+.quill-editor-custom .ql-editor.ql-blank::before {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+
+/* Remove focus outline on toolbar buttons */
+.quill-editor-custom .ql-toolbar button:focus {
+  outline: none;
+}
+
+.quill-editor-custom .ql-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.quill-editor-custom .ql-container::-webkit-scrollbar-thumb {
+  background: #323639 !important;
+  border-radius: 10px;
+}
+
+
+.ql-stroke {
+  stroke: white !important;
+}
+
+.ql-picker {
+  color: white !important;
+}
+
+.ql-toolbar {
+  border: none !important;
+}

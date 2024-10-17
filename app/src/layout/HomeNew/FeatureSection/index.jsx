@@ -37,6 +37,23 @@ const FeatureSection = () => {
 
     const [isMobile, setIsMobile] = useState(false);
 
+    const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
     // Check screen size on load and resize
     useEffect(() => {
         const handleResize = () => {
@@ -168,12 +185,12 @@ const FeatureSection = () => {
 
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
                 {/* Tabs */}
-                <div className="flex items-center justify-between space-x-[10px] bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] rounded-md py-[5px] px-[10px] sm:py-[10px] sm:px-[15px] w-full sm:w-auto">
+                <div className="flex items-center justify-between space-x-[15px] bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] rounded-md py-[5px] px-[10px] sm:py-[10px] sm:px-[15px] w-full sm:w-auto">
                     {directoryFilterSortBy.map((tab, index) => (
                         <button
                             key={index}
                             className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${filters.sortBy === tab.name
-                                ? "bg-[#8B60B2] text-white font-bold"
+                                ? "bg-[#8B60B2] text-white font-semibold"
                                 : "bg-transparent text-white hover:bg-[#323639]"
                                 }`}
                             onClick={() => applyFilter("sortBy", tab.name)}
@@ -195,7 +212,7 @@ const FeatureSection = () => {
                 <div className="hidden sm:flex items-center bg-[#323639] border border-[rgba(255,255,255,0.2)] text-white rounded-md py-[10px] px-[20px] mt-4 sm:mt-0">
                     {/* Verified Toggle */}
                     <div className="hidden sm:flex items-center pr-4 border-r border-[rgba(255,255,255,0.2)]">
-                        <span className="mr-2 text-xs">Verified</span>
+                        <span className="mr-2 text-xs tracking-wide">Verified</span>
                         <label className="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" className="sr-only peer" checked={filters.isVerified} onChange={(e) => applyFilter("isVerified", !filters.isVerified)} />
                             <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
@@ -206,13 +223,13 @@ const FeatureSection = () => {
                     <div className="hidden sm:block border-l border-[rgba(255,255,255,0.2)] h-full"></div>
 
                     {/* Filter Icon */}
-                    <div className="relative">
+                    <div className="relative" ref={dropdownRef}>
                         <button className="ml-4 hidden sm:flex items-center" onClick={toggleFilter}>
                             <svg width="20" height="15" viewBox="0 0 28 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0 0H28V3H0V0ZM4 10H24V13H4V10ZM18 20V23H10V20H18Z" fill="white" />
                             </svg>
 
-                            <span className="ml-2 text-xs">Filter</span>
+                            <span className="ml-2 text-xs tracking-wide">Filter</span>
                         </button>
 
 
@@ -280,7 +297,7 @@ const FeatureSection = () => {
 
                             {/* Price Filter */}
                             <div className="flex items-center py-[20px] border-b border-[rgba(255,255,255,0.2)] mb-4">
-                                <span className="mr-2 text-base">Verified</span>
+                                <span className="mr-2 text-base tracking-wide">Verified</span>
                                 <label className="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" value="" className="sr-only peer" />
                                     <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
@@ -331,7 +348,7 @@ const FeatureSection = () => {
             )}
 
             <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
-                <Link href="/directory" className="px-[20px] py-[10px] bg-none text-white rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e]">View More</Link>
+                <Link href="/directory" className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider">View More</Link>
             </div>
         </section>
     );

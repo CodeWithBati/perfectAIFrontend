@@ -167,8 +167,8 @@ const VerifyEmail = () => {
       <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
 
         <SideBar />
-        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
-          <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
+        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
+          <Link href='/' className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
               src={"/images/defaulticon4.png"}
@@ -176,7 +176,7 @@ const VerifyEmail = () => {
               height={40}
               className="mx-auto rounded-[6.5px] mr-[10px]"
             /> myPerfectAI
-          </p>
+          </Link>
 
           <div className="space-y-4 text-center w-full lg:w-auto flex flex-col items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Verify Your Account</h2>
@@ -189,6 +189,8 @@ const VerifyEmail = () => {
               onKeyDown={(e) => {
                 if (!/^\d$/.test(e.key)) {
                   e.preventDefault();
+                } else if (e.key === "Enter" && !e.shiftKey) {
+                  handleSubmit(e);
                 }
               }}
               inputStyle={{

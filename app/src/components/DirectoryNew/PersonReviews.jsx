@@ -144,19 +144,25 @@ const PersonReviews = ({ directory }) => {
   };
 
   useEffect(() => {
+    if (!directory?.id) return; // Check if directory.id exists
     const getReviews = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/directories/${directory.id}/reviews`
-      );
-      if (response.status === 200) {
-        setReviews(response.data.results);
-      } else {
-        console.log("Error feteching the records");
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/directories/${directory.id}/reviews`
+        );
+        if (response.status === 200) {
+          setReviews(response.data.results);
+        } else {
+          console.log("Error fetching the records");
+        }
+      } catch (error) {
+        console.error("Failed to fetch reviews:", error);
       }
     };
 
     getReviews();
-  }, [directory.id]);
+  }, [directory]);
+
 
   const handleAddReview = () => {
     if (notAllowdUsers.includes(user?.id)) {
@@ -166,14 +172,12 @@ const PersonReviews = ({ directory }) => {
     setShowModal(true);
   };
 
-  console.log(user)
-
   return (
     <div className="border-t mt-8 border-t-[rgba(255,255,255,0.2)]">
       {/* Review Section */}
       <section className="text-white py-8 lg:py-12 lg:flex lg:flex-col items-center justify-center">
         {/* Search Bar */}
-        {isReviewed ? (
+        {!isReviewed ? (
           <div className="flex items-center justify-center bg-[#323639] p-2 rounded-lg max-w-[770px] mb-16 border border-[rgba(255,255,255,0.2)]">
             {/* User avatar */}
             {
@@ -201,15 +205,9 @@ const PersonReviews = ({ directory }) => {
               <input
                 type="text"
                 id="comment"
-                placeholder=" "
-                className="block px-[15px] pb-[8px] w-full h-[40px] text-sm text-white bg-[#323639] rounded-[5px] border-none outline-none appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 peer"
+                placeholder="WHAT DO YOU THINK..."
+                className="block px-[15px] pb-[8px] w-full h-[40px] text-sm text-white bg-[#323639] rounded-[5px] border-none outline-none appearance-none focus:outline-none focus:ring-0 peer"
               />
-              <label
-                htmlFor="comment"
-                className="absolute text-xs text-[rgba(255,255,255,0.5)] duration-300 scale-100 left-[15px] origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-[10px] peer-placeholder-shown:scale-100 peer-focus:top-[8px] peer-focus:text-xs peer-focus:text-[rgba(255,255,255,0.5)] peer-focus:scale-90"
-              >
-                WHAT DO YOU THINK...
-              </label>
             </div>
 
             {/* Review button */}
@@ -266,9 +264,9 @@ const PersonReviews = ({ directory }) => {
           </Swiper>
         </div>
       </section>
-      <div className="lg:flex items-center justify-center hidden">
+      {/* <div className="lg:flex items-center justify-center hidden">
         <span className="bg-[#323639] py-[10px] px-[20px] text-white font-bold rounded-[5px]">Load more review (100)</span>
-      </div>
+      </div> */}
 
       {showModal && (
         <AddNewReviewModal

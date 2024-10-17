@@ -395,22 +395,23 @@ function CreateDirectory() {
             </div>
           </div>
 
-          <div className="relative w-full">
-            <Label htmlFor="description" className="mb-2">
+          <div className="relative w-full bg-[#323639] rounded-[6.56px] border border-[rgba(255,255,255,0.2)] pt-4">
+            <label htmlFor="description" className="text-gray-400 text-sm mb-2 uppercase pl-4">
               Description
-            </Label>
+            </label>
             <ReactQuill
-              theme="snow"
               modules={reactQuillModuleSettings}
               formats={reactQuillFormatSettings}
-              placeholder="Add the simple directory description"
+              placeholder="Add a simple directory description"
               onChange={(content) => {
                 handleInputChange("description", content);
               }}
               value={formData.description}
-              className="text-white min-h-100 flex flex-col h-full"
+              className="bg-[#323639] rounded-md text-white max-h-100 flex flex-col h-full quill-editor-custom"
             />
           </div>
+
+
 
           <div className="flex flex-col w-full lg:flex-row space-y-[20px] lg:space-y-0 lg:space-x-[20px]">
             {/* First Name */}

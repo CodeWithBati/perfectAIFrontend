@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StarRating = ({ rating, maxRating = 5 }) => {
+const StarRating = ({ rating, maxRating = 5, size = 'md' }) => {
   // Function to determine the fill percentage of each star
   const getStarFill = (starIndex) => {
     if (starIndex <= rating) {
@@ -11,6 +11,17 @@ const StarRating = ({ rating, maxRating = 5 }) => {
     return 0; // Unfilled star
   };
 
+  const getSizeClass = () => {
+    switch (size) {
+      case 'sm':
+        return 'w-3 h-3'; // Small size
+      case 'lg':
+        return 'w-6 h-6'; // Large size
+      default:
+        return 'w-5 h-5'; // Medium size (default)
+    }
+  };
+
   return (
     <div className="flex items-center">
       {Array.from({ length: maxRating }, (_, index) => {
@@ -18,7 +29,7 @@ const StarRating = ({ rating, maxRating = 5 }) => {
         return (
           <svg
             key={index}
-            className="w-4 h-4 mr-1"
+            className={`${getSizeClass()} mr-1`}
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

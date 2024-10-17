@@ -33,7 +33,7 @@
 }
 
 body {
-  font-family: 'sansation';
+  font-family: "DM Sans", sans-serif;
 }
 
 .ql-container {
@@ -48,7 +48,7 @@ body {
   flex: 1;  
   min-height: 0;
   @apply text-slate-600;
-  font-family: 'sansation';
+  font-family: "DM Sans", sans-serif;
 }
 
 .dark .ql-editor {

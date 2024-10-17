@@ -1,4 +1,22 @@
 'use client'
+import { useEffect, useState, useRef, useCallback } from "react";
+import Section from "@/app/src/components/global/Section";
+
+import VerticalStepper from "@/app/src/components/ChatBot/VerticalStepper";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import Button from "@/app/src/components/global/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FeaturedSideBar from "@/app/src/components/Directories/FeaturedSideBar/FeaturedSideBar";
+import withDynamicFavicon from "@/app/src/hoc/withDynamicFavicon";
+import { useTheme } from "@/app/src/layout/provider";
+import Spinner from "@/app/src/ui/Spinner";
+import Head from "next/head";
+import { toastText } from "@/constants/text-constants";
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -6,51 +24,188 @@ import 'swiper/css/navigation';
 
 import Link from 'next/link';
 import Image from "next/image"
-import Footer from "../../layout/FooterNew"
-import Header from "../../layout/Header/HeaderNew"
 import feat2 from '../../../../public/images/feat2.jpeg'
 import FeatureCard from "../../layout/HomeNew/FeatureSection/FeatureCard"
 
 import Cards from "./Cards"
+import StarRating from "../StarRating";
+import AlternativeFeatureCard from "./AlternativeFeatureCard";
 
 
-function ChatBotResult() {
+function ChatBotResult({ ChatKey }) {
 
-  const aiToolsData = [
-    {
-      id: 1,
-      title: "GetGenie",
-      description: "GetGenie is an AI-powered tool for content creation and SEO, offering over 30 templates for various use cases.",
-      pricing: "Freemium",
-      rating: 5,
-      reviews: 100,
-      featured: true,
-      verified: true,
-      badge: "Featured",
-      imageUrl: "/images/feat1.jpeg"
-    },
-    {
-      id: 2,
-      title: "Devin AI",
-      description: "Devin AI, developed by Cognition Labs, is an advanced AI model that autonomously handles software engineering tasks.",
-      pricing: "Free",
-      rating: 5,
-      reviews: 100,
-      featured: true,
-      verified: false,
-      badge: "Featured",
-      imageUrl: "/images/feat2.jpeg"
-    },
-  ];
 
-  return (
-      <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
-        <h4 className="text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto tracking-wider text-center lg:font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<span className="text-[#BF96E4] font-bold"> Learn more</span> </h4>
-        <div className="px-[30px] lg:px-[135px] w-full mt-8 rounded-lg text-white">
+  const textAreaRef = useRef(null);
+  const theme = useTheme();
 
-          <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 ">
-            <div className="hidden lg:block lg:w-1/4 px-6 rounded-lg">
-              <button className="flex items-center bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[20px] py-[10px] rounded-[5px] mb-4 text-sm font-bold text-white hover:text-white">
+  const [chatData, setChatData] = useState([]);
+  const [input, setInput] = useState("");
+  const [shareableLink, setShareableLink] = useState("");
+  const [directories, setDirectories] = useState([]);
+  const [extractMoreSpinner, setExtractMoreSpinner] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const { user, token } = useSelector((state) => state.auth);
+  const router = useRouter();
+  const loadingRef = useRef(false);
+
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "inherit"; // Reset height to calculate the scroll height correctly
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    }
+  }, [input]);
+
+  const fetchSites = useCallback(async () => {
+    if (page > totalPages || loadingRef.current) return;
+
+    const config = {};
+    if (token) {
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
+    setExtractMoreSpinner(true);
+    loadingRef.current = true;
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/directories?page=${page}&limit=10&isFeatured=true`,
+        config
+      );
+      if (response.status === 200) {
+        setDirectories((prevSites) =>
+          page === 1
+            ? response.data.results
+            : [...prevSites, ...response.data.results]
+        );
+        setTotalPages(response.data.pagination.totalPages);
+      } else {
+        console.error("error-->", response);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setExtractMoreSpinner(false);
+      loadingRef.current = false;
+    }
+  }, [page, totalPages, token]);
+
+  useEffect(() => {
+    fetchSites();
+  }, [page, fetchSites]);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+      toast.error(toastText.error.loginFirst);
+    }
+  }, [user, router]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/chat/${ChatKey}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          setChatData(response.data.outputs);
+          setInput(response.data.input);
+          setShareableLink(response.data.shareableLink);
+        } else {
+          console.log("error fetching the record");
+        }
+      } catch (error) {
+        if (error.response.status === 404 || error.response.status === 400) {
+          router.push("/chatNotFound");
+        }
+        console.log("error->", error);
+      }
+    })();
+  }, [ChatKey, token, router]);
+
+  const copyTextToClipboard = async (textToCopy) => {
+    if ("clipboard" in navigator) {
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        toast.success(toastText.success.linkCopied);
+      } catch (err) {
+        console.error("Failed to copy: ", err);
+      }
+    } else {
+      console.error("Clipboard API not available.");
+    }
+  };
+
+
+  return chatData.length === 0 ? (
+    <div className="mt-20 md:mt-40 flex justify-center items-center">
+      <Spinner />
+    </div>
+  ) : (
+    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
+      <h4 className="text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto tracking-wider text-center lg:font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<span className="text-[#BF96E4] font-bold"> Learn more</span> </h4>
+      <div className="px-[30px] lg:px-[135px] w-full mt-8 rounded-lg text-white">
+
+        <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 ">
+          <div className="hidden lg:block lg:w-1/4 px-6 rounded-lg">
+            <Link href='/' className="flex items-center bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[20px] py-[10px] rounded-[5px] mb-4 text-sm font-bold text-white hover:text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-5 h-5 mr-2"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5l-7-7m0 0l7-7m-7 7h16.5" />
+              </svg>
+              Back for another search
+            </Link>
+            <div className="bg-[#323639] p-6 rounded-lg">
+              <p className="text-white text-sm mb-4">
+                I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
+                generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
+                to increase the number of qualified leads and grow my client base.
+              </p>
+
+              {/* Share link button */}
+              <button onClick={() => copyTextToClipboard(shareableLink)} className="flex items-center py-2 px-4 bg-[#8B60B2] text-base text-white rounded-[5px] font-semibold mb-6 gap-2">
+                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
+                </svg>
+
+                Share link
+              </button>
+
+              {/* Recommendations */}
+              <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
+                <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
+                <div className="space-y-4 text-sm">
+                  <button className="w-full text-left bg-[#8B60B2] py-2 px-4 rounded-[5px] text-white flex items-center gap-2">
+                    Lead generation by identifying potential clients in a target industry
+                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '14px', height: '15px', flexShrink: 0 }}>
+                      <path d="M8.40625 7L7.6875 7.71875L2.6875 12.7188L2 13.4375L0.5625 12L1.28125 11.3125L5.5625 7L1.28125 2.71875L0.5625 2L2 0.59375L2.6875 1.3125L7.6875 6.3125L8.40625 7Z" fill="white" />
+                    </svg>
+                  </button>
+                  <button className="w-full text-left bg-[#1e1e1e] py-2 px-4 rounded-[5px] text-white flex items-center gap-2">
+                    Automating outreach efforts to potential clients
+                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '14px', height: '15px', flexShrink: 0 }}>
+                      <path d="M8.40625 7L7.6875 7.71875L2.6875 12.7188L2 13.4375L0.5625 12L1.28125 11.3125L5.5625 7L1.28125 2.71875L0.5625 2L2 0.59375L2.6875 1.3125L7.6875 6.3125L8.40625 7Z" fill="white" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg">
+            <div className='flex items-center justify-between mt-4'>
+              <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -61,96 +216,45 @@ function ChatBotResult() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5l-7-7m0 0l7-7m-7 7h16.5" />
                 </svg>
-                Back for another search
-              </button>
-              <div className="bg-[#323639] p-6 rounded-lg">
-                <p className="text-white text-sm mb-4">
-                  I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
-                  generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
-                  to increase the number of qualified leads and grow my client base.
-                </p>
+              </Link>
+              <Link href='/' className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
+                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
+                </svg>
+              </Link>
+            </div>
 
-                {/* Share link button */}
-                <button className="flex items-center py-2 px-4 bg-[#8B60B2] text-base text-white rounded-[5px] font-semibold mb-6 gap-2">
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
-                  </svg>
+            <div className="bg-[#323639] rounded-lg mb-4">
+              <p className="text-white text-sm mb-4 line-clamp-2">
+                I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
+                generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
+                to increase the number of qualified leads and grow my client base.
+              </p>
 
-                  Share link
-                </button>
-
-                {/* Recommendations */}
-                <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
-                  <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
-                  <div className="space-y-4 text-sm">
-                    <button className="w-full text-left bg-[#8B60B2] py-2 px-4 rounded-[5px] text-white flex items-center gap-2">
-                      Lead generation by identifying potential clients in a target industry
-                      <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '14px', height: '15px', flexShrink: 0 }}>
-                        <path d="M8.40625 7L7.6875 7.71875L2.6875 12.7188L2 13.4375L0.5625 12L1.28125 11.3125L5.5625 7L1.28125 2.71875L0.5625 2L2 0.59375L2.6875 1.3125L7.6875 6.3125L8.40625 7Z" fill="white" />
-                      </svg>
-                    </button>
-                    <button className="w-full text-left bg-[#1e1e1e] py-2 px-4 rounded-[5px] text-white flex items-center gap-2">
-                      Automating outreach efforts to potential clients
-                      <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '14px', height: '15px', flexShrink: 0 }}>
-                        <path d="M8.40625 7L7.6875 7.71875L2.6875 12.7188L2 13.4375L0.5625 12L1.28125 11.3125L5.5625 7L1.28125 2.71875L0.5625 2L2 0.59375L2.6875 1.3125L7.6875 6.3125L8.40625 7Z" fill="white" />
-                      </svg>
-                    </button>
-                  </div>
+              {/* Recommendations */}
+              <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
+                <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
+                <div className="flex space-x-2 text-sm">
+                  <button className="w-full text-center bg-[#8B60B2] font-bold text-xs py-2 px-4 rounded-[5px] text-white">
+                    Result 1
+                  </button>
+                  <button className="w-full text-center bg-[#323639] font-bold text-xs py-2 px-4 rounded-[5px] text-white">
+                    Result 2
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg">
-              <div className='flex items-center justify-between mt-4'>
-                <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5 mr-2"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5l-7-7m0 0l7-7m-7 7h16.5" />
-                  </svg>
-                </Link>
-                <Link href='/' className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
-                  </svg>
-                </Link>
-              </div>
+          </div>
 
-              <div className="bg-[#323639] rounded-lg mb-4">
-                <p className="text-white text-sm mb-4 line-clamp-2">
-                  I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
-                  generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
-                  to increase the number of qualified leads and grow my client base.
-                </p>
-
-                {/* Recommendations */}
-                <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
-                  <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
-                  <div className="flex space-x-2 text-sm">
-                    <button className="w-full text-center bg-[#8B60B2] font-bold text-xs py-2 px-4 rounded-[5px] text-white">
-                      Result 1
-                    </button>
-                    <button className="w-full text-center bg-[#323639] font-bold text-xs py-2 px-4 rounded-[5px] text-white">
-                      Result 2
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full lg:w-2/4">
-              <p className="text-base lg:text-lg mb-4 lg:font-bold">Lead generation by identifying potential clients in a target industry </p>
+          {chatData.map((rec, index) => (
+            <div className="w-full lg:w-2/4" key={index}>
+              <p className="text-base lg:text-lg mb-4 lg:font-bold">{rec?.taskTitle}</p>
               <div className="flex items-center space-x-4 mb-4">
-                <Image alt="Writesonic" src={feat2} className="w-16 h-16 rounded-lg" />
+                <Image alt="Writesonic" src={rec?.recommended?.directory?.icon} width={16} height={16} className="object-cover w-16 h-16 rounded-lg" />
                 <div>
-                  <h2 className="text-lg lg:text-2xl font-semibold">Writesonic</h2>
+                  <h2 className="text-lg lg:text-2xl font-semibold">{rec?.recommended?.directory?.name}</h2>
                   <div className="flex items-center text-2xl space-x-1 text-[#8B60B2]">
-                    <span>★★★★★</span>
-                    <span className="text-white text-lg">(100)</span>
+                    {/* <StarRating rating={rec?.recommended?.directory?.rating} /> */}
                   </div>
                 </div>
               </div>
@@ -162,9 +266,9 @@ function ChatBotResult() {
                     <path d="M6.5 11.2812L7.25 11.7188L11 13.9062V2H2V13.9062L5.71875 11.7188L6.5 11.2812ZM2 15.625L0.5 16.5V14.7812V2V0.5H2H11H12.5V2V14.7812V16.5L11 15.625L6.5 13L2 15.625Z" fill="white" />
                   </svg>
 
-                  Save (128)
+                  Save
                 </button>
-                <button className='flex w-full lg:w-auto items-center p-2 h-[41px] bg-[#8B60B2] font-bold rounded-[5px]'>
+                <button onClick={() => window.open(rec?.recommended?.directory?.website, '_blank')} className='flex w-full lg:w-auto items-center p-2 h-[41px] bg-[#8B60B2] font-bold rounded-[5px]'>
                   <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" className='mr-2'>
                     <path d="M9 0.5H13H14V1.5V5.5V6.5H12V5.5V3.9375L6.6875 9.21875L6 9.9375L4.5625 8.5L5.28125 7.8125L10.5625 2.5H9H8V0.5H9ZM1 1.5H5H6V3.5H5H2V12.5H11V9.5V8.5H13V9.5V13.5V14.5H12H1H0V13.5V2.5V1.5H1Z" fill="white" />
                   </svg>
@@ -179,32 +283,32 @@ function ChatBotResult() {
                 backgroundBlendMode: "screen",
               }}>
                 <div
-                    className="absolute lg:hidden"
-                    style={{
-                        width: '710px',
-                        height: '770px',
-                        borderRadius: '50%',
-                        top: '-50px',
-                        left: '20px',
-                        transform: 'rotate(180deg)',
-                        background:
-                            'radial-gradient(41.73% 41.73% at 50% 52.76%, #935FAF 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
-                        backgroundBlendMode: 'lighten',
-                    }}
+                  className="absolute lg:hidden"
+                  style={{
+                    width: '710px',
+                    height: '770px',
+                    borderRadius: '50%',
+                    top: '-50px',
+                    left: '20px',
+                    transform: 'rotate(180deg)',
+                    background:
+                      'radial-gradient(41.73% 41.73% at 50% 52.76%, #935FAF 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
+                    backgroundBlendMode: 'lighten',
+                  }}
                 ></div>
                 <div
-                    className="absolute lg:hidden"
-                    style={{
-                        width: '710px',
-                        height: '770px',
-                        borderRadius: '50%',
-                        top: '-400px',
-                        right: '50px',
-                        transform: 'rotate(180deg)',
-                        background:
-                            'radial-gradient(41.73% 41.73% at 50% 52.76%, #353C83 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
-                        backgroundBlendMode: 'lighten',
-                    }}
+                  className="absolute lg:hidden"
+                  style={{
+                    width: '710px',
+                    height: '770px',
+                    borderRadius: '50%',
+                    top: '-400px',
+                    right: '50px',
+                    transform: 'rotate(180deg)',
+                    background:
+                      'radial-gradient(41.73% 41.73% at 50% 52.76%, #353C83 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
+                    backgroundBlendMode: 'lighten',
+                  }}
                 ></div>
                 <div
                   className="absolute hidden lg:block"
@@ -243,35 +347,29 @@ function ChatBotResult() {
                     <h3 className="text-lg lg:text-2xl font-semibold">Why it&apos;s Perfect for your task</h3>
                   </div>
                   <ul className="list-disc space-y-4 text-sm ml-6">
-                    <li>AI-driven content generation with a focus on creativity</li>
-                    <li>Variety of templates for different content types</li>
-                    <li>User-friendly interface</li>
+                    {rec?.why?.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
 
               {/* Tool description */}
               <p className="text-white text-sm mb-8">
-                Writesonic is an AI-driven content generation tool that uses advanced natural language processing to produce high-quality written
-                content quickly. It is designed to assist with various types of content creation, including blogs, ads, landing pages, and social media
-                posts. The platform offers an intuitive interface and multiple templates to help users generate content efficiently, leveraging the
-                capabilities of GPT-4 and other AI models.
+                {rec?.recommended?.description}
               </p>
 
               {/* Pricing information */}
               <h3 className="text-2xl font-semibold mb-2">Pricing information</h3>
               <p className="text-white text-sm mb-8">
-                Free plan available with limited features; premium plans available at additional costs.
+                {rec?.pricing}
               </p>
 
               {/* Alternatives */}
               <h3 className="text-2xl font-semibold mb-2">Alternatives</h3>
-              <p className="text-white text-sm mb-8">
-                Free plan available with limited features; premium plans available at additional costs.
-              </p>
               <div className="hidden lg:flex items-center gap-4 mb-4">
-                {aiToolsData?.map((tool, i) => (
-                  <FeatureCard directory={tool} key={i} />
+                {rec?.alternatives?.map((tool, i) => (
+                  <AlternativeFeatureCard data={tool} key={i} />
                 ))}
               </div>
               <div className="w-full lg:hidden mx-auto grid grid-cols-1 ">
@@ -299,10 +397,10 @@ function ChatBotResult() {
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                   >
-                    {aiToolsData.map((alt, index) => (
+                    {rec?.alternatives?.map((alt, index) => (
 
                       <SwiperSlide key={index}>
-                        <FeatureCard directory={alt} key={index} />
+                        <AlternativeFeatureCard data={alt} key={index} />
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -324,16 +422,17 @@ function ChatBotResult() {
                 </div>
               </div>
             </div>
+          ))}
 
-            <div className="hidden lg:flex flex-col w-1/4">
-              {aiToolsData?.map((tool, i) => (
-                <FeatureCard directory={tool} key={i} />
-              ))}
-              <Cards />
-            </div>
+          <div className="hidden lg:flex flex-col w-1/4">
+            {directories?.slice(0, 2)?.map((tool, i) => (
+              <FeatureCard directory={tool} key={i} />
+            ))}
+            <Cards />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
   )
 }

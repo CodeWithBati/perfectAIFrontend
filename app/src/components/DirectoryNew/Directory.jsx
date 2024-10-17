@@ -212,16 +212,16 @@ function Directory() {
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
 
       <div className="min-h-screen text-white w-full">
-        <h1 className='text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.Learn about our rigorous approval and verification process.</h1>
+        <h1 className='text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<span className="text-main-purple"> Learn about</span> our rigorous approval and verification process.</h1>
 
         <div className="px-[30px] lg:px-[135px]">
           {/* Main Content */}
           <div className="flex flex-col lg:flex-row ">
             {/* Left Side Text Section */}
-            <div className="flex w-full lg:w-3/4 lg:mr-8 space-y-4">
+            <div className="flex w-full lg:w-[70%] lg:mr-8 space-y-4">
               <div className="overflow-hidden">
                 <div className="btn flex lg:flex-row flex-col justify-between lg:items-center gap-4 lg:gap-0 mb-6 lg:mb-0">
-                  <div className="feat2 flex gap-4">
+                  <div className="feat2 flex gap-4 w-full">
                     <Image className='rounded-xl' src={feat2} alt='' />
                     <div className="genie">
                       <h2 className="text-2xl font-bold tracking-wider">{directory?.name}</h2>
@@ -325,7 +325,7 @@ function Directory() {
             </div>
 
             {/* Right Side Cards Section */}
-            <div className="hidden lg:flex flex-col lg:w-1/4 px-8">
+            <div className="hidden lg:flex flex-col lg:w-[30%] px-8">
               {featureDirectories?.slice(0, 2)?.map((tool, i) => (
                 <FeatureCard directory={tool} key={i} />
               ))}

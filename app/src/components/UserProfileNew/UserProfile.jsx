@@ -83,7 +83,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <section className="relative flex flex-col items-center justify-start min-w-screen pt-16 lg:pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
+      <section className="relative flex flex-col items-center justify-start min-w-screen min-h-[500px] pt-16 lg:pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
 
         <h1 className="text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center">Profile</h1>
 
@@ -111,17 +111,17 @@ const UserProfile = () => {
                 Chats
               </button>
               <button
-                className={`px-[10px] py-[5px] ${activeTab === 'Top rated' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
-                onClick={() => handleTabChange('Top rated')}
+                className={`px-[10px] py-[5px] ${activeTab === 'Saved' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
+                onClick={() => handleTabChange('Saved')}
               >
-                Top rated
+                Saved
               </button>
             </div>
           </div>
 
           {activeTab === 'Overview' && <Overview user={user} token={token} imageUrl={imageUrl} handleImageChange={handleImageChange} spinner={spinner} setSpinner={setSpinner} />}
           {activeTab === 'Settings' && <Settings user={user} token={token} imageUrl={imageUrl} handleImageChange={handleImageChange} spinner={spinner} setSpinner={setSpinner} />}
-          {activeTab === 'Top rated' && <SavedDiectories user={user} token={token} imageUrl={imageUrl} handleImageChange={handleImageChange} spinner={spinner} setSpinner={setSpinner} />}
+          {activeTab === 'Saved' && <SavedDiectories user={user} token={token} imageUrl={imageUrl} handleImageChange={handleImageChange} spinner={spinner} setSpinner={setSpinner} />}
           {activeTab === 'Chats' && <UserChatsLog user={user} token={token} imageUrl={imageUrl} handleImageChange={handleImageChange} spinner={spinner} setSpinner={setSpinner} />}
         </div>
       </section>

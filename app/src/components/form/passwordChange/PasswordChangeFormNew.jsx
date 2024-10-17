@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import axios from 'axios';
+import Link from "next/link";
 import Image from "next/image";
 import AuthFooter from '../AuthFooter';
 import SideBar from '../SideBar';
@@ -117,9 +118,9 @@ const PasswordChangeForm = () => {
       <SideBar />
 
       {/* Right Side with Sign-Up Options */}
-      <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
+      <div className="relative z-10 lg:w-2/3 w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
         {/* Top Part (Logo and Sign Up Buttons) */}
-        <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
+        <Link href="/" className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
           <Image
             alt="website Logo"
             src={"/images/defaulticon4.png"}
@@ -127,7 +128,7 @@ const PasswordChangeForm = () => {
             height={40}
             className="mx-auto rounded-[6.5px] mr-[10px]"
           /> myPerfectAI
-        </p>
+        </Link>
 
         <div className="space-y-8 w-full text-center flex flex-col justify-center items-center">
           <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Reset Password?</h2>
@@ -140,6 +141,11 @@ const PasswordChangeForm = () => {
                   name="password"
                   placeholder=" "
                   onChange={(e) => handleChange(e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleSubmit(e);
+                    }
+                  }}
                   onBlur={() => handleBlur('password')}
                   error={errors.password}
                   label="PASSWORD"
@@ -155,6 +161,11 @@ const PasswordChangeForm = () => {
                 placeholder=" "
                 onChange={(e) => handleChange(e)}
                 onBlur={() => handleBlur('confirmPassword')}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    handleSubmit(e);
+                  }
+                }}
                 error={errors.confirmPassword}
                 label="CONFIRM PASSWORD"
                 className="mb-4"

@@ -150,14 +150,14 @@ const Overview = ({ setSelectedIndex }) => {
           <div className="text-center flex flex-col lg:flex-row justify-center items-center gap-[30px]">
             <div className="relative w-[150px] h-[150px]">
               {user && user.profile ? (
-                <Image src={imageUrl} alt="" height={150} width={150} className="rounded-full mb-4" />
+                <Image src={imageUrl} alt="" height={150} width={150} className="object-cover rounded-full w-[150px] h-[150px] mb-4" />
               ) : (
                 <Image
                   src="/images/avatar.svg"
                   alt=""
                   height={150}
                   width={150}
-                  className="rounded-full mb-4"
+                  className="object-cover rounded-full w-[150px] h-[150px] mb-4"
                 />
               )}
               <div className="absolute bottom-1 right-1">
@@ -215,6 +215,12 @@ const Overview = ({ setSelectedIndex }) => {
                   name="firstName"
                   placeholder=" "
                   onChange={(e) => handleChange(e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleUpdateProfile(e);
+                    }
+                  }}
+                  disabled={!editProfile}
                   value={formValue.firstName}
                   error={errors.firstName}
                   label="FIRST NAME"
@@ -230,7 +236,13 @@ const Overview = ({ setSelectedIndex }) => {
                   id="lastName"
                   name="lastName"
                   placeholder=" "
+                  disabled={!editProfile}
                   onChange={(e) => handleChange(e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleUpdateProfile(e);
+                    }
+                  }}
                   value={formValue.lastName}
                   error={errors.lastName}
                   label="LAST NAME"

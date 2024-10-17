@@ -16,13 +16,15 @@ import SideBar from "../SideBar";
 import AuthFooter from "../AuthFooter";
 import InputNew from "../InputNew";
 import Button from "../Button";
+import Terms from "../../Term&Conditions/Terms";
+import PrivacyPolicy from "../../Privacy&Policy/PrivacyPolicy";
 
 const RegisterFormCreatePartner = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [roleForm, setRoleForm] = useState(false);
-  const [isTCModalOpen, setIsTCModalOpen] = useState(false);
-  const [isPpModalOpen, setIsPpModalOpen] = useState(false);
+  const [termModalOpen, setTermModalOpen] = useState(false);
+  const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -64,6 +66,11 @@ const RegisterFormCreatePartner = () => {
   const handleRoleChange = (newRole) => {
     setFormData((prevFormData) => ({ ...prevFormData, role: newRole }));
   };
+
+  const openModalTerms = () => setTermModalOpen(true);
+  const closeModalTerms = () => setTermModalOpen(false);
+  const openModalPrivacy = () => setPrivacyModalOpen(true);
+  const closeModalPrivacy = () => setPrivacyModalOpen(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -228,14 +235,8 @@ const RegisterFormCreatePartner = () => {
   };
   return (
     <>
-      <TermsAndConditionModal
-        isModalOpen={isTCModalOpen}
-        closeModal={() => setIsTCModalOpen(false)}
-      />
-      <PrivacyPolicyModal
-        isModalOpen={isPpModalOpen}
-        closeModal={() => setIsPpModalOpen(false)}
-      />
+      <Terms isOpen={termModalOpen} onClose={closeModalTerms} />
+      <PrivacyPolicy isOpen={privacyModalOpen} onClose={closeModalPrivacy} />
       <SnackBar
         open={snackbar.open}
         icon={snackbar.icon}
@@ -248,9 +249,9 @@ const RegisterFormCreatePartner = () => {
         <SideBar />
 
         {/* Right Side with Sign-Up Options */}
-        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-full lg:min-h-screen lg:bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
+        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
           {/* Top Part (Logo and Sign Up Buttons) */}
-          <p className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
+          <Link href='/' className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
               src={"/images/defaulticon4.png"}
@@ -258,7 +259,7 @@ const RegisterFormCreatePartner = () => {
               height={40}
               className="mx-auto rounded-[6.5px] mr-[10px]"
             /> myPerfectAI
-          </p>
+          </Link>
 
           <div className="space-y-4 text-center flex flex-col justify-center items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Create your MyPerfectAI <br />Partner account</h2>
@@ -273,6 +274,11 @@ const RegisterFormCreatePartner = () => {
                     placeholder=" "
                     onChange={(e) => handleChange(e)}
                     onBlur={() => handleBlur('firstName')}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        handleSubmit(e);
+                      }
+                    }}
                     error={errors.firstName}
                     label="FIRST NAME"
                     className="mb-4"
@@ -289,6 +295,11 @@ const RegisterFormCreatePartner = () => {
                     placeholder=" "
                     onChange={(e) => handleChange(e)}
                     onBlur={() => handleBlur('lastName')}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        handleSubmit(e);
+                      }
+                    }}
                     error={errors.lastName}
                     label="LAST NAME"
                     className="mb-4"
@@ -306,6 +317,11 @@ const RegisterFormCreatePartner = () => {
                   placeholder=" "
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('email')}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleSubmit(e);
+                    }
+                  }}
                   error={errors.email}
                   label="EMAIL ADDRESS"
                   className="mb-4"
@@ -322,6 +338,11 @@ const RegisterFormCreatePartner = () => {
                   placeholder=" "
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('password')}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleSubmit(e);
+                    }
+                  }}
                   error={errors.password}
                   label="PASSWORD"
                   className="mb-4"
@@ -336,6 +357,11 @@ const RegisterFormCreatePartner = () => {
                   placeholder=" "
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('confirmPassword')}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      handleSubmit(e);
+                    }
+                  }}
                   error={errors.confirmPassword}
                   label="CONFIRM PASSWORD"
                   className="mb-4"
@@ -344,7 +370,7 @@ const RegisterFormCreatePartner = () => {
               </div>
             </div>
 
-            <div className="flex justify-start space-x-2 text-white font-semibold  w-full lg:w-[370px]">
+            <div className="flex justify-start space-x-2 text-white font-semibold w-full lg:w-[370px]">
               <input
                 type="checkbox"
                 id="terms"
@@ -352,13 +378,13 @@ const RegisterFormCreatePartner = () => {
               />
               <label htmlFor="terms" className="text-xs">
                 I agree to the{' '}
-                <Link href="#" className="text-additional-purple underline">
+                <span onClick={openModalTerms} className="text-additional-purple underline cursor-pointer">
                   Terms and Conditions
-                </Link>{' '}
+                </span>{' '}
                 and{' '}
-                <Link href="#" className="text-additional-purple underline">
+                <span onClick={openModalPrivacy} className="text-additional-purple underline cursor-pointer">
                   Privacy Policy
-                </Link>
+                </span>
               </label>
             </div>
 
