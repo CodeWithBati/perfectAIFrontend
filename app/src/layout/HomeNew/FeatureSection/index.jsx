@@ -199,7 +199,7 @@ const FeatureSection = () => {
                         </button>
                     ))}
 
-                    <div className="sm:hidden border-l border-[rgba(255,255,255,0.2)] h-full"></div>
+                    <div className="sm:hidden w-[1px] h-[20px] bg-[rgba(255,255,255,0.2)]"></div>
 
                     <button className="sm:hidden ml-4 flex items-center" onClick={toggleFilter}>
                         <svg width="20" height="15" viewBox="0 0 28 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -272,7 +272,7 @@ const FeatureSection = () => {
                             className="fixed sm:hidden inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50"
                             onClick={toggleFilter}
                         />
-                        <div className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-800px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg z-50 w-full sm:w-64">
+                        <div ref={dropdownRef} className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-800px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg z-50 w-full sm:w-64">
                             <div className="flex justify-between items-center text-white font-semibold text-lg border-b border-[rgba(255,255,255,0.2)] pb-2">
                                 <p>Filter</p>
                                 <div

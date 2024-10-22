@@ -39,7 +39,7 @@ const Footer = () => {
             />
             <span className="text-2xl font-semibold">myPerfectAI</span>
           </div>
-          <p className="text-xs max-w-[390px] tracking-wider">
+          <p className="text-xs max-w-[390px] tracking-wider text-center sm:text-start">
             FindMyAITool is a website dedicated to providing a comprehensive list of AI tools to assist individuals and businesses in finding the most suitable AI tool for their specific requirements.
           </p>
         </div>

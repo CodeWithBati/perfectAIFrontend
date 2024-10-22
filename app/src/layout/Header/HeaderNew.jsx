@@ -214,7 +214,7 @@ const Header = ({ className }) => {
         </div>
 
         {menuOpen && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 sm:hidden" onClick={toggleMenu}>
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-80 sm:hidden" onClick={toggleMenu}>
             <div className="bg-[#323639] absolute w-full text-white z-60">
               <div className="flex items-center justify-between px-[30px] py-[20px]">
                 <button onClick={toggleMenu} className="text-white text-2xl">
@@ -256,11 +256,23 @@ const Header = ({ className }) => {
                   </svg>
                 </p>
               </Link>
-              <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
-              <div className="flex items-center justify-center w-full p-[20px] gap-[10px]">
-                <Link href="/login" className="block py-2 bg-[#1e1e1e] text-center rounded-[5px] border border-[rgba(255,255,255,0.2)] font-bold w-full tracking-wider text-sm">Sign in</Link>
-                <Link href="/register" className="block py-2 bg-main-purple text-center rounded-[5px] font-bold w-full tracking-wider text-sm">Sign up</Link>
-              </div>
+              <Link href="/pricing" className="block py-2 hover:text-additional-purple px-[30px] py-[20px] flex items-center justify-between">
+                <p className="tracking-wider text-sm">Pricing</p>
+                <p>
+                  <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />
+                  </svg>
+                </p>
+              </Link>
+              {!isAuthenticated && 
+                <>
+                  <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
+                  <div className="flex items-center justify-center w-full p-[20px] gap-[10px]">
+                    <Link href="/login" className="block py-2 bg-[#1e1e1e] text-center rounded-[5px] border border-[rgba(255,255,255,0.2)] font-bold w-full tracking-wider text-sm">Sign in</Link>
+                    <Link href="/register" className="block py-2 bg-main-purple text-center rounded-[5px] font-bold w-full tracking-wider text-sm">Sign up</Link>
+                  </div>
+              </>
+              }
             </div>
           </div>
         )}

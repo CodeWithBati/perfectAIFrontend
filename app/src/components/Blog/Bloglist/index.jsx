@@ -86,7 +86,7 @@ const BlogList = () => {
 
                 {/* Blog Grid */}
                 <div>
-                    <div className="grid grid-cols-1 md:grid-cols-[65%_35%] gap-[30px] lg:mt-[40px] h-500">
+                    <div className="hidden md:grid grid-cols-1 md:grid-cols-[65%_35%] gap-[30px] lg:mt-[40px] h-500">
                         <Link href={`/blog-detail/${blogData[0]?.id}`} className="flex justify-between gap-4 w-[100%] h-500">
                             <Image
                                 src={blogData[0]?.imageUrl}

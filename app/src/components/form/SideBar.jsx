@@ -15,7 +15,7 @@ const SideBar = () => {
                 </p>
             </div>
         </div>
-        <div className="absolute inset-0 bg-black opacity-40 lg:hidden"></div>
+        {/* <div className="absolute inset-0 bg-black opacity-40 lg:hidden"></div> */}
         </>
     );
 };

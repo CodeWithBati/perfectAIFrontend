@@ -21,9 +21,9 @@ const Feedback = ({ review, user }) => {
             {/* Author section */}
             <div className="flex items-center mt-4">
                 {
-                    user?.profile ? (
+                    review.user?.profile ? (
                         <Image
-                            src={user?.profile}
+                            src={review.user?.profile}
                             className="w-[40px] h-[40px] rounded-[5px] mr-2"
                             alt="avatar"
                             width={40}

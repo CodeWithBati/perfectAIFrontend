@@ -19,6 +19,7 @@ import ProsCons from './keyFeature/ProsCons'
 import Summary from './keyFeature/Summery'
 import PersonReviews from './PersonReviews'
 import About from './keyFeature/About'
+import { toastText } from "@/constants/text-constants";
 
 import { useRouter } from "next/navigation";
 import StarRating from '../StarRating';
@@ -33,6 +34,27 @@ function Directory() {
   const [directorySaveStatus, setDirectorySaveStatus] = useState(directory?.hasSaved);
   const [directorySaves, setDirectorySaves] = useState(directory?.saves)
   const { user, token } = useSelector((state) => state.auth);
+  const [isFixed, setIsFixed] = useState(false);
+
+  const handleScroll = () => {
+    // You can adjust this threshold to the scroll position where you want to fix the sidebar
+    const threshold = 200;
+    if (window.scrollY > threshold) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add scroll event listener when the component mounts
+    window.addEventListener('scroll', handleScroll);
+
+    // Remove event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const loadingRef = useRef(false);
 
@@ -213,7 +235,9 @@ function Directory() {
 
       <div className="min-h-screen text-white w-full">
         <h1 className='text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<span className="text-main-purple"> Learn about</span> our rigorous approval and verification process.</h1>
-
+        <div className={`${isFixed ? 'bg-[#181C1F] h-[200px] w-full fixed lg:hidden top-0 z-20' : 'hidden'}`} style={{
+          background: 'linear-gradient(to bottom, #1e1e1e, #181C1F)',
+        }} />
         <div className="px-[30px] lg:px-[135px]">
           {/* Main Content */}
           <div className="flex flex-col lg:flex-row ">
@@ -222,11 +246,11 @@ function Directory() {
               <div className="overflow-hidden">
                 <div className="btn flex lg:flex-row flex-col justify-between lg:items-center gap-4 lg:gap-0 mb-6 lg:mb-0">
                   <div className="feat2 flex gap-4 w-full">
-                    <Image className='rounded-xl' src={feat2} alt='' />
+                    <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={40} height={40} src={feat2} alt='' />
                     <div className="genie">
-                      <h2 className="text-2xl font-bold tracking-wider">{directory?.name}</h2>
+                      <h2 className="text-lg md:text-2xl font-bold tracking-wider">{directory?.name}</h2>
                       <div className='flex gap-1'>
-                        <StarRating rating={directory?.averageRating} />
+                        <StarRating rating={directory?.averageRating} size='sm' />
                         <p>({directory?.reviews})</p>
                       </div>
                       <div className='flex gap-3'>
@@ -255,7 +279,7 @@ function Directory() {
                   <div className="save flex lg:justify-end gap-4 w-full">
                     <button className='flex items-center justify-center w-full lg:w-auto p-2 h-[41px] text-white font-bold rounded-[5px] bg-[#323639]' onClick={handleToggleSaved}>
                       {directorySaveStatus ?
-                        <FillBookMarkIcon width={18} height={20} className='mr-2'/>
+                        <FillBookMarkIcon width={18} height={20} className='mr-2' />
                         :
                         <svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg" className='mr-2'>
                           <path d="M6.5 11.2812L7.25 11.7188L11 13.9062V2H2V13.9062L5.71875 11.7188L6.5 11.2812ZM2 15.625L0.5 16.5V14.7812V2V0.5H2H11H12.5V2V14.7812V16.5L11 15.625L6.5 13L2 15.625Z" fill="white" />
@@ -286,9 +310,38 @@ function Directory() {
                   <About directory={directory} />
                 </div>
 
+
+
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-8">
                   {/* Sidebar */}
-                  <div className="w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] p-4 lg:rounded-lg lg:max-h-[312px] sticky top-8 lg:top-4 z-50">
+                  <div className={`${isFixed ? 'fixed lg:hidden top-6 z-20 flex justify-between w-[85%]' : 'hidden'}`}>
+                    <div className='flex gap-4'>
+                      <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={40} height={40} src={feat2} alt='' />
+                      <div className="genie">
+                        <h2 className="text-lg md:text-2xl font-bold tracking-wider">{directory?.name}</h2>
+                        <div className='flex gap-1'>
+                          <StarRating rating={directory?.averageRating} size='sm' />
+                          <p>({directory?.reviews})</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='flex gap-4'>
+                      <button className='flex items-center justify-center h-[40px] p-[10px] text-white font-bold rounded-[5px] bg-[#323639]' onClick={handleToggleSaved}>
+                        {directorySaveStatus ?
+                          <FillBookMarkIcon width={18} height={20}/>
+                          :
+                          <svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5 11.2812L7.25 11.7188L11 13.9062V2H2V13.9062L5.71875 11.7188L6.5 11.2812ZM2 15.625L0.5 16.5V14.7812V2V0.5H2H11H12.5V2V14.7812V16.5L11 15.625L6.5 13L2 15.625Z" fill="white" />
+                          </svg>}
+                      </button>
+                      <button onClick={() => window.open(directory?.website, '_blank')} className='flex h-[40px] items-center justify-center p-[10px] bg-[#8B60B2] font-bold rounded-[5px]'>
+                        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9 0.5H13H14V1.5V5.5V6.5H12V5.5V3.9375L6.6875 9.21875L6 9.9375L4.5625 8.5L5.28125 7.8125L10.5625 2.5H9H8V0.5H9ZM1 1.5H5H6V3.5H5H2V12.5H11V9.5V8.5H13V9.5V13.5V14.5H12H1H0V13.5V2.5V1.5H1Z" fill="white" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] p-4 lg:rounded-lg ${isFixed ? 'fixed lg:sticky lg:max-h-[330px] lg:top-0 lg:block top-[120px] z-20' : ''}`}>
                     <ul className="lg:space-y-2 hidden lg:block ">
                       {tabs.map((tab) => (
                         <li key={tab} className="flex-shrink-0">
@@ -313,7 +366,6 @@ function Directory() {
                         </li>
                       ))}
                     </ul>
-
                   </div>
 
                   {/* Main Content */}
