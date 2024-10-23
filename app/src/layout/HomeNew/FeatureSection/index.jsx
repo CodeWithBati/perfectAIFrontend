@@ -38,21 +38,29 @@ const FeatureSection = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     const dropdownRef = useRef(null);
+    const dropdownRef2 = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsFilterOpen(false);
-      }
-    };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                (dropdownRef.current && dropdownRef.current.contains(event.target)) ||
+                (dropdownRef2.current && dropdownRef2.current.contains(event.target))
+            ) {
+                // Clicked inside one of the dropdowns; do nothing.
+                return;
+            }
+            // Clicked outside both dropdowns; close the filter.
+            setIsFilterOpen(false);
+        };
 
-    // Cleanup the event listener on component unmount
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownRef]);
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Cleanup the event listener on component unmount
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     // Check screen size on load and resize
     useEffect(() => {
@@ -177,7 +185,7 @@ const FeatureSection = () => {
 
 
     // Slice data for mobile view
-    const displayedTools = isMobile ? directories.slice(0, 4) : directories.slice(0, 12) ;
+    const displayedTools = isMobile ? directories.slice(0, 4) : directories.slice(0, 12);
 
 
     return (
@@ -272,7 +280,7 @@ const FeatureSection = () => {
                             className="fixed sm:hidden inset-0 z-40 flex items-end justify-center bg-black bg-opacity-50"
                             onClick={toggleFilter}
                         />
-                        <div ref={dropdownRef} className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-800px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg z-50 w-full sm:w-64">
+                        <div ref={dropdownRef2} className="fixed inset-x-0 bottom-0 sm:inset-x-[-30px] sm:bottom-[-800px] sm:hidden sm:mt-2 sm:right-0 bg-[#1E1E1E] p-4 rounded-t-lg sm:rounded-lg z-50 w-full sm:w-64">
                             <div className="flex justify-between items-center text-white font-semibold text-lg border-b border-[rgba(255,255,255,0.2)] pb-2">
                                 <p>Filter</p>
                                 <div
