@@ -11,6 +11,7 @@ import Header from '../../layout/Header/HeaderNew';
 import Image from 'next/image';
 import feat2 from '../../../../public/images/feat2.jpeg';
 import Cards from './Cards';
+import DOMPurify from 'dompurify';
 import Footer from '../../layout/FooterNew';
 import FeatureCard from '../../layout/HomeNew/FeatureSection/FeatureCard';
 import { BookmarkIcon as FillBookMarkIcon } from "@heroicons/react/24/solid";
@@ -22,6 +23,11 @@ import parse from 'html-react-parser';
 import PersonReviews from './PersonReviews';
 import About from './keyFeature/About';
 import MobileFeature from './keyFeature/MobileFeature';
+import KeyFeatures from './keyFeature/Features';
+import UseCases from './keyFeature/UseCases';
+import ProsCons from './keyFeature/ProsCons';
+import Pricing from './keyFeature/Pricing';
+import Reviews from './keyFeature/Reviews';
 
 function Directory() {
 
@@ -136,21 +142,21 @@ function Directory() {
     getData();
   }, [token, router]);
 
-  // Replace this with your actual description
-
   useEffect(() => {
     if (directory?.description) {
-      const parsedSections = parseDescription(directory?.description);
+      const parsedSections = parseDescription(directory.description);
       setSections(parsedSections);
     }
   }, [directory?.description]);
 
   const parseDescription = (htmlString) => {
+    const cleanHTML = DOMPurify.sanitize(htmlString);
     const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlString, 'text/html');
+    const doc = parser.parseFromString(cleanHTML, 'text/html');
     const sections = {};
     let currentSection = 'About'; // Default section
-    sections[currentSection] = '';
+    sections[currentSection] = [];
+    let currentSubSection = null;
 
     const childNodes = Array.from(doc.body.childNodes);
 
@@ -159,16 +165,63 @@ function Directory() {
         const title = node.textContent.trim();
         if (tabs.includes(title) || title === 'About') {
           currentSection = title;
-          sections[currentSection] = '';
+          sections[currentSection] = [];
+          currentSubSection = null;
+        }
+      } else if (currentSection === 'Pros/Cons Comparison') {
+        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'P') {
+          const strongText = node.querySelector('strong')?.textContent.trim();
+          if (strongText === 'Pros:') {
+            currentSubSection = 'Pros';
+            sections['Pros'] = [];
+          } else if (strongText === 'Cons:') {
+            currentSubSection = 'Cons';
+            sections['Cons'] = [];
+          }
+        } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'UL') {
+          if (currentSubSection) {
+            const items = Array.from(node.querySelectorAll('li')).map((li) => li.innerHTML);
+            sections[currentSubSection] = sections[currentSubSection].concat(items);
+          }
+        }
+      } else if (currentSection === 'Key Features') {
+        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'UL') {
+          const items = Array.from(node.querySelectorAll('li')).map((li) => li.innerHTML);
+          sections[currentSection] = sections[currentSection].concat(items);
+        }
+      } else if (currentSection === 'Use Cases') {
+        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'UL') {
+          const items = Array.from(node.querySelectorAll('li')).map((li) => li.innerHTML);
+          sections[currentSection] = sections[currentSection].concat(items);
+        }
+      } else if (currentSection === 'Pricing Information') {
+        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'UL') {
+          const items = Array.from(node.querySelectorAll('li')).map((li) => li.innerHTML);
+          // Transform HTML strings into structured objects
+          sections[currentSection] = items.map((item) => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = item;
+            const strong = tempDiv.querySelector('strong');
+            const span = tempDiv.querySelector('span');
+            return {
+              name: strong ? strong.innerHTML.replace(':', '').trim() : 'Unnamed Plan',
+              description: span ? span.innerHTML.trim() : 'No description available.'
+            };
+          });
+        }
+      } else if (currentSection === 'Reviews') {
+        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'UL') {
+          const items = [node.outerHTML]; // Assuming each <ul> is a separate string
+          sections[currentSection] = items;
         }
       } else if (currentSection) {
-        const outerHTML = node.outerHTML || node.textContent;
-        sections[currentSection] += outerHTML;
+        sections[currentSection].push(node.outerHTML || node.textContent);
       }
     });
 
     return sections;
   };
+  
 
 
   useEffect(() => {
@@ -200,8 +253,6 @@ function Directory() {
     }
   };
 
-
-
   const renderContent = () => (
     <>
       {tabs.map((tab) => (
@@ -214,8 +265,21 @@ function Directory() {
           <div>
             {tab === 'About' ? (
               <About aboutContent={sections['About']} directory={directory} />
+            ) : tab === 'Key Features' ? (
+              <KeyFeatures features={sections['Key Features']} />
+            ) : tab === 'Use Cases' ? (
+              <UseCases useCases={sections['Use Cases']} />
+            ) : tab === 'Pros/Cons Comparison' ? (
+              <ProsCons
+                pros={sections['Pros'] || []}
+                cons={sections['Cons'] || []}
+              />
+            ) : tab === 'Pricing Information' ? (
+              <Pricing pricingData={sections['Pricing Information'] || []} />
+            ) : tab === 'Reviews' ? (
+              <Reviews reviews={sections['Reviews'] || []} />
             ) : (
-              sections[tab] ? parse(sections[tab]) : <p>No content available</p>
+              sections[tab] ? parse(sections[tab].join('')) : <p>No content available</p>
             )}
           </div>
         </section>
@@ -252,7 +316,7 @@ function Directory() {
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
       <div className="min-h-screen text-white w-full">
         <h1 className='text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<span className="text-main-purple"> Learn about</span> our rigorous approval and verification process.</h1>
-        <div className={`${isFixed ? 'bg-[#181C1F] h-[200px] w-full fixed lg:hidden top-0 z-20' : 'hidden'}`} style={{
+        <div className={`${isFixed ? 'bg-[#181C1F] h-[200px] w-full fixed lg:hidden top-[70px] z-20' : 'hidden'}`} style={{
           background: 'linear-gradient(to bottom, #1e1e1e, #181C1F)',
         }} />
         <div className="px-[30px] lg:px-[135px]">
@@ -352,7 +416,7 @@ function Directory() {
 
                 <div className="flex flex-col lg:flex-row relative">
                   {/* Sidebar */}
-                  <div className={`${isFixed ? 'fixed lg:hidden top-6 z-20 flex justify-between w-[85%]' : 'hidden'}`}>
+                  <div className={`${isFixed ? 'fixed lg:hidden top-[100px] z-20 flex justify-between w-[85%]' : 'hidden'}`}>
                     <div className='flex gap-4'>
                       <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={40} height={40} src={feat2} alt='' />
                       <div className="genie">
@@ -380,7 +444,7 @@ function Directory() {
                     </div>
                   </div>
                   <div
-                    className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] p-4 lg:rounded-lg ${isMobile && isFixed ? 'fixed top-[120px] z-20' : ''
+                    className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] p-4 lg:rounded-lg ${isMobile && isFixed ? 'fixed top-[190px] z-20' : ''
                       } lg:sticky lg:top-10 lg:h-[320px]`}
                   >
                     <ul className="lg:space-y-2 hidden lg:block ">

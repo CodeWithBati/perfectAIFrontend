@@ -105,7 +105,7 @@ const Header = ({ className }) => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
-    <header className="absolute w-full bg-transparent z-10">
+    <header className="lg:absolute fixed w-full lg:bg-transparent bg-[#181C1F] z-20">
       <nav className="flex items-center justify-between py-4 px-[30px] sm:px-[135px]">
         {/* Logo */}
         <div className="sm:hidden">

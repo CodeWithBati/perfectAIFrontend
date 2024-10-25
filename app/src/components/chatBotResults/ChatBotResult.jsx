@@ -96,7 +96,7 @@ function ChatBotResult({ ChatKey }) {
   }, [page, totalPages, token]);
 
   const handleScroll = () => {
-    const threshold = 200;
+    const threshold = 110;
     if (window.scrollY > threshold) {
       setIsFixed(true);
     } else {
@@ -167,9 +167,7 @@ function ChatBotResult({ ChatKey }) {
     </div>
   ) : (
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
-      <div className={`${isFixed ? 'hidden z-20 top-[20px] lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'hidden'}`} style={{
-        background: 'linear-gradient(to bottom, #1e1e1e, #181C1F)',
-      }}>
+      <div className={`${isFixed ? 'fixed z-10 top-[70px] lg:hidden w-[88%] bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'hidden'}`} >
         <div className='flex items-center justify-between mt-4'>
           <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
             <svg
@@ -276,7 +274,7 @@ function ChatBotResult({ ChatKey }) {
                 </div>
               </div>
             </div>
-            <div className={`${isFixed ? 'block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg'}`}>
+            <div className={`${isFixed ? 'hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg'}`}>
               <div className='flex items-center justify-between mt-4'>
                 <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
                   <svg
@@ -448,7 +446,7 @@ function ChatBotResult({ ChatKey }) {
                       backgroundBlendMode: 'lighten',
                     }}
                   ></div>
-                  <div className="relative z-10">
+                  <div className="relative z-5">
                     <div className="flex items-center gap-4 mb-2">
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 16.5C3.5625 16.5 0 12.9375 0 8.5C0 4.09375 3.5625 0.5 8 0.5C12.4062 0.5 16 4.09375 16 8.5C16 12.9375 12.4062 16.5 8 16.5ZM9.46875 6.5L8 3.5L6.53125 6.5L3.21875 6.96875L5.625 9.28125L5.0625 12.5625L8 11L10.9375 12.5625L10.375 9.28125L12.75 6.96875L9.46875 6.5Z" fill="white" />
