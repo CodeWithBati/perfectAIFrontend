@@ -338,8 +338,8 @@ function Directory() {
                     onSwiper={(swiper) => console.log(swiper)}
                   >
                     {featureDirectories?.map((tool, i) => (
-                      <SwiperSlide className='rounded-lg shadow-lg'>
-                        <MobileFeature directory={tool} key={i} />
+                      <SwiperSlide className='rounded-lg shadow-lg' key={i}>
+                        <MobileFeature directory={tool} />
                       </SwiperSlide>
 
                     ))}

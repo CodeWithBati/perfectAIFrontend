@@ -313,8 +313,8 @@ function ChatBotResult({ ChatKey }) {
                     onSwiper={(swiper) => console.log(swiper)}
                   >
                     {directories?.map((tool, i) => (
-                      <SwiperSlide className='rounded-lg shadow-lg'>
-                        <MobileFeature directory={tool} key={i} />
+                      <SwiperSlide className='rounded-lg shadow-lg' key={i}>
+                        <MobileFeature directory={tool} />
                       </SwiperSlide>
 
                     ))}
