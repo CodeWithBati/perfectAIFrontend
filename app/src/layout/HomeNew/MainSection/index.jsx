@@ -29,9 +29,18 @@ const MainSection = () => {
         setInput(val);
     };
 
+    const handleFocus = () => {
+        if (!user) {
+            toast.error(toastText.error.loginFirst);
+            router.push('/login');
+            return;
+        }
+    };
+
     const handleSearchChatbot = async () => {
         if (!user) {
             toast.error(toastText.error.loginFirst);
+            router.push("/login");
             return;
         }
 
@@ -74,57 +83,72 @@ const MainSection = () => {
 
                 {/* Search and Prompt Guidelines */}
                 {spinner ? (
-                  <Spinner className="mb-8" />
+                    <Spinner className="mb-8" />
                 ) : (
-                <div className="flex items-center bg-[#1e1e1e] rounded-md w-full border border-[rgba(255,255,255,0.2)] max-w-[85%] sm:max-w-[570px] p-2 mb-8">
-                    {/* Search Icon */}
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="white"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"
-                        />
-                    </svg>
+                    <div className="
+                            flex 
+                            items-center 
+                            bg-[#1e1e1e] 
+                            rounded-md 
+                            w-full 
+                            border 
+                            border-[rgba(255,255,255,0.2)] 
+                            focus-within:border-red-500 
+                            max-w-[85%] 
+                            sm:max-w-[570px] 
+                            p-2 
+                            mb-8 
+                            transition-colors 
+                            duration-200 
+                            ease-in-out
+                        ">
+                        {/* Search Icon */}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 text-white"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="white"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"
+                            />
+                        </svg>
 
-                    {/* Input Field */}
-                    <input
-                        type="text"
-                        placeholder="Describe your AI tool use case in detail.."
-                        className="bg-[#1e1e1e] focus:bg-transparent focus:outline-none focus:border-none focus:ring-0 focus:shadow-none text-gray-300 text-sm w-full border-none placeholder-gray-500"
-                        onChange={handleChange}
-                        value={input}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" && !e.shiftKey) {
-                            e.preventDefault();
-                            handleSearchChatbot();
-                          }
-                        }}
-                    />
-                    
-                </div>
+                        {/* Input Field */}
+                        <input
+                            type="text"
+                            placeholder="Describe your AI tool use case in detail.."
+                            className="bg-[#1e1e1e] focus:bg-transparent focus:outline-none focus:border-none focus:ring-0 focus:shadow-none text-gray-300 text-sm w-full border-none placeholder-gray-500"
+                            onChange={handleChange}
+                            value={input}
+                            onFocus={handleFocus}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleSearchChatbot();
+                                }
+                            }}
+                        />
+                    </div>
                 )}
 
-                <div className="bg-[#323639] text-white p-[20px] mx-[30px] border border-[rgba(255,255,255,0.2)] rounded-lg max-w-full sm:hidden relative">
+                <div onClick={openModal} className="bg-[#323639] text-white p-[20px] mx-[30px] border border-[rgba(255,255,255,0.2)] rounded-lg max-w-full sm:hidden relative">
                     <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
                     <p className="text-lg">to relieve accurate, use-case specific AI tool recommendations </p>
                     <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <span className="text-main-purple">Learn more</span></p>
                     {/* Question mark icon for opening modal */}
-                    <button
+                    <div
                         className="absolute top-4 right-4 text-white rounded-full p-1"
-                        onClick={openModal}
                     >
                         <svg width="15" height="16" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.875 6.5C10.875 4.76562 9.9375 3.17188 8.4375 2.28125C6.91406 1.41406 5.0625 1.41406 3.5625 2.28125C2.03906 3.17188 1.125 4.76562 1.125 6.5C1.125 8.25781 2.03906 9.85156 3.5625 10.7422C5.0625 11.6094 6.91406 11.6094 8.4375 10.7422C9.9375 9.85156 10.875 8.25781 10.875 6.5ZM0 6.5C0 4.36719 1.125 2.39844 3 1.32031C4.85156 0.242188 7.125 0.242188 9 1.32031C10.8516 2.39844 12 4.36719 12 6.5C12 8.65625 10.8516 10.625 9 11.7031C7.125 12.7812 4.85156 12.7812 3 11.7031C1.125 10.625 0 8.65625 0 6.5ZM3.9375 4.8125C3.9375 4.10938 4.52344 3.5 5.25 3.5H6.5625C7.38281 3.5 8.0625 4.17969 8.0625 5C8.0625 5.51562 7.75781 6.00781 7.3125 6.26562L6.5625 6.71094V6.875V7.4375H5.4375V6.875V6.38281V6.05469L5.71875 5.89062L6.75 5.30469C6.86719 5.23438 6.9375 5.11719 6.9375 5C6.9375 4.78906 6.77344 4.64844 6.5625 4.64844H5.25C5.13281 4.64844 5.0625 4.71875 5.0625 4.83594V4.97656H3.9375V4.8125ZM5.4375 8.375H6.5625V9.5H5.4375V8.375Z" fill="white" />
                         </svg>
 
-                    </button>
+                    </div>
                 </div>
 
                 {/* Modal that opens on click */}

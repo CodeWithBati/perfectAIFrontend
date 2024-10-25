@@ -1,8 +1,27 @@
 
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { toastText } from "@/constants/text-constants";
 import Image from "next/image";
 
+import { useSelector } from "react-redux";
+
 const PriceCard = ({ detail, toggleOpen, openIndex }) => {
+
+    const { user, token } = useSelector((state) => state.auth);
+
+    const router = useRouter();
+
+    const handlePayment = () => {
+        if (!user) {
+            toast.error(toastText.error.loginFirst);
+            router.push('/login');
+            return;
+        } else {
+            router.push('/directory-manager');
+        }
+    };
 
     return (
         <div className="bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-lg shadow-lg min-w-full lg:min-w-auto">
@@ -100,6 +119,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                     <p className="text-[40px] font-bold mb-6">{detail?.price}<span className='text-base'> / {detail?.duration}</span></p>
                 }
                 <button
+                    onClick={handlePayment}
                     className={`w-full text-white font-semibold px-[20px] py-[10px] rounded-lg mb-6 ${detail?.button === 'Get started' ? 'bg-[#8B60B2]' : 'bg-[#1e1e1e] border border-[#FFFFFF33]'}`}
                 >
                     {detail?.button}

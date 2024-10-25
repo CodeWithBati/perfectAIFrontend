@@ -1,43 +1,62 @@
-'use client'
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+'use client';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import Header from '../../layout/Header/HeaderNew'
-import Image from 'next/image'
-import feat2 from '../../../../public/images/feat2.jpeg'
-import Cards from './Cards'
-import Slider from './Slider'
-import Features from './keyFeature/Features'
-import Footer from '../../layout/FooterNew'
-import FeatureCard from '../../layout/HomeNew/FeatureSection/FeatureCard'
-import UseCases from './keyFeature/UseCases'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import Header from '../../layout/Header/HeaderNew';
+import Image from 'next/image';
+import feat2 from '../../../../public/images/feat2.jpeg';
+import Cards from './Cards';
+import Footer from '../../layout/FooterNew';
+import FeatureCard from '../../layout/HomeNew/FeatureSection/FeatureCard';
 import { BookmarkIcon as FillBookMarkIcon } from "@heroicons/react/24/solid";
-import Pricing from './keyFeature/Pricing'
-import Reviews from './keyFeature/Reviews'
-import ProsCons from './keyFeature/ProsCons'
-import Summary from './keyFeature/Summery'
-import PersonReviews from './PersonReviews'
-import About from './keyFeature/About'
 import { toastText } from "@/constants/text-constants";
-
 import { useRouter } from "next/navigation";
 import StarRating from '../StarRating';
 import DirectoryAlternatives from './DirectoryAlternatives';
+import parse from 'html-react-parser';
+import PersonReviews from './PersonReviews';
+import About from './keyFeature/About';
+import MobileFeature from './keyFeature/MobileFeature';
 
 function Directory() {
-  const [activeTab, setActiveTab] = useState('Key Features');
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState(isMobile? 'About' : 'Key Features');
   const [featureDirectories, setFeatureDirectories] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [directory, setDirectory] = useState({});
-  const [directorySaveStatus, setDirectorySaveStatus] = useState(directory?.hasSaved);
-  const [directorySaves, setDirectorySaves] = useState(directory?.saves)
+  const [directorySaveStatus, setDirectorySaveStatus] = useState(false);
+  const [directorySaves, setDirectorySaves] = useState(0);
   const { user, token } = useSelector((state) => state.auth);
   const [isFixed, setIsFixed] = useState(false);
+  const [sections, setSections] = useState({});
+  const loadingRef = useRef(false);
+  const router = useRouter();
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024); // Adjust breakpoint as needed
+    };
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Update the tabs to match your headings
+  const tabs = isMobile
+    ? ['About', 'Key Features', 'Use Cases', 'Pricing Information', 'Reviews', 'Pros/Cons Comparison', 'Summary']
+    : ['Key Features', 'Use Cases', 'Pricing Information', 'Reviews', 'Pros/Cons Comparison', 'Summary'];
+
+  const mobTabs = tabs;
 
   const handleScroll = () => {
-    // You can adjust this threshold to the scroll position where you want to fix the sidebar
     const threshold = 200;
     if (window.scrollY > threshold) {
       setIsFixed(true);
@@ -47,31 +66,16 @@ function Directory() {
   };
 
   useEffect(() => {
-    // Add scroll event listener when the component mounts
     window.addEventListener('scroll', handleScroll);
-
-    // Remove event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => { window.removeEventListener('scroll', handleScroll); };
   }, []);
-
-  const loadingRef = useRef(false);
-
-
-  const tabs = ['Key Features', 'Use Cases', 'Pricing Information', 'Reviews', 'Pros Cons Comparison', 'Summary'];
-  const mobTabs = ['About', 'Key Features', 'Use Cases', 'Pricing Information', 'Reviews', 'Pros Cons Comparison', 'Summary'];
-
-  const router = useRouter();
 
   const fetchSites = useCallback(async () => {
     if (page > totalPages || loadingRef.current) return;
 
     const config = {};
     if (token) {
-      config.headers = {
-        Authorization: `Bearer ${token}`,
-      };
+      config.headers = { Authorization: `Bearer ${token}` };
     }
 
     loadingRef.current = true;
@@ -82,9 +86,7 @@ function Directory() {
       );
       if (response.status === 200) {
         setFeatureDirectories((prevSites) =>
-          page === 1
-            ? response.data.results
-            : [...prevSites, ...response.data.results]
+          page === 1 ? response.data.results : [...prevSites, ...response.data.results]
         );
         setTotalPages(response.data.pagination.totalPages);
       } else {
@@ -106,7 +108,6 @@ function Directory() {
       try {
         const parts = window.location.pathname.split("/");
         const directoryName = parts[parts.length - 1];
-
         let headers = {};
         if (token) {
           headers.Authorization = `Bearer ${token}`;
@@ -116,10 +117,6 @@ function Directory() {
           `${process.env.NEXT_PUBLIC_API_URL}/directories/${directoryName}`,
           { headers }
         );
-
-        if (response.status === 404) {
-          console.log("Yooo!!");
-        }
 
         if (response.status === 200) {
           setDirectory(response.data);
@@ -139,11 +136,46 @@ function Directory() {
     getData();
   }, [token, router]);
 
-  // Scroll event listener to highlight tab based on scroll position
+  // Replace this with your actual description
+
+  useEffect(() => {
+    if (directory?.description) {
+      const parsedSections = parseDescription(directory?.description);
+      setSections(parsedSections);
+    }
+  }, [directory?.description]);
+
+  const parseDescription = (htmlString) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    const sections = {};
+    let currentSection = 'About'; // Default section
+    sections[currentSection] = '';
+
+    const childNodes = Array.from(doc.body.childNodes);
+
+    childNodes.forEach((node) => {
+      if (node.nodeType === Node.ELEMENT_NODE && node.tagName.match(/^H[1-6]$/i)) {
+        const title = node.textContent.trim();
+        if (tabs.includes(title) || title === 'About') {
+          currentSection = title;
+          sections[currentSection] = '';
+        }
+      } else if (currentSection) {
+        const outerHTML = node.outerHTML || node.textContent;
+        sections[currentSection] += outerHTML;
+      }
+    });
+
+    return sections;
+  };
+
+
   useEffect(() => {
     const handleScroll = () => {
       tabs.forEach((tab) => {
-        const section = document.getElementById(tab.toLowerCase().replace(/\s+/g, '-'));
+        const sectionId = tab.toLowerCase().replace(/\s+/g, '-').replace('/', '').replace('comparison', 'comparison');
+        const section = document.getElementById(sectionId);
         if (section) {
           const bounding = section.getBoundingClientRect();
           if (bounding.top >= 0 && bounding.top <= window.innerHeight / 2) {
@@ -154,85 +186,70 @@ function Directory() {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [tabs]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    const section = document.getElementById(tab.toLowerCase().replace(/\s+/g, '-'));
+    const sectionId = tab.toLowerCase().replace(/\s+/g, '-').replace('/', '').replace('comparison', 'comparison');
+    const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
+
+
   const renderContent = () => (
     <>
-      <section id="about" className="mt-4 lg:mt-0 lg:p-4 lg:hidden">
-        <About directory={directory} />
-      </section>
-      <section id="key-features" className="mt-4 lg:mt-0 lg:p-4">
-        <Features />
-      </section>
-      <section id="use-cases" className="mt-4 lg:mt-0 lg:p-4">
-        <UseCases />
-      </section>
-      <section id="pricing-information" className="mt-4 lg:mt-0 lg:p-4">
-        <Pricing />
-      </section>
-      <section id="reviews" className="mt-4 lg:mt-0 lg:p-4">
-        <Reviews />
-      </section>
-      <section id="pros-cons-comparison" className="mt-4 lg:mt-0 lg:p-4">
-        <ProsCons />
-      </section>
-      <section id="summary" className="mt-4 lg:mt-0 lg:p-4">
-        <Summary />
-      </section>
+      {tabs.map((tab) => (
+        <section
+          id={tab.toLowerCase().replace(/\s+/g, '-').replace('/', '').replace('comparison', 'comparison')}
+          className="mt-4 lg:mt-0 lg:p-4"
+          key={tab}
+        >
+          {tab !== 'About' && <h2 className="text-2xl font-bold mb-4">{tab}</h2>}
+          <div>
+            {tab === 'About' ? (
+              <About aboutContent={sections['About']} directory={directory} />
+            ) : (
+              sections[tab] ? parse(sections[tab]) : <p>No content available</p>
+            )}
+          </div>
+        </section>
+      ))}
     </>
   );
 
+
+
   const handleToggleSaved = async (event) => {
     event.stopPropagation();
-
     if (!user) {
       toast.error(toastText.error.savingWithoutLogin);
       router.push("/login");
       return;
     }
 
-
     const response = await axios.patch(
       `${process.env.NEXT_PUBLIC_API_URL}/directories/${directory.id}/saves`,
       {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
 
     if (response.status === 200) {
       setDirectorySaveStatus(!directorySaveStatus);
-      if (directorySaveStatus) {
-        setDirectorySaves(prevState => prevState - 1)
-        toast.success("Save Successfully removed from your list");
-      } else {
-        setDirectorySaves(prevState => prevState + 1)
-        toast.success("Save Successfully added to your list");
-      }
+      setDirectorySaves((prevState) => directorySaveStatus ? prevState - 1 : prevState + 1);
+      toast.success(directorySaveStatus ? "Save removed from your list" : "Save added to your list");
     } else {
       toast.error(toastText.error.directoryNotSaved);
     }
   };
 
-  console.log(directory?.categories)
-
   return (
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
-
       <div className="min-h-screen text-white w-full">
         <h1 className='text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<span className="text-main-purple"> Learn about</span> our rigorous approval and verification process.</h1>
         <div className={`${isFixed ? 'bg-[#181C1F] h-[200px] w-full fixed lg:hidden top-0 z-20' : 'hidden'}`} style={{
@@ -243,7 +260,7 @@ function Directory() {
           <div className="flex flex-col lg:flex-row ">
             {/* Left Side Text Section */}
             <div className="flex w-full lg:w-[70%] lg:mr-8 space-y-4">
-              <div className="overflow-hidden">
+              <div className="w-full">
                 <div className="btn flex lg:flex-row flex-col justify-between lg:items-center gap-4 lg:gap-0 mb-6 lg:mb-0">
                   <div className="feat2 flex gap-4 w-full">
                     <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={40} height={40} src={feat2} alt='' />
@@ -299,20 +316,41 @@ function Directory() {
 
                 <h2 className='text-lg font-bold tracking-wider text-left mb-4 lg:hidden block'>App Feature</h2>
 
-                <div className="hidden lg:hidden flex-col lg:w-1/4 px-8">
-                  {featureDirectories?.slice(0, 2).map((tool, i) => (
-                    <FeatureCard directory={tool} key={i} />
-                  ))}
-                  <Cards />
+                <div className="relative w-full lg:hidden ">
+
+                  <Swiper
+                    spaceBetween={30}
+                    slidesPerView={1.7}
+                    modules={[Navigation]}
+                    loop={false}
+                    navigation={{
+                      nextEl: '.swiper-button-next-custom',
+                      prevEl: '.swiper-button-prev-custom',
+                    }}
+                    breakpoints={{
+                      // When window width is >= 640px (mobile screen)
+                      200: {
+                        slidesPerView: 1.7,
+                        spaceBetween: 30,
+                      },
+                    }}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                  >
+                    {featureDirectories?.map((tool, i) => (
+                      <SwiperSlide className='rounded-lg shadow-lg'>
+                        <MobileFeature directory={tool} key={i} />
+                      </SwiperSlide>
+
+                    ))}
+                  </Swiper>
                 </div>
 
                 <div className='hidden lg:block'>
-                  <About directory={directory} />
+                  <About aboutContent={sections['About']} directory={directory} />
                 </div>
 
-
-
-                <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-8">
+                <div className="flex flex-col lg:flex-row relative">
                   {/* Sidebar */}
                   <div className={`${isFixed ? 'fixed lg:hidden top-6 z-20 flex justify-between w-[85%]' : 'hidden'}`}>
                     <div className='flex gap-4'>
@@ -328,7 +366,7 @@ function Directory() {
                     <div className='flex gap-4'>
                       <button className='flex items-center justify-center h-[40px] p-[10px] text-white font-bold rounded-[5px] bg-[#323639]' onClick={handleToggleSaved}>
                         {directorySaveStatus ?
-                          <FillBookMarkIcon width={18} height={20}/>
+                          <FillBookMarkIcon width={18} height={20} />
                           :
                           <svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6.5 11.2812L7.25 11.7188L11 13.9062V2H2V13.9062L5.71875 11.7188L6.5 11.2812ZM2 15.625L0.5 16.5V14.7812V2V0.5H2H11H12.5V2V14.7812V16.5L11 15.625L6.5 13L2 15.625Z" fill="white" />
@@ -341,7 +379,11 @@ function Directory() {
                       </button>
                     </div>
                   </div>
-                  <div className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] p-4 lg:rounded-lg ${isFixed ? 'fixed lg:sticky lg:max-h-[330px] lg:top-0 lg:block top-[120px] z-20' : ''}`}>
+                  <div
+                    className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] p-4 lg:rounded-lg ${isMobile && isFixed ? 'fixed top-[120px] z-20' : ''
+                      } lg:sticky lg:top-10`}
+                    style={{ height: '320px'}}
+                  >
                     <ul className="lg:space-y-2 hidden lg:block ">
                       {tabs.map((tab) => (
                         <li key={tab} className="flex-shrink-0">
@@ -355,7 +397,7 @@ function Directory() {
                       ))}
                     </ul>
                     <ul className="lg:hidden flex space-x-2 overflow-x-auto no-scrollbar">
-                      {mobTabs.map((tab) => (
+                      {tabs.map((tab) => (
                         <li key={tab} className="flex-shrink-0">
                           <button
                             className={`lg:w-full text-left py-2 px-4 rounded-lg ${activeTab === tab && 'bg-[#8B60B2] text-white'}`}
@@ -369,7 +411,7 @@ function Directory() {
                   </div>
 
                   {/* Main Content */}
-                  <div className="w-full lg:w-3/4 lg:px-4">
+                  <div className="w-full lg:w-3/4 lg:ml-8 sticky">
                     {renderContent()}
                   </div>
                 </div>
@@ -377,22 +419,24 @@ function Directory() {
             </div>
 
             {/* Right Side Cards Section */}
-            <div className="hidden lg:flex flex-col lg:w-[30%] px-8">
-              {featureDirectories?.slice(0, 2)?.map((tool, i) => (
-                <FeatureCard directory={tool} key={i} />
-              ))}
+            <div className="hidden lg:sticky lg:h-[850px] lg:top-10 lg:flex flex-col lg:w-[30%] px-8 gap-4">
+              <div
+                className="hidden lg:flex flex-col lg:w-[100%] max-h-[500px] overflow-y-auto no-scrollbar"
+              >
+                {featureDirectories?.map((tool, i) => (
+                  <FeatureCard directory={tool} key={i} />
+                ))}
+              </div>
               <Cards />
             </div>
-
 
           </div>
           <PersonReviews directory={directory} />
           <DirectoryAlternatives category={directory?.categories?.join(', ')} currentDirectory={directory} />
-
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Directory
+export default Directory;

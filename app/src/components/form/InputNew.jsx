@@ -51,6 +51,7 @@ const InputNew = React.forwardRef(
               'top-1 text-xs text-gray-300 scale-90': isFocused || value,
             }, labelClassName)} // Add custom label class names
           >
+            {console.log(isFocused, value)}
             {label}
           </label>
         )}

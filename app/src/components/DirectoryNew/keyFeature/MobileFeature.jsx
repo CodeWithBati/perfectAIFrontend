@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { toastText } from "@/constants/text-constants";
 
 
-const FeatureCard = ({ directory, saved=false }) => {
+const MobileFeature = ({ directory, saved=false }) => {
 
     const { user, token } = useSelector((state) => state.auth);
     const router = useRouter();
@@ -94,6 +94,6 @@ const FeatureCard = ({ directory, saved=false }) => {
     );
 };
 
-export default FeatureCard;
+export default MobileFeature;
 
 

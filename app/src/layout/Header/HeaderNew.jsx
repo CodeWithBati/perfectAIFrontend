@@ -204,7 +204,7 @@ const Header = ({ className }) => {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-[#323639] border border-[rgba(255,255,255,0.2)] text-white text-sm rounded-lg shadow-lg">
                   {user.role === "admin" && <Link href="/dashboard" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Admin</Link>}
-                  {user.role === "creator" && <Link href="/create-directory" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Directory Manager</Link>}
+                  {user.role === "creator" && <Link href="/directory-manager" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Directory Manager</Link>}
                   <Link href="/profile" className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm">Profile</Link>
                   <span onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-700 tracking-wider text-sm cursor-pointer">Log out</span>
                 </div>
@@ -319,7 +319,7 @@ const Header = ({ className }) => {
                 </Link>
               }
               {user.role === "creator" &&
-                <Link href="/create-directory" className="block py-2 hover:text-additional-purple px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
+                <Link href="/directory-manager" className="block py-2 hover:text-additional-purple px-[30px] pt-[20px] pb-[15px] flex items-center justify-between">
                   <p className="tracking-wider text-sm">Directory Manager</p>
                   <p>
                     <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">

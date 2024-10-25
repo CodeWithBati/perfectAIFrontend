@@ -13,7 +13,6 @@ import MultipleSelectNew from "@/app/src/components/global/MultipleSelectNew";
 import SelectNew from "@/app/src/components/global/SelectNew";
 import Spinner from "@/app/src/ui/Spinner";
 
-
 const defaultFilters = {
     type: "",
     sortBy: "Featured",
@@ -27,7 +26,6 @@ const FeatureSection = () => {
     const [extractMoreSpinner, setExtractMoreSpinner] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const listRef = useRef(null);
     const loadingRef = useRef(false);
     const [categories, setCategories] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
@@ -40,7 +38,7 @@ const FeatureSection = () => {
     const dropdownRef = useRef(null);
     const dropdownRef2 = useRef(null);
 
-
+    // Handle click outside for filter dropdowns
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -74,7 +72,7 @@ const FeatureSection = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-
+    // Generate the API URL based on current filters and page
     const generateFilterUrl = useCallback(() => {
         const { type, sortBy, categories, isVerified, search } = filters;
         const filterParams = [];
@@ -88,7 +86,7 @@ const FeatureSection = () => {
         if (search.length !== 0) filterParams.push(`search=${search}`);
 
         const filterQueryString = filterParams.join("&");
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/directories?page=${page}&limit=15`;
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/directories?page=${page}&limit=12`;
         const finalUrl = filterQueryString
             ? `${apiUrl}&${filterQueryString}`
             : apiUrl;
@@ -96,6 +94,7 @@ const FeatureSection = () => {
         return finalUrl;
     }, [filters, page]);
 
+    // Fetch directories from the API
     const fetchSites = useCallback(async () => {
         if (page > totalPages || loadingRef.current) return;
 
@@ -123,32 +122,22 @@ const FeatureSection = () => {
                         : response?.data?.pagination?.totalPages
                 );
             } else {
-                console.error("error-->", response);
+                console.error("Error fetching directories:", response);
             }
         } catch (error) {
-            loadingRef.current = false;
-            console.error(error);
+            console.error("Error fetching directories:", error);
         } finally {
             setExtractMoreSpinner(false);
             loadingRef.current = false;
         }
     }, [page, totalPages, generateFilterUrl, token]);
 
-    const handleScroll = useCallback(() => {
-        if (listRef.current && !loadingRef.current) {
-            const { scrollTop, scrollHeight, clientHeight } = listRef.current;
-            if (scrollHeight - scrollTop <= clientHeight + 100) {
-                setPage((prevPage) => prevPage + 1);
-            }
-        }
-    }, []);
-
-
+    // Initial fetch and refetch on filters or page change
     useEffect(() => {
-        console.log("asdsadasd")
         fetchSites();
-    }, [page, fetchSites, filters.search]);
+    }, [page, fetchSites]);
 
+    // Apply a single filter
     const applyFilter = (key, value) => {
         const updatedFilters = {
             ...filters,
@@ -158,20 +147,18 @@ const FeatureSection = () => {
         setFilters(updatedFilters);
     };
 
-    const setCategoiesFilter = (newCategories) => {
-        console.log(newCategories);
+    // Set categories filter
+    const setCategoriesFilter = (newCategories) => {
         const categories = newCategories.map((cat) => cat.name);
-        setCategories((prevState) => {
-            const updatedState = categories;
-            setPage(1);
-            setFilters({
-                ...filters,
-                categories: categories,
-            });
-            return updatedState;
-        });
+        setCategories(categories);
+        setPage(1);
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            categories: categories,
+        }));
     };
 
+    // Clear all filters
     const clearFilter = () => {
         setPage(1);
         setTotalPages(1);
@@ -179,28 +166,27 @@ const FeatureSection = () => {
         setFilters(defaultFilters);
     };
 
+    // Toggle filter dropdown
     const toggleFilter = () => {
         setIsFilterOpen(!isFilterOpen);
     };
 
-
     // Slice data for mobile view
     const displayedTools = isMobile ? directories.slice(0, 4) : directories.slice(0, 12);
 
-
     return (
         <section className="py-8 border-t border-[rgba(255,255,255,0.2)]">
-
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
                 {/* Tabs */}
                 <div className="flex items-center justify-between space-x-[15px] bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] rounded-md py-[5px] px-[10px] sm:py-[10px] sm:px-[15px] w-full sm:w-auto">
                     {directoryFilterSortBy.map((tab, index) => (
                         <button
                             key={index}
-                            className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${filters.sortBy === tab.name
-                                ? "bg-[#8B60B2] text-white font-semibold"
-                                : "bg-transparent text-white hover:bg-[#323639]"
-                                }`}
+                            className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${
+                                filters.sortBy === tab.name
+                                    ? "bg-[#8B60B2] text-white font-semibold"
+                                    : "bg-transparent text-white hover:bg-[#323639]"
+                            }`}
                             onClick={() => applyFilter("sortBy", tab.name)}
                         >
                             {tab.name}
@@ -222,7 +208,12 @@ const FeatureSection = () => {
                     <div className="hidden sm:flex items-center pr-4 border-r border-[rgba(255,255,255,0.2)]">
                         <span className="mr-2 text-xs tracking-wide">Verified</span>
                         <label className="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" value="" className="sr-only peer" checked={filters.isVerified} onChange={(e) => applyFilter("isVerified", !filters.isVerified)} />
+                            <input
+                                type="checkbox"
+                                className="sr-only peer"
+                                checked={filters.isVerified}
+                                onChange={(e) => applyFilter("isVerified", !filters.isVerified)}
+                            />
                             <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
                         </label>
                     </div>
@@ -239,8 +230,6 @@ const FeatureSection = () => {
 
                             <span className="ml-2 text-xs tracking-wide">Filter</span>
                         </button>
-
-
 
                         {isFilterOpen && (
                             <div className="z-50 absolute mt-2 right-[-20px] bg-[#1E1E1E] p-4 rounded-lg w-64">
@@ -264,13 +253,12 @@ const FeatureSection = () => {
                                 <MultipleSelectNew
                                     options={directoryCategory}
                                     selected={filters.categories.map((name) => ({ name }))}
-                                    onChange={(e) => setCategoiesFilter(e)}
+                                    onChange={(e) => setCategoriesFilter(e)}
                                     Name="USE CASE"
                                     id="categories"
                                 />
                             </div>
                         )}
-
                     </div>
                 </div>
 
@@ -303,11 +291,16 @@ const FeatureSection = () => {
                                 </div>
                             </div>
 
-                            {/* Price Filter */}
+                            {/* Verified Toggle */}
                             <div className="flex items-center py-[20px] border-b border-[rgba(255,255,255,0.2)] mb-4">
                                 <span className="mr-2 text-base tracking-wide">Verified</span>
                                 <label className="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" value="" className="sr-only peer" />
+                                    <input
+                                        type="checkbox"
+                                        className="sr-only peer"
+                                        checked={filters.isVerified}
+                                        onChange={(e) => applyFilter("isVerified", !filters.isVerified)}
+                                    />
                                     <div className="w-10 h-5 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#8B60B2] dark:peer-focus:ring-[#8B60B2] peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#8B60B2]"></div>
                                 </label>
                             </div>
@@ -325,25 +318,23 @@ const FeatureSection = () => {
                             <MultipleSelectNew
                                 options={directoryCategory}
                                 selected={filters.categories.map((name) => ({ name }))}
-                                onChange={(e) => setCategoiesFilter(e)}
+                                onChange={(e) => setCategoriesFilter(e)}
                                 Name="USE CASE"
                                 id="categories"
                             />
                         </div>
                     </>
                 )}
-
             </div>
 
             {/* AI Tools Grid */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {displayedTools.map((tool) => (
+                {directories.map((tool) => (
                     <FeatureCard directory={tool} key={tool.id} />
                 ))}
             </div>
 
-            {/* View More Button */}
-
+            {/* Spinner or No Directories Message */}
             {extractMoreSpinner && (
                 <div className="flex justify-center items-center py-4 w-full my-4 lg:col-span-3 md:col-span-2 col-span-1">
                     <Spinner />
@@ -355,13 +346,20 @@ const FeatureSection = () => {
                 </p>
             )}
 
-            <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
-                <Link href="/directory" className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider">View More</Link>
-            </div>
+            {/* View More Button */}
+            {page < totalPages && directories.length > 0 && (
+                <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
+                    <button
+                        onClick={() => setPage((prevPage) => prevPage + 1)}
+                        className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider hover:bg-[#323639]"
+                        disabled={extractMoreSpinner}
+                    >
+                        {extractMoreSpinner ? "Loading..." : "View More"}
+                    </button>
+                </div>
+            )}
         </section>
     );
 };
 
 export default FeatureSection;
-
-

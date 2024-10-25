@@ -166,6 +166,7 @@ const LoginForm = () => {
                 type="email"
                 id="email"
                 name="email"
+                value={formData.email}
                 placeholder=" "
                 onChange={(e) => handleChange(e)}
                 onBlur={() => handleBlur('email')}
@@ -187,6 +188,7 @@ const LoginForm = () => {
                 id="password"
                 name="password"
                 placeholder=" "
+                value={formData.password}
                 onChange={(e) => handleChange(e)}
                 onBlur={() => handleBlur('password')}
                 onKeyDown={(e) => {

@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
                   padding: '16px',
                 },
               }}  position="top-right" />
-            <div className="flex flex-col bg-[#181C1F] min-h-screen overflow-x-hidden max-w-full justify-between">
+            <div className="flex flex-col bg-[#181C1F] min-h-screen max-w-full justify-between">
               {!isAuthPage && <HeaderNew />}
                 {children}
                 <SpeedInsights />

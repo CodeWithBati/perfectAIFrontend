@@ -11,6 +11,7 @@ const MultipleSelect = ({
   onChange,
   Name,
   id,
+  disabled
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -64,7 +65,7 @@ const MultipleSelect = ({
   return (
     <div className={compClass} ref={dropdownRef}>
       <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1">{Name}</label>
-      <div onClick={toggleDropdown} className="flex justify-between items-center">
+      <div onClick={() => (!disabled && toggleDropdown())} className="flex justify-between items-center">
         <span className="text-white text-sm truncate max-w-full">
           {selected.length > 1
             ? selected[0].name + ', ...'

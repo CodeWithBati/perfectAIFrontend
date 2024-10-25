@@ -171,6 +171,7 @@ const PasswordResetForm = () => {
                   id="email"
                   name="email"
                   placeholder=" "
+                  value={formData.email}
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('email')}
                   onKeyDown={(e) => {

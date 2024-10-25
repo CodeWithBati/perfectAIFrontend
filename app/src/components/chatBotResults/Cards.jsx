@@ -37,7 +37,7 @@ function Cards() {
         <Image className='w-[40px] h-[40px] rounded-[10px] mb-4' src='/images/footer_logo.jpeg' width={40} height={40} alt='' />
         <p className='text-lg font-semibold text-white'>Let&apos;s us heard from you</p>
         <h2 className='text-sm text-white mb-4'>Send your feedback via our email: feedback@ myperfectai. app</h2>
-        <button className='bg-[#8B60B2] p-2 rounded-md mt-2 font-bold text-white'>Feedback Now</button>
+        {/* <button className='bg-[#8B60B2] p-2 rounded-md mt-2 font-bold text-white'>Feedback Now</button> */}
       </div>
     </div>
   )

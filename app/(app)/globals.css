@@ -129,6 +129,33 @@ body {
   color: white !important;
 }
 
+.ql-picker-options{
+  background-color: #323639 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-item:hover {
+  color: white !important;
+  background-color: #4a4a4a !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label:hover {
+  color: white !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active {
+  color: white !important;
+}
+
+.ql-picker-label {
+  border: none !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected {
+  color: white !important;
+}
+
 .ql-toolbar {
   border: none !important;
 }

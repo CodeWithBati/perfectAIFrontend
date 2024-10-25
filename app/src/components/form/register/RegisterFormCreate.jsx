@@ -274,6 +274,7 @@ const RegisterFormCreate = () => {
                     id="firstName"
                     name="firstName"
                     placeholder=" "
+                    value={formData.firstName}
                     onChange={(e) => handleChange(e)}
                     onBlur={() => handleBlur('firstName')}
                     onKeyDown={(e) => {
@@ -295,6 +296,7 @@ const RegisterFormCreate = () => {
                     id="lastName"
                     name="lastName"
                     placeholder=" "
+                    value={formData.lastName}
                     onChange={(e) => handleChange(e)}
                     onBlur={() => handleBlur('lastName')}
                     onKeyDown={(e) => {
@@ -317,6 +319,7 @@ const RegisterFormCreate = () => {
                   id="email"
                   name="email"
                   placeholder=" "
+                  value={formData.email}
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('email')}
                   onKeyDown={(e) => {
@@ -338,6 +341,7 @@ const RegisterFormCreate = () => {
                   id="password"
                   name="password"
                   placeholder=" "
+                  value={formData.password}
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('password')}
                   onKeyDown={(e) => {
@@ -357,6 +361,7 @@ const RegisterFormCreate = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder=" "
+                  value={formData.confirmPassword}
                   onChange={(e) => handleChange(e)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {

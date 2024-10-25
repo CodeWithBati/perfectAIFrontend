@@ -62,7 +62,13 @@ const validationSchema = Yup.object({
     }),
 });
 
-function CreateDirectory() {
+function CreateDirectory({
+  title,
+  url,
+  type,
+  setIsNew = () => {},
+  setIsActive = () => {},
+}) {
 
   const defaultState = {
     name: "",
@@ -72,7 +78,7 @@ function CreateDirectory() {
     docs: [],
     categories: [],
     website: "",
-    isVerified: "directoryRequest" === "directoryRequest" ? true : false,
+    isVerified: type === "directoryRequest" ? true : false,
     isFeatured: false,
     description: "",
     extraInformation: "",
@@ -89,6 +95,7 @@ function CreateDirectory() {
   const [spinner, setSpinner] = useState(false);
 
   const [images, setImages] = useState([]);
+  const [imagesList, setImagesList] = useState([]);
   const [videos, setVideos] = useState([]);
   const [docs, setDocs] = useState([]);
   const [formData, setFormData] = useState(defaultState);
@@ -157,7 +164,7 @@ function CreateDirectory() {
 
     try {
       const url = `${process.env.NEXT_PUBLIC_API_URL}/directories/videos`;
-      const response = await axios.put('/directories/request', videosData, {
+      const response = await axios.put(url, videosData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -202,12 +209,15 @@ function CreateDirectory() {
     setVideos(videos.filter((video) => video !== fileToRemove));
   };
 
-  const handleImagesChange = async (e) => {
-    const newImages = Array.from(e.target.files).map((file) =>
+  const handleImagesChange = async (event) => {
+    const newImages = Array.from(event.target.files).map((file) =>
       URL.createObjectURL(file)
     );
-    setImages((prevImages) => [...prevImages, ...newImages]);
+    setImagesList((prevImages) => [...prevImages, ...newImages]);
+    setImages([...images, ...event.target.files]);
   };
+
+  
 
   const removeSelectedDocumentFile = (fileToRemove) => {
     setDocs(docs.filter((document) => document !== fileToRemove));
@@ -226,6 +236,7 @@ function CreateDirectory() {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (response.status === 200) {
         formData.images = response.data.images;
       } else {
@@ -238,6 +249,7 @@ function CreateDirectory() {
 
   const removeSelectedImageFile = (fileToRemove) => {
     setImages(images.filter((image) => image !== fileToRemove));
+    setImagesList(images.filter((image) => image !== fileToRemove));
   };
 
   const handleSubmit = async () => {
@@ -269,7 +281,7 @@ function CreateDirectory() {
     try {
       await validationSchema.validate(cleanedFormData);
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/directories/request`,
+        `${process.env.NEXT_PUBLIC_API_URL}${url}`,
         cleanedFormData,
         {
           headers: {
@@ -279,9 +291,11 @@ function CreateDirectory() {
       );
 
       if (res.status === 201) {
-        toast.success(toastText.success.directoryCreated);
+        // toast.success(toastText.success.directoryCreated);
+        setIsNew(false);
+        setIsActive(false);
         setFormData(defaultState);
-        // router.push('/dashboard/directories')
+        router.push('/ThankYou')
       } else {
         toast.error("Error, creating the record");
       }
@@ -299,7 +313,7 @@ function CreateDirectory() {
 
       <div className="lg:w-[770px] w-full px-[30px] lg:px-0">
         <h1 className="text-[32px] lg:text-5xl font-bold text-white mb-4 text-center">
-          Create New Directory Listing
+          {title}
         </h1>
         <p className="text-base lg:text-lg font-bold text-center">We recommend uploading as much specific, detailed information as possible about your AI tool. This will increase the quality of your leads, as the chatbot will recommend AI tools more precisely and accurately to users.</p>
       </div>
@@ -480,7 +494,7 @@ function CreateDirectory() {
                     />
                   </div>
                   <div className="overflow-x-auto flex space-x-4 max-h-[150px] w-full lg:w-[400px]">
-                    {images.map((img, index) => (
+                    {imagesList.map((img, index) => (
                       <div key={index} className="relative min-w-[90px]">
                         <img src={img} alt={`Uploaded ${index}`} className="h-[90px] w-[140px] rounded-[5px] object-cover" />
                         <button

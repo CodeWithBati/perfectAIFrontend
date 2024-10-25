@@ -33,7 +33,7 @@ const RegisterFormCreatePartner = () => {
     password: "",
     confirmPassword: "",
     isChecked: false,
-    role: "user",
+    role: "creator",
   });
   const [touched, setTouched] = useState({
     firstName: false,
@@ -272,6 +272,7 @@ const RegisterFormCreatePartner = () => {
                     id="firstName"
                     name="firstName"
                     placeholder=" "
+                    value={formData.firstName}
                     onChange={(e) => handleChange(e)}
                     onBlur={() => handleBlur('firstName')}
                     onKeyDown={(e) => {
@@ -293,6 +294,7 @@ const RegisterFormCreatePartner = () => {
                     id="lastName"
                     name="lastName"
                     placeholder=" "
+                    value={formData.lastName}
                     onChange={(e) => handleChange(e)}
                     onBlur={() => handleBlur('lastName')}
                     onKeyDown={(e) => {
@@ -315,6 +317,7 @@ const RegisterFormCreatePartner = () => {
                   id="email"
                   name="email"
                   placeholder=" "
+                  value={formData.email}
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('email')}
                   onKeyDown={(e) => {
@@ -336,6 +339,7 @@ const RegisterFormCreatePartner = () => {
                   id="password"
                   name="password"
                   placeholder=" "
+                  value={formData.password}
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('password')}
                   onKeyDown={(e) => {
@@ -355,6 +359,7 @@ const RegisterFormCreatePartner = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder=" "
+                  value={formData.confirmPassword}
                   onChange={(e) => handleChange(e)}
                   onBlur={() => handleBlur('confirmPassword')}
                   onKeyDown={(e) => {

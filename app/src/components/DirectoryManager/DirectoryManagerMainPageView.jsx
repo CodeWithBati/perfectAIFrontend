@@ -8,7 +8,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import EditDirectoryForm from "../Dashboard/AdminDirectories/EditDirectoryForm";
 import Spinner from "../../ui/Spinner";
-import DisabledForm from "./DisabledForm";
+import DisabledForm from "./DisabledFormNew";
+import CreateDirectory from "../CreateDirectory/CreateDirectory";
+import EditDirectory from "../EditDirectory/EditDirectory";
 
 const DirectoryManagerMainPageView = () => {
   const { user, token } = useSelector((state) => state.auth);
@@ -73,7 +75,7 @@ const DirectoryManagerMainPageView = () => {
                   )}
 
                   {isNew && Object.keys(userDirectory).length === 0 && (
-                    <CreateDirectoryForm
+                    <CreateDirectory
                       title="Create New Directory Listing"
                       url="/directories/request"
                       type="directoryRequest"
@@ -83,7 +85,7 @@ const DirectoryManagerMainPageView = () => {
                   )}
 
                   {isActive && !isNew && Object.keys(userDirectory).length !== 0 && (
-                    <EditDirectoryForm
+                    <EditDirectory
                       directorySlug={userDirectory.slug}
                       url={`/directories/${userDirectory.id}/request`}
                       pricingUrl={`/directories/${userDirectory.id}/pricings/:pricing/request`}

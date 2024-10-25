@@ -140,6 +140,7 @@ const PasswordChangeForm = () => {
                   id="password"
                   name="password"
                   placeholder=" "
+                  value={formData.password}
                   onChange={(e) => handleChange(e)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
@@ -159,6 +160,7 @@ const PasswordChangeForm = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 placeholder=" "
+                value={formData.confirmPassword}
                 onChange={(e) => handleChange(e)}
                 onBlur={() => handleBlur('confirmPassword')}
                 onKeyDown={(e) => {

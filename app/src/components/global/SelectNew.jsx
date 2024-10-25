@@ -3,7 +3,7 @@
 import React from "react";
 import classNames from "classnames";
 
-function SelectNew({ size, className, options, selected, onChange, id, label }) {
+function SelectNew({ size, className, options, selected, onChange, id, label, disabled }) {
   // Handle changes when selecting an option
   const handleChange = (e) => {
     const selectedOption = options.find(option => option.name === e.target.value);
@@ -17,16 +17,23 @@ function SelectNew({ size, className, options, selected, onChange, id, label }) 
 
   return (
     <div className={compClass}>
-      <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1">{label}</label>
+      <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1" htmlFor={id}>
+        {label}
+      </label>
       <select 
-        className="w-full p-0 bg-[#323639] border-none text-white rounded-md"
+        className="w-full p-0 bg-[#323639] border-none text-white rounded-md focus:outline-none focus:ring-0 appearance-none cursor-pointer"
         onChange={handleChange}
+        disabled={disabled}
         value={selected?.name || ""} // Set the selected value
         id={id}
       >
         <option value="" disabled>Select</option>
         {options.map((option, index) => (
-          <option value={option.name} key={index}>
+          <option 
+            value={option.name} 
+            key={index}
+            className="bg-[#323639] text-white hover:bg-[#e1e1e1]"
+          >
             {option.name}
           </option>
         ))}
