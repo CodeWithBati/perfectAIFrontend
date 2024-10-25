@@ -47,6 +47,7 @@ function ChatBotResult({ ChatKey }) {
   const [extractMoreSpinner, setExtractMoreSpinner] = useState(false);
   const [page, setPage] = useState(1);
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(0);
+  const [isFixed, setIsFixed] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const { user, token } = useSelector((state) => state.auth);
   const router = useRouter();
@@ -93,6 +94,20 @@ function ChatBotResult({ ChatKey }) {
       loadingRef.current = false;
     }
   }, [page, totalPages, token]);
+
+  const handleScroll = () => {
+    const threshold = 200;
+    if (window.scrollY > threshold) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => { window.removeEventListener('scroll', handleScroll); };
+  }, []);
 
   useEffect(() => {
     fetchSites();
@@ -152,6 +167,56 @@ function ChatBotResult({ ChatKey }) {
     </div>
   ) : (
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
+      <div className={`${isFixed ? 'hidden z-20 top-[20px] lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'hidden'}`} style={{
+        background: 'linear-gradient(to bottom, #1e1e1e, #181C1F)',
+      }}>
+        <div className='flex items-center justify-between mt-4'>
+          <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-5 h-5 mr-2"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5l-7-7m0 0l7-7m-7 7h16.5" />
+            </svg>
+          </Link>
+          <Link href='/' className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
+            </svg>
+          </Link>
+        </div>
+
+        <div className="bg-[#323639] rounded-lg mb-4">
+          <p className="text-white text-sm mb-4 line-clamp-2">
+            I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
+            generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
+            to increase the number of qualified leads and grow my client base.
+          </p>
+
+          {/* Recommendations */}
+          <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
+            <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
+            <div className="flex space-x-2 text-sm overflow-x-auto no-scrollbar">
+              {chatData.map((rec, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedTaskIndex(index)}
+                  className={clsx(
+                    "flex-shrink-0 w-1/2 text-center bg-[#8B60B2] font-bold text-xs py-2 px-4 rounded-[5px] text-white transition-colors duration-200",
+                    selectedTaskIndex === index ? "bg-[#8B60B2]" : "bg-[#323639]"
+                  )}
+                >
+                  {rec?.taskTitle}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="min-h-screen text-white w-full">
         <h4 className="text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto tracking-wider text-center lg:font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<span className="text-[#BF96E4] font-bold"> Learn more</span> </h4>
         <div className="px-[30px] lg:px-[135px] w-full mt-8 rounded-lg text-white">
@@ -211,7 +276,7 @@ function ChatBotResult({ ChatKey }) {
                 </div>
               </div>
             </div>
-            <div className="block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg">
+            <div className={`${isFixed ? 'block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'block lg:hidden w-full bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg'}`}>
               <div className='flex items-center justify-between mt-4'>
                 <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
                   <svg
