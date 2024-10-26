@@ -8,6 +8,7 @@ import Image from "next/image";
 
 import axios from "axios";
 import toast from "react-hot-toast";
+import Link from 'next/link';
 import { useTheme } from "../../provider";
 import { toastText } from "@/constants/text-constants";
 import FeatureSection from "../FeatureSection";
@@ -139,7 +140,7 @@ const MainSection = () => {
                 <div onClick={openModal} className="bg-[#323639] text-white p-[20px] mx-[30px] border border-[rgba(255,255,255,0.2)] rounded-lg max-w-full sm:hidden relative">
                     <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
                     <p className="text-lg">to relieve accurate, use-case specific AI tool recommendations </p>
-                    <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <span className="text-main-purple">Learn more</span></p>
+                    <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                     {/* Question mark icon for opening modal */}
                     <div
                         className="absolute top-4 right-4 text-white rounded-full p-1"
@@ -157,7 +158,7 @@ const MainSection = () => {
                         <div className="px-[10px] py-[25px]">
                             <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
                             <p className="text-lg">to relieve accurate, use-case specific AI tool recommendations </p>
-                            <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <span className="text-main-purple">Learn more</span></p>
+                            <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                         </div>
                         <div className="px-[10px] py-[25px] flex justify-between">
                             <div className="text-white inline-flex items-center justify-center border border-white rounded-full w-10 h-10 mb-2">1</div>
@@ -195,7 +196,7 @@ const MainSection = () => {
                     <div className="p-4 sm:col-span-1">
                         <h5 className="font-semibold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
                         <p className="text-sm mb-4">to relieve accurate, use-case specific AI tool recommendations </p>
-                        <p className="text-[10px]">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <span className="text-main-purple">Learn more</span></p>
+                        <p className="text-[10px]">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                     </div>
                     <div className="p-4 sm:col-span-1">
                         <div className="text-white inline-flex items-center justify-center border border-white rounded-full w-10 h-10 mb-2">1</div>
@@ -219,7 +220,7 @@ const MainSection = () => {
                     </div>
                 </div>
 
-                <p className="text-center text-sm sm:text-lg mt-4 sm:mt-8 mx-[30px] sm:w-[55%] block tracking-wider font-semibold">We only include high-quality, business-grade AI tools & software in our directory. <span className="text-main-purple">Learn more</span> about our rigorous approval and verification process</p>
+                <p className="text-center text-sm sm:text-lg mt-4 sm:mt-8 mx-[30px] sm:w-[55%] block tracking-wider font-semibold">We only include high-quality, business-grade AI tools & software in our directory. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link> about our rigorous approval and verification process</p>
             </div>
             <div className="px-[30px] sm:px-[135px]">
                 <FeatureSection />

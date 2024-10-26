@@ -123,11 +123,11 @@ const PasswordChangeForm = () => {
         <Link href="/" className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
           <Image
             alt="website Logo"
-            src={"/images/defaulticon4.png"}
-            width={40}
+            src={"/images/Profile_logo.png"}
+            width={160}
             height={40}
-            className="mx-auto rounded-[6.5px] mr-[10px]"
-          /> myPerfectAI
+            className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
+          />
         </Link>
 
         <div className="space-y-8 w-full text-center flex flex-col justify-center items-center">
@@ -135,24 +135,24 @@ const PasswordChangeForm = () => {
           <h2 className="text-white text-sm lg:text-lg w-full lg:w-[550px] lg:font-semibold">Enter your new password</h2>
           <div className="space-y-[20px] w-full flex flex-col items-center">
             <div className="relative w-full lg:w-[370px]">
-                <InputNew
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder=" "
-                  value={formData.password}
-                  onChange={(e) => handleChange(e)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && !e.shiftKey) {
-                      handleSubmit(e);
-                    }
-                  }}
-                  onBlur={() => handleBlur('password')}
-                  error={errors.password}
-                  label="PASSWORD"
-                  className="mb-4"
-                  labelClassName="text-[rgba(255,255,255,0.5)]"
-                />
+              <InputNew
+                type="password"
+                id="password"
+                name="password"
+                placeholder=" "
+                value={formData.password}
+                onChange={(e) => handleChange(e)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    handleSubmit(e);
+                  }
+                }}
+                onBlur={() => handleBlur('password')}
+                error={errors.password}
+                label="PASSWORD"
+                className="mb-4"
+                labelClassName="text-[rgba(255,255,255,0.5)]"
+              />
             </div>
             <div className="relative w-full lg:w-[370px]">
               <InputNew

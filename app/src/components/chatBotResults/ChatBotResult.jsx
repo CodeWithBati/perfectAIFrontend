@@ -216,7 +216,7 @@ function ChatBotResult({ ChatKey }) {
         </div>
       </div>
       <div className="min-h-screen text-white w-full">
-        <h4 className="text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto tracking-wider text-center lg:font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<span className="text-[#BF96E4] font-bold"> Learn more</span> </h4>
+        <h4 className="text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto tracking-wider text-center lg:font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<Link href='/about' className="text-[#BF96E4] font-bold"> Learn more</Link> </h4>
         <div className="px-[30px] lg:px-[135px] w-full mt-8 rounded-lg text-white">
 
           <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 ">

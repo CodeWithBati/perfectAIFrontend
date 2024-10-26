@@ -120,11 +120,11 @@ const Header = ({ className }) => {
           <Link href='/' className='flex text-white text-center items-center justify-center font-bold text-2xl'>
             <Image
               alt="website Logo"
-              src={"/images/defaulticon4.png"}
-              width={40}
+              src={"/images/Profile_logo.png"}
+              width={160}
               height={40}
-              className="mx-auto rounded-[6.5px] mr-[10px]"
-            /> myPerfectAI
+              className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
+            />
           </Link>
         </div>
 

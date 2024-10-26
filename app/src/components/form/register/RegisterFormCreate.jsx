@@ -35,7 +35,7 @@ const RegisterFormCreate = () => {
     isChecked: false,
     role: "user",
   });
-  
+
   const [touched, setTouched] = useState({
     firstName: false,
     lastName: false,
@@ -256,11 +256,11 @@ const RegisterFormCreate = () => {
           <Link href='/' className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
-              src={"/images/defaulticon4.png"}
-              width={40}
+              src={"/images/Profile_logo.png"}
+              width={160}
               height={40}
-              className="mx-auto rounded-[6.5px] mr-[10px]"
-            /> myPerfectAI
+              className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
+            />
           </Link>
 
           <div className="space-y-4 text-center flex flex-col justify-center items-center">
