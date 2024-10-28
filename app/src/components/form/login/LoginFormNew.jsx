@@ -145,21 +145,21 @@ const LoginForm = () => {
       <SideBar />
 
       {/* Right Side with Sign-Up Options */}
-      <div className="relative z-10 lg:w-2/3 w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
+      <div className="relative z-10 lg:w-[60%] w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
         {/* Top Part (Logo and Sign Up Buttons) */}
         <Link href='/' className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
           <Image
             alt="website Logo"
             src={"/images/Profile_logo.png"}
-            width={160}
+            width={170}
             height={40}
-            className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
+            className="mx-auto rounded-[6.5px] mr-[10px] w-[190px] h-[100%]"
           />
         </Link>
 
         <div className="space-y-4 w-full text-center flex flex-col items-center">
           <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Sign in</h2>
-          <div className="space-y-[20px] w-full flex flex-col items-center">
+          <div className="space-y-[4px] w-full flex flex-col items-center">
             {/* Email Input with Floating Label */}
             <div className="relative w-full lg:w-[370px]">
               <InputNew

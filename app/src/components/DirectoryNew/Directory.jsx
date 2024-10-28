@@ -32,7 +32,7 @@ import Reviews from './keyFeature/Reviews';
 function Directory() {
 
   const [isMobile, setIsMobile] = useState(false);
-  const [activeTab, setActiveTab] = useState(isMobile? 'About' : 'Key Features');
+  const [activeTab, setActiveTab] = useState(isMobile ? 'About' : 'Key Features');
   const [featureDirectories, setFeatureDirectories] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -221,7 +221,7 @@ function Directory() {
 
     return sections;
   };
-  
+
 
 
   useEffect(() => {
@@ -327,7 +327,11 @@ function Directory() {
               <div className="w-full">
                 <div className="btn flex lg:flex-row flex-col justify-between lg:items-center gap-4 lg:gap-0 mb-6 lg:mb-0">
                   <div className="feat2 flex gap-4 w-full">
-                    <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={40} height={40} src={feat2} alt='' />
+                    {(directory && directory?.icon) ?
+                      <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={100} height={100} src={directory?.icon} alt='' quality={100} />
+                      :
+                      <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={100} height={100} src={feat2} alt='' quality={100} />
+                    }
                     <div className="genie">
                       <h2 className="text-lg md:text-2xl font-bold tracking-wider">{directory?.name}</h2>
                       <div className='flex gap-1'>
@@ -418,7 +422,11 @@ function Directory() {
                   {/* Sidebar */}
                   <div className={`${isFixed ? 'fixed lg:hidden top-[100px] z-20 flex justify-between w-[85%]' : 'hidden'}`}>
                     <div className='flex gap-4'>
-                      <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={40} height={40} src={feat2} alt='' />
+                      {directory && directory?.icon ?
+                        <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={100} height={100} src={directory?.icon} alt='' quality={100} />
+                        :
+                        <Image className='rounded-xl w-[70px] h-[70px] md:w-[105px] md:h-[105px]' width={100} height={100} src={feat2} alt='' quality={100} />
+                      }
                       <div className="genie">
                         <h2 className="text-lg md:text-2xl font-bold tracking-wider">{directory?.name}</h2>
                         <div className='flex gap-1'>

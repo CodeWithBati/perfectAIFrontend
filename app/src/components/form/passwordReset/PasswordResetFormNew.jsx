@@ -148,22 +148,22 @@ const PasswordResetForm = () => {
         <SideBar />
 
         {/* Right Side with Sign-Up Options */}
-        <div className="relative z-10 lg:w-2/3 w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
+        <div className="relative z-10 lg:w-[60%] w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
           {/* Top Part (Logo and Sign Up Buttons) */}
           <Link href='/' className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
             <Image
               alt="website Logo"
               src={"/images/Profile_logo.png"}
-              width={160}
+              width={170}
               height={40}
-              className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
+              className="mx-auto rounded-[6.5px] mr-[10px] w-[190px] h-[100%]"
             />
           </Link>
 
           <div className="space-y-8 text-center flex flex-col justify-center items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-0 lg:mb-8">Forget Password?</h2>
             <p className='text-white text-sm lg:text-lg w-full lg:w-[550px] lg:font-semibold mb-6'>Enter the email address you used when you joined and we’ll send you instructions to reset your password.</p>
-            <div className="space-y-[20px] w-full flex flex-col items-center">
+            <div className="space-y-[4px] w-full flex flex-col items-center">
               {/* Email Input with Floating Label */}
               <div className="relative w-full lg:w-[370px]">
                 <InputNew

@@ -73,7 +73,7 @@ const FeatureCard = ({ directory, saved=false }) => {
                                 <path d="M17 0L22.375 10.25L33.8125 12.25L25.75 20.5625L27.375 32L17 26.9375L6.5625 32L8.25 20.5625L0.125 12.25L11.5625 10.25L17 0Z" fill="white" />
                             </svg>
 
-                            <span className="text-white text-xs font-semibold ml-1 tracking-wide">Featured</span>
+                            <span className="text-white text-xs ml-1 tracking-wide">Featured</span>
                         </div>
                     </div>
                 </div>}
@@ -99,8 +99,8 @@ const FeatureCard = ({ directory, saved=false }) => {
                         </div>}
                     </div>
                     <div>
-                        <h3 className="text-lg font-semibold text-white ml-4 tracking-wide">{directory?.name}</h3>
-                        <div className="flex items-center text-purple-400 ml-4">
+                        <h3 className="text-lg font-semibold text-white ml-3 tracking-wide">{directory?.name}</h3>
+                        <div className="flex items-center text-purple-400 ml-3">
                             <StarRating rating={directory?.averageRating} size="sm" />
                             <span className="text-[10px] text-white">({directory?.reviews})</span>
                         </div>

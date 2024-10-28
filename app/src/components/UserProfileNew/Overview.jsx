@@ -150,7 +150,7 @@ const Overview = ({ setSelectedIndex }) => {
           <div className="text-center flex flex-col lg:flex-row justify-center items-center gap-[30px]">
             <div className="relative w-[150px] h-[150px]">
               {user && user.profile ? (
-                <Image src={imageUrl} alt="" height={150} width={150} className="object-cover rounded-full w-[150px] h-[150px] mb-4" />
+                <Image src={imageUrl} alt="" height={150} width={150} className="object-cover rounded-full w-[150px] h-[150px] mb-4" quality={100}/>
               ) : (
                 <Image
                   src="/images/avatar.svg"

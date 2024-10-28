@@ -30,17 +30,18 @@ const Footer = () => {
         {/* Left Side - Logo and Description */}
         <div className="flex flex-col sm:items-start items-center">
           <div className="flex items-center mb-4">
-            <Image
-              alt="website Logo"
-              src={"/images/defaulticon4.png"}
-              width={40}
-              height={40}
-              className="mx-auto rounded-[6.5px] mr-[10px]"
-            />
-            <span className="text-2xl font-semibold">myPerfectAI</span>
+            <Link href='/' className='flex text-white text-center items-center justify-center font-bold text-2xl'>
+              <Image
+                alt="website Logo"
+                src={"/images/Profile_logo.png"}
+                width={170}
+                height={40}
+                className="mx-auto rounded-[6.5px] mr-[10px] w-[190px] h-[100%]"
+              />
+            </Link>
           </div>
           <p className="text-xs max-w-[390px] tracking-wider text-center sm:text-start">
-            FindMyAITool is a website dedicated to providing a comprehensive list of AI tools to assist individuals and businesses in finding the most suitable AI tool for their specific requirements.
+            FindMyAITool ss is a website dedicated to providing a comprehensive list of AI tools to assist individuals and businesses in finding the most suitable AI tool for their specific requirements.
           </p>
         </div>
 
@@ -52,7 +53,7 @@ const Footer = () => {
             <Link href="#" className="text-sm hover:underline">About</Link>
             <Link href="#" className="text-sm hover:underline">Blogs</Link>
             <Link href="#" className="text-sm hover:underline">Pricing</Link>
-            <p onClick={openModalPrivacy} href="#" className="text-sm hover:underline">Privacy Policy</p>
+            <p onClick={openModalPrivacy} className="text-sm hover:underline">Privacy Policy</p>
             <p onClick={openModalTerms} className="text-sm hover:underline">Terms and Conditions</p>
           </div>
 

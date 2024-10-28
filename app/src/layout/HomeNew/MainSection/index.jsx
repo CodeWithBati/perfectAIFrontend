@@ -77,14 +77,26 @@ const MainSection = () => {
     const closeModal = () => setIsOpen(false);
 
     return (
-        <section className="text-white bg-contain bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull.png')]" >
+        <section className="text-white bg-cover  bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull.png')]" >
             <div className="relative flex flex-col items-center justify-center min-w-screen sm:pt-32 pt-20 pb-8">
                 <h1 className="text-[32px] sm:text-[80px] font-bold text-center tracking-tight">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
                 <h5 className="text-base sm:text-2xl font-bold text-center mb-8 w-[85%] sm:w-[50%]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>
 
                 {/* Search and Prompt Guidelines */}
                 {spinner ? (
-                    <Spinner className="mb-8" />
+                    <div className="
+                        flex 
+                        items-center 
+                        justify-center
+                        rounded-md 
+                        w-full
+                        max-w-[85%] 
+                        sm:max-w-[570px] 
+                        p-2 
+                        mb-14
+                    ">
+                    <Spinner />
+                    </div>
                 ) : (
                     <div className="
                             flex 
@@ -98,7 +110,7 @@ const MainSection = () => {
                             max-w-[85%] 
                             sm:max-w-[570px] 
                             p-2 
-                            mb-8 
+                            mb-14 
                             transition-colors 
                             duration-200 
                             ease-in-out
@@ -139,7 +151,6 @@ const MainSection = () => {
 
                 <div onClick={openModal} className="bg-[#323639] text-white p-[20px] mx-[30px] border border-[rgba(255,255,255,0.2)] rounded-lg max-w-full sm:hidden relative">
                     <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
-                    <p className="text-lg">to relieve accurate, use-case specific AI tool recommendations </p>
                     <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                     {/* Question mark icon for opening modal */}
                     <div
@@ -157,7 +168,6 @@ const MainSection = () => {
                     <div className="grid grid-cols-1 rounded-[5px] bg-[#323639] p-[20px_10px_20px_10px] border-bottom-except-last">
                         <div className="px-[10px] py-[25px]">
                             <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
-                            <p className="text-lg">to relieve accurate, use-case specific AI tool recommendations </p>
                             <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                         </div>
                         <div className="px-[10px] py-[25px] flex justify-between">
@@ -192,11 +202,10 @@ const MainSection = () => {
                 </CustomModel>
 
                 {/* Desktop version: Full content */}
-                <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] tracking-wide sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last h-[250px] overflow-hidden">
+                <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] tracking-wide sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last overflow-hidden">
                     <div className="p-4 sm:col-span-1">
                         <h5 className="font-semibold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
-                        <p className="text-sm mb-4">to relieve accurate, use-case specific AI tool recommendations </p>
-                        <p className="text-[10px]">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
+                        <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                     </div>
                     <div className="p-4 sm:col-span-1">
                         <div className="text-white inline-flex items-center justify-center border border-white rounded-full w-10 h-10 mb-2">1</div>

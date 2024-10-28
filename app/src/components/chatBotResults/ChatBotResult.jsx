@@ -35,9 +35,6 @@ import MobileFeature from "../DirectoryNew/keyFeature/MobileFeature";
 
 
 function ChatBotResult({ ChatKey }) {
-
-
-  const textAreaRef = useRef(null);
   const theme = useTheme();
 
   const [chatData, setChatData] = useState([]);
@@ -53,12 +50,8 @@ function ChatBotResult({ ChatKey }) {
   const router = useRouter();
   const loadingRef = useRef(false);
 
-  useEffect(() => {
-    if (textAreaRef.current) {
-      textAreaRef.current.style.height = "inherit"; // Reset height to calculate the scroll height correctly
-      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
-    }
-  }, [input]);
+  console.log(input)
+
 
   const fetchSites = useCallback(async () => {
     if (page > totalPages || loadingRef.current) return;
@@ -189,12 +182,11 @@ function ChatBotResult({ ChatKey }) {
         </div>
 
         <div className="bg-[#323639] rounded-lg mb-4">
-          <p className="text-white text-sm mb-4 line-clamp-2">
-            I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
-            generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
-            to increase the number of qualified leads and grow my client base.
-          </p>
-
+          {input &&
+            <p className="text-white text-sm mb-4 line-clamp-2">
+              {input}
+            </p>
+          }
           {/* Recommendations */}
           <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
             <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
@@ -235,11 +227,11 @@ function ChatBotResult({ ChatKey }) {
                 Back for another search
               </Link>
               <div className="bg-[#323639] p-6 rounded-lg">
-                <p className="text-white text-sm mb-4">
-                  I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
-                  generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
-                  to increase the number of qualified leads and grow my client base.
-                </p>
+                {input &&
+                  <p className="text-white text-sm mb-4">
+                    {input}
+                  </p>
+                }
 
                 {/* Share link button */}
                 <button onClick={() => copyTextToClipboard(shareableLink)} className="flex items-center py-2 px-4 bg-[#8B60B2] text-base text-white rounded-[5px] font-semibold mb-6 gap-2">
@@ -296,11 +288,9 @@ function ChatBotResult({ ChatKey }) {
               </div>
 
               <div className="bg-[#323639] rounded-lg mb-4">
-                <p className="text-white text-sm mb-4 line-clamp-2">
-                  I own a small B2B consulting firm specializing in digital transformation. I need an AI tool to help with lead
-                  generation by identifying potential clients in my target industry and automating outreach efforts. My goal is
-                  to increase the number of qualified leads and grow my client base.
-                </p>
+                {input && <p className="text-white text-sm mb-4 line-clamp-2">
+                  {input}
+                </p>}
 
                 {/* Recommendations */}
                 <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
@@ -327,7 +317,7 @@ function ChatBotResult({ ChatKey }) {
               <div className="w-full lg:w-2/4">
                 <p className="text-base lg:text-lg mb-4 lg:font-bold">{chatData[selectedTaskIndex]?.taskTitle}</p>
                 <div className="flex items-center space-x-4 mb-4">
-                  <Image alt="Writesonic" src={chatData[selectedTaskIndex]?.recommended?.directory?.icon} width={16} height={16} className="object-cover w-16 h-16 rounded-lg" />
+                  <Image alt="Writesonic" src={chatData[selectedTaskIndex]?.recommended?.directory?.icon} width={100} height={100} quality={100} className="object-cover w-16 h-16 rounded-lg" />
                   <div>
                     <h2 className="text-lg lg:text-2xl font-semibold">{chatData[selectedTaskIndex]?.recommended?.directory?.name}</h2>
                     <div className="flex items-center text-2xl space-x-1 text-[#8B60B2]">

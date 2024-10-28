@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import "~quill/dist/quill.core.css";
 @import "~quill/dist/quill.snow.css";
 
@@ -34,6 +34,8 @@
 
 body {
   font-family: "DM Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
 }
 
 .border-right-except-last > *:not(:last-child) {
@@ -48,6 +50,11 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 .parent-container {

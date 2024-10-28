@@ -121,9 +121,10 @@ const Header = ({ className }) => {
             <Image
               alt="website Logo"
               src={"/images/Profile_logo.png"}
-              width={160}
-              height={40}
-              className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
+              width={170}
+              height={100}
+              quality={100}
+              className="mx-auto rounded-[6.5px] mr-[10px] w-[190px] h-[100%]"
             />
           </Link>
         </div>
@@ -135,16 +136,17 @@ const Header = ({ className }) => {
                 src={user?.profile}
                 className="object-cover rounded-full w-[40px] h-[40px]"
                 alt="avatar"
-                width={40}
-                height={40}
+                width={100}
+                height={100}
               />
             ) : (
               <Image
                 src="/images/avatar.svg"
                 className="object-cover rounded-full w-[40px] h-[40px]"
                 alt="No Profile Image Avatar"
-                width={40}
-                height={40}
+                width={100}
+                height={100}
+                quality={100}
               />
             )
           }
@@ -181,16 +183,17 @@ const Header = ({ className }) => {
                       src={user?.profile}
                       className="object-cover rounded-full w-[40px] h-[40px]"
                       alt="avatar"
-                      width={40}
-                      height={40}
+                      width={100}
+                      height={100}
+                      quality={100}
                     />
                   ) : (
                     <Image
                       src="/images/avatar.svg"
                       className="object-cover rounded-full w-[40px] h-[40px]"
                       alt="No Profile Image Avatar"
-                      width={40}
-                      height={40}
+                      width={100}
+                      height={100}
                     />
                   )
                 }
@@ -290,16 +293,16 @@ const Header = ({ className }) => {
                         src={user?.profile}
                         className="object-cover rounded-full w-[40px] h-[40px]"
                         alt="avatar"
-                        width={40}
-                        height={40}
+                        width={100}
+                        height={100}
                       />
                     ) : (
                       <Image
                         src="/images/avatar.svg"
                         className="object-cover rounded-full w-[40px] h-[40px]"
                         alt="No Profile Image Avatar"
-                        width={40}
-                        height={40}
+                        width={100}
+                        height={100}
                       />
                     )
                   }
