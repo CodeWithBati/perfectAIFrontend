@@ -51,7 +51,7 @@ const DirectoryManagerMainPageView = () => {
   return (
     <>
       {user?.role === "creator" ? (
-        <div className="flex">
+        <div className="flex bg-[#181C1F] bg-no-repeat bg-center lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
           <div className="flex flex-col min-h-screen flex-grow overflow-x-hidden max-w-full">
             <main>
               {spinner ? (
@@ -59,7 +59,7 @@ const DirectoryManagerMainPageView = () => {
                   <Spinner />
                 </div>
               ) : (
-                <Section className="py-6 mt-20">
+                <Section>
                   {!isActive && !isNew && userDirectory.slug && (
                     <>
                       <div className=" text-black dark:text-white bg-red-300 dark:bg-red-500 rounded-md w-full text-lg text-center ">

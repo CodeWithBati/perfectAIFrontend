@@ -308,7 +308,7 @@ function CreateDirectory({
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
+    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] bg-center lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
 
 
       <div className="lg:w-[770px] w-full px-[30px] lg:px-0">
@@ -350,7 +350,7 @@ function CreateDirectory({
         </div>
 
         {/* Form */}
-        <div className="w-full lg:w-[570px] space-y-4 flex justify-center items-center flex-col rounded-lg">
+        <div className="w-full lg:w-[570px] space-y-[4px] flex justify-center items-center flex-col rounded-lg">
           <div className="flex flex-col w-full lg:flex-row space-y-[20px] lg:space-y-0 lg:space-x-[20px]">
             {/* First Name */}
             <div className="relative w-full lg:w-[275px]">
@@ -364,7 +364,6 @@ function CreateDirectory({
                 }
                 value={formData.name}
                 label="NAME"
-                className="mb-4"
                 labelClassName="text-[rgba(255,255,255,0.5)]"
               />
             </div>
@@ -403,7 +402,6 @@ function CreateDirectory({
                 value={formData.website}
                 placeholder=" "
                 label="WEBSITE"
-                className="mb-4"
                 labelClassName="text-[rgba(255,255,255,0.5)]"
               />
             </div>
@@ -458,7 +456,7 @@ function CreateDirectory({
           </div>
 
           <div className="relative w-full">
-            <h3 className="text-lg font-bold mb-4">Images</h3>
+            <h3 className="text-lg font-bold mb-2">Images</h3>
             {
               images.length === 0 ?
                 <div onClick={() => document.getElementById('image-upload').click()} className="flex justify-center items-center mx-auto max-w-auto max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">
@@ -514,7 +512,7 @@ function CreateDirectory({
           </div>
 
           <div className="relative w-full">
-            <h3 className="text-lg font-bold mb-4">Videos</h3>
+            <h3 className="text-lg font-bold mb-2">Videos</h3>
             {
               videos.length === 0 ?
                 <div onClick={() => document.getElementById('video-upload').click()} className="flex justify-center items-center max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">
@@ -571,9 +569,9 @@ function CreateDirectory({
             }
           </div>
 
-          <div className="relative w-full mb-8">
-            <h3 className="text-lg font-bold mb-4">Documents</h3>
-            <p className="text-white text-xs mb-4">This document will be used to inform the chatbot to make more accurate AI tool recommendations. It will not be published. </p>
+          <div className="relative w-full">
+            <h3 className="text-lg font-bold mb-2">Documents</h3>
+            <p className="text-white text-xs mb-2">This document will be used to inform the chatbot to make more accurate AI tool recommendations. It will not be published. </p>
             {
               docs.length === 0 ?
                 <div onClick={() => document.getElementById('document-upload').click()} className="flex justify-center items-center max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">
@@ -636,6 +634,8 @@ function CreateDirectory({
                 </div>
             }
           </div>
+
+          <div />
 
           <Button variant="primary" size="small" onClick={handleSubmit}>
             Create directory

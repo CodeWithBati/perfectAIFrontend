@@ -267,13 +267,13 @@ const RegisterForm = () => {
         <div className="relative z-10 relative z-10 lg:w-2/3 w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">
           {/* Top Part (Logo and Sign Up Buttons) */}
           <Link href='/' className='flex text-white text-center items-center justify-center mt-10 lg:mt-[68px] mb-4 lg:mb-8 font-bold text-xl lg:text-2xl'>
-          <Image
-            alt="website Logo"
-            src={"/images/Profile_logo.png"}
-            width={160}
-            height={40}
-            className="mx-auto rounded-[6.5px] mr-[10px] w-[171px] h-[100%]"
-          />
+            <Image
+              alt="website Logo"
+              src={"/images/Profile_logo.png"}
+              width={300}
+              height={60}
+              className="mx-auto rounded-[6.5px] mr-[10px] w-[300px] h-[100%]"
+            />
           </Link>
 
           <div className="space-y-8 text-center">

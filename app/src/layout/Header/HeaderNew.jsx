@@ -226,11 +226,12 @@ const Header = ({ className }) => {
                 <p className='flex text-white text-center items-center justify-center font-bold text-2xl'>
                   <Image
                     alt="website Logo"
-                    src={"/images/defaulticon4.png"}
-                    width={39}
-                    height={39}
-                    className="mx-auto rounded-[6.5px] mr-[10px]"
-                  /> myPerfectAI
+                    src={"/images/Profile_logo.png"}
+                    width={170}
+                    height={100}
+                    quality={100}
+                    className="mx-auto rounded-[6.5px] mr-[10px] w-[190px] h-[100%]"
+                  />
                 </p>
                 <div />
               </div>
@@ -267,14 +268,14 @@ const Header = ({ className }) => {
                   </svg>
                 </p>
               </Link>
-              {!isAuthenticated && 
+              {!isAuthenticated &&
                 <>
                   <div className="w-full h-[1px] block bg-[rgba(255,255,255,0.2)]" />
                   <div className="flex items-center justify-center w-full p-[20px] gap-[10px]">
                     <Link href="/login" className="block py-2 bg-[#1e1e1e] text-center rounded-[5px] border border-[rgba(255,255,255,0.2)] font-bold w-full tracking-wider text-sm">Sign in</Link>
                     <Link href="/register" className="block py-2 bg-main-purple text-center rounded-[5px] font-bold w-full tracking-wider text-sm">Sign up</Link>
                   </div>
-              </>
+                </>
               }
             </div>
           </div>

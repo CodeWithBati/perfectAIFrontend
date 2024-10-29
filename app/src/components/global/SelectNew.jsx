@@ -11,13 +11,13 @@ function SelectNew({ size, className, options, selected, onChange, id, label, di
   };
 
   const compClass = classNames({
-    "mb-4 bg-[#323639] rounded-md border border-[rgba(255,255,255,0.2)] p-2": true,
+    "bg-[#323639] rounded-md border border-[rgba(255,255,255,0.2)] p-2": true,
     [`${className}`]: className,
   });
 
   return (
     <div className={compClass}>
-      <label className="block text-[rgba(255,255,255,0.5)] text-xs mb-1" htmlFor={id}>
+      <label className="block text-[rgba(255,255,255,0.5)] text-xs" htmlFor={id}>
         {label}
       </label>
       <select 

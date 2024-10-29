@@ -257,9 +257,9 @@ const RegisterFormCreate = () => {
             <Image
               alt="website Logo"
               src={"/images/Profile_logo.png"}
-              width={170}
-              height={40}
-              className="mx-auto rounded-[6.5px] mr-[10px] w-[190px] h-[100%]"
+              width={300}
+              height={60}
+              className="mx-auto rounded-[6.5px] mr-[10px] w-[300px] h-[100%]"
             />
           </Link>
 

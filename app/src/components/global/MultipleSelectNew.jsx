@@ -57,7 +57,7 @@ const MultipleSelect = ({
   const isAllSelected = selected.length === options.length;
 
   const compClass = classNames({
-    "mb-4 bg-[#323639] p-2 border border-[rgba(255,255,255,0.2)] rounded-[5px] cursor-pointer relative": true,
+    "bg-[#323639] p-2 border border-[rgba(255,255,255,0.2)] rounded-[5px] cursor-pointer relative": true,
     ["py-2 text-sm/[1.125rem]"]: !size,
     [`${className}`]: className,
   });

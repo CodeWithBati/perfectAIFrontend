@@ -21,7 +21,6 @@ const Overview = ({ setSelectedIndex }) => {
   const { user, token } = useAppSelector((state) => state.auth);
   const [spinner, setSpinner] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
-  const [imageUrl, setImageUrl] = useState(user?.profile);
 
   const [formValue, setFormValue] = useState({
     firstName: user?.firstName ? user?.firstName : '',
@@ -65,7 +64,6 @@ const Overview = ({ setSelectedIndex }) => {
 
       if (response.status === 200) {
         dispatch(updateProfileImage({ profile: response.data.profile }));
-        setImageUrl(response.data.profile);
         toast.success("Image Uploaded Successfully");
       }
       setSpinner(false);
@@ -150,7 +148,7 @@ const Overview = ({ setSelectedIndex }) => {
           <div className="text-center flex flex-col lg:flex-row justify-center items-center gap-[30px]">
             <div className="relative w-[150px] h-[150px]">
               {user && user.profile ? (
-                <Image src={imageUrl} alt="" height={150} width={150} className="object-cover rounded-full w-[150px] h-[150px] mb-4" quality={100}/>
+                <Image src={user.profile} alt="" height={150} width={150} className="object-cover rounded-full w-[150px] h-[150px] mb-4" quality={100}/>
               ) : (
                 <Image
                   src="/images/avatar.svg"

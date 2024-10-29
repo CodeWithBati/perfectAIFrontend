@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Image from 'next/image'
+import { Rating, ThinStar } from "@smastrom/react-rating";
 import toast from "react-hot-toast";
 import { toastText } from "@/constants/text-constants";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,6 +21,12 @@ const defaultformState = {
   reviewId: "",
 };
 
+const myStyles = {
+  itemShapes: ThinStar,
+  activeFillColor: "#8B60B2",
+  inactiveFillColor: "gray",
+};
+
 const PersonReviews = ({ directory }) => {
 
   const { user, token } = useSelector((state) => state.auth);
@@ -30,7 +37,13 @@ const PersonReviews = ({ directory }) => {
   const [reviewFormData, setReviewFormData] = useState(defaultformState);
   const [showModal, setShowModal] = useState(false);
   const [showUpdatedModal, setShowUpdatedModal] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [showStars, setShowStars] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleInputFocus = () => {
+    setShowStars(true);
+  };
 
   const handleCreateNewReview = async () => {
     try {
@@ -152,6 +165,12 @@ const PersonReviews = ({ directory }) => {
         );
         if (response.status === 200) {
           setReviews(response.data.results);
+          const reviewRecord = reviews.find((rec) => rec.id === reviewId);
+          setReviewFormData({
+            description: reviewRecord.description,
+            stars: reviewRecord.stars,
+            reviewId: reviewId,
+          });
         } else {
           console.log("Error fetching the records");
         }
@@ -186,32 +205,51 @@ const PersonReviews = ({ directory }) => {
                   src={user?.profile}
                   className="w-10 h-10 rounded-[5px] mr-2"
                   alt="avatar"
-                  width={10}
-                  height={10}
+                  width={100}
+                  height={100}
                 />
               ) : (
                 <Image
                   src="/images/avatar.svg"
                   className="w-10 h-10 rounded-[5px] mr-2"
                   alt="No Profile Image Avatar"
-                  width={10}
-                  height={10}
+                  width={100}
+                  height={100}
                 />
               )
             }
 
             {/* Input field */}
-            <div className="relative w-full lg:w-[570px]">
+            <div className="relative flex w-full lg:w-[570px]">
               <input
                 type="text"
                 id="comment"
                 placeholder="WHAT DO YOU THINK..."
-                className="block px-[15px] pb-[8px] w-full h-[40px] text-sm text-white bg-[#323639] rounded-[5px] border-none outline-none appearance-none focus:outline-none focus:ring-0 peer"
+                className="block px-4 pb-2 w-full h-10 text-sm text-white bg-[#323639] rounded-[5px] border-none outline-none focus:outline-none focus:ring-0 peer"
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
+                value={reviewFormData.description}
+                onFocus={handleInputFocus}
+                ref={inputRef}
               />
+
+              {/* Star Rating */}
+              {showStars && (
+                <div className="mt-2">
+                  <Rating
+                    itemStyles={myStyles}
+                    style={{ maxWidth: 100 }}
+                    activeColor="#8B60B2"
+                    value={reviewFormData.stars}
+                    onChange={(value) => handleInputChange("stars", value)}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Review button */}
-            <button className="hidden lg:block ml-3 bg-[#8B60B2] text-white px-4 py-2 rounded-lg font-semibold" onClick={handleAddReview}>
+            <button className="hidden lg:block ml-3 bg-[#8B60B2] text-white px-4 py-2 rounded-lg font-semibold" onClick={handleCreateNewReview}>
               Review
             </button>
             <button className="lg:hidden ml-3 bg-[#8B60B2] text-white px-4 py-4 rounded-lg font-semibold">
@@ -224,16 +262,67 @@ const PersonReviews = ({ directory }) => {
         ) :
           (
             <div className="flex items-center justify-center bg-[#323639] p-2 rounded-lg max-w-[770px] mb-16 border border-[rgba(255,255,255,0.2)]">
-              <p className="text-white text-2xl flex justify-center items-center">
-                Thanks For your Review !!!
-              </p>
+              {/* User avatar */}
+              {
+                user?.profile ? (
+                  <Image
+                    src={user?.profile}
+                    className="w-10 h-10 rounded-[5px] mr-2"
+                    alt="avatar"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Image
+                    src="/images/avatar.svg"
+                    className="w-10 h-10 rounded-[5px] mr-2"
+                    alt="No Profile Image Avatar"
+                    width={100}
+                    height={100}
+                  />
+                )
+              }
+
+              {/* Input field */}
+              <div className="relative flex w-full lg:w-[570px]">
+                <input
+                  type="text"
+                  id="comment"
+                  placeholder="WHAT DO YOU THINK..."
+                  className="block px-4 pb-2 w-full h-10 text-sm text-white bg-[#323639] rounded-[5px] border-none outline-none focus:outline-none focus:ring-0 peer"
+                  onChange={(e) =>
+                    handleInputChange("description", e.target.value)
+                  }
+                  value={reviewFormData.description}
+                />
+
+                <div className="mt-2">
+                  <Rating
+                    itemStyles={myStyles}
+                    style={{ maxWidth: 100 }}
+                    activeColor="#8B60B2"
+                    value={reviewFormData.stars}
+                    onChange={(value) => handleInputChange("stars", value)}
+                  />
+                </div>
+              </div>
+
+              {/* Review button */}
+              <button className="hidden lg:block ml-3 bg-[#8B60B2] text-white px-4 py-2 rounded-lg font-semibold" onClick={handleUpdateReview}>
+                Review
+              </button>
+              <button className="lg:hidden ml-3 bg-[#8B60B2] text-white px-4 py-4 rounded-lg font-semibold">
+                <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.59375 6.09375L0 0H2L16 7L2 14H0L2.59375 7.9375L9.5 7L2.59375 6.09375Z" fill="white" />
+                </svg>
+              </button>
             </div>
           )
         }
 
         <div className="hidden lg:grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((review, index) => (
-            <Feedback key={index} review={review} user={user} />
+            <Feedback key={index} review={review} user={user} handleEditReview={handleEditReview} handleRemoveReview={handleRemoveReview} />
           ))}
         </div>
 
@@ -264,27 +353,7 @@ const PersonReviews = ({ directory }) => {
           </Swiper>
         </div>
       </section>
-      {/* <div className="lg:flex items-center justify-center hidden">
-        <span className="bg-[#323639] py-[10px] px-[20px] text-white font-bold rounded-[5px]">Load more review (100)</span>
-      </div> */}
 
-      {showModal && (
-        <AddNewReviewModal
-          handleInputChange={handleInputChange}
-          handleCreateNewReview={handleCreateNewReview}
-          reviewFormData={reviewFormData}
-          setShowModal={setShowModal}
-        />
-      )}
-
-      {showUpdatedModal && (
-        <UpdateReviewModal
-          handleInputChange={handleInputChange}
-          handleUpdateReview={handleUpdateReview}
-          reviewFormData={reviewFormData}
-          setShowModal={setShowUpdatedModal}
-        />
-      )}
     </div>
   );
 }
