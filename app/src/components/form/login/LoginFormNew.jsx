@@ -157,9 +157,9 @@ const LoginForm = () => {
           />
         </Link>
 
-        <div className="space-y-4 w-full text-center flex flex-col items-center">
+        <div className="space-y-3 w-full text-center flex flex-col items-center">
           <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Sign in</h2>
-          <div className="space-y-[4px] w-full flex flex-col items-center">
+          <div className="space-y-3 w-full flex flex-col items-center">
             {/* Email Input with Floating Label */}
             <div className="relative w-full lg:w-[370px]">
               <InputNew
@@ -177,7 +177,6 @@ const LoginForm = () => {
                 }}
                 error={errors.email}
                 label="EMAIL ADDRESS"
-                className="mb-4"
                 labelClassName="text-[rgba(255,255,255,0.5)]"
               />
             </div>
@@ -198,7 +197,6 @@ const LoginForm = () => {
                 }}
                 error={errors.password}
                 label="PASSWORD"
-                className="mb-4"
                 labelClassName="text-[rgba(255,255,255,0.5)]"
               />
             </div>

@@ -278,7 +278,7 @@ const RegisterForm = () => {
 
           <div className="space-y-8 text-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Sign up</h2>
-            <div className="space-y-4 lg:space-y-2">
+            <div className="space-y-3 lg:space-y-2">
 
               {/* Client Signup Button */}
               <button className="w-full lg:w-[515px] h-auto lg:h-[100px] text-white bg-quill-dark-background border border-[#ffffff33] rounded-md flex items-center justify-between p-[20px] lg:px-6 lg:py-4 hover:bg-gray-700 transition-all"

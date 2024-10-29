@@ -453,7 +453,7 @@ function Directory() {
                   </div>
                   <div
                     className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] p-4 lg:rounded-lg ${isMobile && isFixed ? 'fixed top-[190px] z-20' : ''
-                      } lg:sticky lg:top-10 lg:h-[320px]`}
+                      } lg:sticky lg:top-10 lg:h-[320px] sm:h-[340px]`}
                   >
                     <ul className="lg:space-y-2 hidden lg:block ">
                       {tabs.map((tab) => (

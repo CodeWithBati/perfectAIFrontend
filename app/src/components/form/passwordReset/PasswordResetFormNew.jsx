@@ -163,7 +163,7 @@ const PasswordResetForm = () => {
           <div className="space-y-8 text-center flex flex-col justify-center items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-0 lg:mb-8">Forget Password?</h2>
             <p className='text-white text-sm lg:text-lg w-full lg:w-[550px] lg:font-semibold mb-6'>Enter the email address you used when you joined and we’ll send you instructions to reset your password.</p>
-            <div className="space-y-[4px] w-full flex flex-col items-center">
+            <div className="space-y-3 w-full flex flex-col items-center">
               {/* Email Input with Floating Label */}
               <div className="relative w-full lg:w-[370px]">
                 <InputNew
@@ -181,7 +181,6 @@ const PasswordResetForm = () => {
                   }}
                   error={errors.email}
                   label="EMAIL ADDRESS"
-                  className="mb-4"
                   labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
               </div>

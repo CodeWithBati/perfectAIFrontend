@@ -261,9 +261,9 @@ const RegisterFormCreatePartner = () => {
             />
           </Link>
 
-          <div className="space-y-4 text-center flex flex-col justify-center items-center">
+          <div className="space-y-3 text-center flex flex-col justify-center items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Create your MyPerfectAI <br />Partner account</h2>
-            <div className="space-y-[4px] w-full flex flex-col items-center">
+            <div className="space-y-3 w-full flex flex-col items-center">
               <div className="flex space-x-[20px] w-full lg:w-[370px]">
                 {/* First Name */}
                 <div className="relative w-full lg:w-[178px]">
@@ -282,7 +282,6 @@ const RegisterFormCreatePartner = () => {
                     }}
                     error={errors.firstName}
                     label="FIRST NAME"
-                    className="mb-4"
                     labelClassName="text-[rgba(255,255,255,0.5)]"
                   />
                 </div>
@@ -304,7 +303,6 @@ const RegisterFormCreatePartner = () => {
                     }}
                     error={errors.lastName}
                     label="LAST NAME"
-                    className="mb-4"
                     labelClassName="text-[rgba(255,255,255,0.5)]"
                   />
                 </div>
@@ -327,7 +325,6 @@ const RegisterFormCreatePartner = () => {
                   }}
                   error={errors.email}
                   label="EMAIL ADDRESS"
-                  className="mb-4"
                   labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
               </div>
@@ -349,7 +346,6 @@ const RegisterFormCreatePartner = () => {
                   }}
                   error={errors.password}
                   label="PASSWORD"
-                  className="mb-4"
                   labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
               </div>
@@ -369,7 +365,6 @@ const RegisterFormCreatePartner = () => {
                   }}
                   error={errors.confirmPassword}
                   label="CONFIRM PASSWORD"
-                  className="mb-4"
                   labelClassName="text-[rgba(255,255,255,0.5)]"
                 />
               </div>

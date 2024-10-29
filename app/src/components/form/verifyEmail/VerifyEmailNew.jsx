@@ -178,7 +178,7 @@ const VerifyEmail = () => {
             />
           </Link>
 
-          <div className="space-y-4 text-center w-full lg:w-auto flex flex-col items-center">
+          <div className="space-y-3 text-center w-full lg:w-auto flex flex-col items-center">
             <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Verify Your Account</h2>
             <ReactCodeInput
               fields={6}

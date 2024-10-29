@@ -25,7 +25,7 @@ const PasswordResetFormSuccess = () => {
             />
           </Link>
 
-          <div className="space-y-4 text-center flex flex-col justify-center items-center mt-20 lg:mt-0">
+          <div className="space-y-3 text-center flex flex-col justify-center items-center mt-20 lg:mt-0">
             <div className="flex items-center justify-center mb-6">
               <svg className="rounded-full border-4 border-white bg-white" width="65" height="64" viewBox="0 0 65 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-outside-1_598_3608" maskUnits="userSpaceOnUse" x="-9.5" y="-10" width="84" height="84" fill="black">

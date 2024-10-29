@@ -133,7 +133,7 @@ const PasswordChangeForm = () => {
         <div className="space-y-8 w-full text-center flex flex-col justify-center items-center">
           <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Reset Password?</h2>
           <h2 className="text-white text-sm lg:text-lg w-full lg:w-[550px] lg:font-semibold">Enter your new password</h2>
-          <div className="space-y-[4px] w-full flex flex-col items-center">
+          <div className="space-y-3 w-full flex flex-col items-center">
             <div className="relative w-full lg:w-[370px]">
               <InputNew
                 type="password"
@@ -150,7 +150,6 @@ const PasswordChangeForm = () => {
                 onBlur={() => handleBlur('password')}
                 error={errors.password}
                 label="PASSWORD"
-                className="mb-4"
                 labelClassName="text-[rgba(255,255,255,0.5)]"
               />
             </div>
@@ -170,7 +169,6 @@ const PasswordChangeForm = () => {
                 }}
                 error={errors.confirmPassword}
                 label="CONFIRM PASSWORD"
-                className="mb-4"
                 labelClassName="text-[rgba(255,255,255,0.5)]"
               />
             </div>

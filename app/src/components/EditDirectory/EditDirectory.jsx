@@ -514,8 +514,8 @@ function EditDirectory({
         </div>
 
         {/* Form */}
-        <div className="w-full lg:w-[570px] space-y-4 flex justify-center items-center flex-col rounded-lg">
-          <div className="flex flex-col w-full lg:flex-row space-y-[4px] lg:space-y-0 lg:space-x-[20px]">
+        <div className="w-full lg:w-[570px] space-y-3 flex justify-center items-center flex-col rounded-lg">
+          <div className="flex flex-col w-full lg:flex-row space-y-3 lg:space-y-0 lg:space-x-[20px]">
             {/* First Name */}
             <div className="relative w-full lg:w-[275px]">
               <InputNew
