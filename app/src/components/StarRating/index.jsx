@@ -18,7 +18,7 @@ const StarRating = ({ rating, maxRating = 5, size = 'md' }) => {
       case 'lg':
         return 'w-6 h-6  mr-[0.25rem]'; // Large size
       default:
-        return 'w-5 h-5  mr-[0.5rem]'; // Medium size (default)
+        return 'w-5 h-5  mr-[0.25rem]'; // Medium size (default)
     }
   };
 

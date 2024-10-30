@@ -16,7 +16,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
     const handlePayment = () => {
         if (!user) {
             toast.error(toastText.error.loginFirst);
-            router.push('/login');
+            router.push('/registerCreatePartner');
             return;
         } else {
             router.push('/directory-manager');
@@ -32,7 +32,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                         <svg viewBox="0 0 320 44" preserveAspectRatio="none" className="w-full lg:w-auto min-h-[44px] max-h-[44px]" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0H320L307.5 22L320 44H0V0Z" fill="#875C33" />
                         </svg>
-                        <div className="flex items-center absolute top-0 left-4 lg:w-full h-full z-20">
+                        <div className="flex items-center absolute top-0 left-4 lg:w-full h-full ml-1">
                             <Image
                                 alt="GetGenie"
                                 width={40}

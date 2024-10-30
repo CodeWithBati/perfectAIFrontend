@@ -182,11 +182,10 @@ const FeatureSection = () => {
                     {directoryFilterSortBy.map((tab, index) => (
                         <button
                             key={index}
-                            className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${
-                                filters.sortBy === tab.name
+                            className={`text-xs text-center px-2 sm:px-[10px] py-[5px] rounded-md ${filters.sortBy === tab.name
                                     ? "bg-[#8B60B2] text-white font-semibold"
                                     : "bg-transparent text-white hover:bg-[#323639]"
-                            }`}
+                                }`}
                             onClick={() => applyFilter("sortBy", tab.name)}
                         >
                             {tab.name}
@@ -249,6 +248,7 @@ const FeatureSection = () => {
                                     onChange={(e) => applyFilter("type", e.name)}
                                     selected={{ name: filters.type }}
                                     label="PRICE"
+                                    className="mb-4"
                                 />
                                 <MultipleSelectNew
                                     options={directoryCategory}
@@ -312,6 +312,7 @@ const FeatureSection = () => {
                                 onChange={(e) => applyFilter("type", e.name)}
                                 selected={filters.type ? { name: filters.type } : null}
                                 label="PRICE"
+                                className="mb-4"
                             />
 
                             {/* Multiple Select for Use Case */}

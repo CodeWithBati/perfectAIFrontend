@@ -55,7 +55,7 @@ const Reviews = ({ reviews }) => {
         {['Positive', 'Negative', 'Mixed'].map((type, index) => (
           <div
             key={index}
-            className={`${type !== 'Mixed' ? 'lg:border-r lg:border-r-dashed pr-4 pl-4' : 'lg:ml-4 mt-4 lg:mt-0'}`}
+            className={`${type !== 'Mixed' ? 'lg:border-r lg:border-r-dashed lg:pr-4 lg:pl-4' : 'lg:ml-4 mt-4 lg:mt-0'}`}
             style={type !== 'Mixed' ? { borderRightStyle: 'dashed' } : {}}
           >
             <div className="flex items-center mb-2">

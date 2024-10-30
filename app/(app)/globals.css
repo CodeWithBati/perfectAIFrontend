@@ -18,7 +18,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 /* Handle */
@@ -165,4 +165,15 @@ body {
 
 .ql-toolbar {
   border: none !important;
+}
+
+.key-features-section ul ul {
+  margin-left: 1.5rem;
+}
+
+.bottom-full {
+  bottom: 100%;
+}
+.top-full {
+  top: 100%;
 }

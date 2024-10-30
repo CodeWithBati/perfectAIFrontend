@@ -49,10 +49,10 @@ const Footer = () => {
         <div className="flex flex-col items-center sm:justify-between space-y-6 sm:items-end h-full">
           {/* Navigation Links */}
           <div className="flex sm:flex-row flex-col items-center sm:items-end sm:space-x-10 space-y-6 mb-4 mt-4 sm:mt-0  tracking-wide">
-            <Link href="#" className="text-sm hover:underline">Home</Link>
-            <Link href="#" className="text-sm hover:underline">About</Link>
-            <Link href="#" className="text-sm hover:underline">Blogs</Link>
-            <Link href="#" className="text-sm hover:underline">Pricing</Link>
+            <Link href="/" className="text-sm hover:underline">Home</Link>
+            <Link href="/about" className="text-sm hover:underline">About</Link>
+            <Link href="/blogs" className="text-sm hover:underline">Blogs</Link>
+            <Link href="/pricing" className="text-sm hover:underline">Pricing</Link>
             <p onClick={openModalPrivacy} className="text-sm hover:underline">Privacy Policy</p>
             <p onClick={openModalTerms} className="text-sm hover:underline">Terms and Conditions</p>
           </div>

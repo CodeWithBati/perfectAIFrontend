@@ -522,7 +522,7 @@ function ChatBotResult({ ChatKey }) {
             }
 
 
-            <div className="hidden lg:sticky lg:h-[100%] lg:top-10 lg:flex flex-col w-1/4 gap-4">
+            <div className="hidden lg:sticky lg:max-h-[75vh] lg:top-10 lg:flex flex-col w-1/4 gap-4">
               <div
                 className="hidden lg:flex flex-col lg:w-[100%] max-h-[500px] overflow-y-auto no-scrollbar"
               >
