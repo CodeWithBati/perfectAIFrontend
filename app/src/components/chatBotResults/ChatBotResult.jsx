@@ -375,67 +375,17 @@ function ChatBotResult({ ChatKey }) {
                 </div>
 
                 {/* Why it's perfect */}
-                <div className="relative p-4 rounded-[5px] mb-6 overflow-hidden lg:min-h-[175px]" style={{
-                  background: '#1E1E1E',
-                  backgroundBlendMode: "screen",
-                }}>
-                  <div
-                    className="absolute lg:hidden"
-                    style={{
-                      width: '710px',
-                      height: '770px',
-                      borderRadius: '50%',
-                      top: '-50px',
-                      left: '20px',
-                      transform: 'rotate(180deg)',
-                      background:
-                        'radial-gradient(41.73% 41.73% at 50% 52.76%, #935FAF 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
-                      backgroundBlendMode: 'lighten',
-                    }}
-                  ></div>
-                  <div
-                    className="absolute lg:hidden"
-                    style={{
-                      width: '710px',
-                      height: '770px',
-                      borderRadius: '50%',
-                      top: '-400px',
-                      right: '50px',
-                      transform: 'rotate(180deg)',
-                      background:
-                        'radial-gradient(41.73% 41.73% at 50% 52.76%, #353C83 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
-                      backgroundBlendMode: 'lighten',
-                    }}
-                  ></div>
-                  <div
-                    className="absolute hidden lg:block"
-                    style={{
-                      width: '1454px',
-                      height: '1454px',
-                      borderRadius: '50%',
-                      top: '-705px',
-                      left: '255px',
-                      transform: 'rotate(180deg)',
-                      background:
-                        'radial-gradient(41.73% 41.73% at 50% 52.76%, #935FAF 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
-                      backgroundBlendMode: 'lighten',
-                    }}
-                  ></div>
-
-                  <div
-                    className="absolute hidden lg:block"
-                    style={{
-                      width: '1454px',
-                      height: '1454px',
-                      borderRadius: '50%',
-                      top: '-650px',
-                      right: '70px',
-                      transform: 'rotate(180deg)',
-                      background:
-                        'radial-gradient(41.73% 41.73% at 50% 52.76%, #353C83 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%)',
-                      backgroundBlendMode: 'lighten',
-                    }}
-                  ></div>
+                <div className="relative p-4 rounded-[5px] mb-6 overflow-hidden lg:min-h-[175px]"
+                  style={{
+                    background: `
+                    radial-gradient(44.73% 130.73% at 104% 7.76%, rgb(147, 95, 175) 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%) center center / cover no-repeat, radial-gradient(73.73% 157.73% at 13% 28.76%, rgb(53, 60, 131) 0%, rgba(53, 60, 131, 0.5) 56.85%, rgba(53, 60, 131, 0) 100%) no-repeat, no-repeat rgb(30, 30, 30)
+                    `,
+                    backgroundBlendMode: 'lighten, lighten, normal',
+                    backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
                   <div className="relative z-5">
                     <div className="flex items-center gap-4 mb-2">
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">

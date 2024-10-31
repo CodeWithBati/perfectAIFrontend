@@ -177,3 +177,7 @@ body {
 .top-full {
   top: 100%;
 }
+
+.scroll-section {
+  scroll-margin-top: 60px;
+}

@@ -31,8 +31,13 @@ import Reviews from './keyFeature/Reviews';
 
 function Directory() {
 
-  const [isMobile, setIsMobile] = useState(false);
-  const [activeTab, setActiveTab] = useState(isMobile ? 'About' : 'Key Features');
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 1024; // Adjust breakpoint as needed
+    }
+    return false; // Default to desktop if window is undefined
+  });
+  const [activeTab, setActiveTab] = useState('Key Features');
   const [featureDirectories, setFeatureDirectories] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -47,23 +52,6 @@ function Directory() {
   const router = useRouter();
   const tabRefs = useRef({});
 
-
-  useEffect(() => {
-    if (tabRefs.current[activeTab]) {
-      const tabList = tabRefs.current[activeTab].parentNode.parentNode;
-      const tabWidth = tabRefs.current[activeTab].offsetWidth;
-      const tabOffsetLeft = tabRefs.current[activeTab].offsetLeft;
-      const tabListWidth = tabList.offsetWidth;
-  
-      const scrollPosition = tabOffsetLeft - (tabListWidth / 2) + (tabWidth / 2);
-  
-      tabList.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth',
-      });
-    }
-  }, [activeTab]);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1024); // Adjust breakpoint as needed
@@ -73,26 +61,82 @@ function Directory() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Update activeTab when isMobile changes
+  useEffect(() => {
+    setActiveTab(isMobile ? 'About' : 'Key Features');
+  }, [isMobile]);
+
   // Update the tabs to match your headings
   const tabs = isMobile
     ? ['About', 'Key Features', 'Use Cases', 'Pricing Information', 'Reviews', 'Pros/Cons Comparison', 'Summary']
     : ['Key Features', 'Use Cases', 'Pricing Information', 'Reviews', 'Pros/Cons Comparison', 'Summary'];
 
+  // Scroll to the active tab on mobile
+  useEffect(() => {
+    if (tabRefs.current[activeTab]) {
+      const tabList = tabRefs.current[activeTab].parentNode.parentNode;
+      const tabWidth = tabRefs.current[activeTab].offsetWidth;
+      const tabOffsetLeft = tabRefs.current[activeTab].offsetLeft;
+      const tabListWidth = tabList.offsetWidth;
 
+      const scrollPosition = tabOffsetLeft - (tabListWidth / 2) + (tabWidth / 2);
+
+      tabList.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth',
+      });
+    }
+  }, [activeTab]);
+
+  // Consolidated handleScroll function
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollToTop(true);
-      } else {
-        setShowScrollToTop(false);
-      }
+      // Show or hide scroll to top button
+      setShowScrollToTop(window.scrollY > 300);
+
+      // Set fixed state for header
+      setIsFixed(window.scrollY > 200);
+
+      // Update active tab based on scroll position
+      tabs.forEach((tab) => {
+        const sectionId = tab.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '').replace('proscons-comparison', 'pros-cons-comparison');
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const bounding = section.getBoundingClientRect();
+          if (bounding.top >= 0 && bounding.top <= window.innerHeight / 2) {
+            setActiveTab(tab);
+          }
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [tabs]);
+
+  // Apply scroll-margin-top to sections
+  useEffect(() => {
+    const header = document.querySelector('.header');
+    const tabsContainer = document.querySelector('.tabs-container');
+
+    const headerHeight = header ? header.offsetHeight : 0;
+    const tabsHeight = isMobile && isFixed && tabsContainer ? tabsContainer.offsetHeight : 0;
+
+    const totalFixedHeight = headerHeight + tabsHeight;
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .scroll-section {
+        scroll-margin-top: ${totalFixedHeight}px;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, [isFixed, isMobile]);
 
   // Scroll-to-top function
   const scrollToTop = () => {
@@ -101,20 +145,6 @@ function Directory() {
       behavior: 'smooth',
     });
   };
-
-  const handleScroll = () => {
-    const threshold = 200;
-    if (window.scrollY > threshold) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => { window.removeEventListener('scroll', handleScroll); };
-  }, []);
 
   const fetchSites = useCallback(async () => {
     if (page > totalPages || loadingRef.current) return;
@@ -173,7 +203,7 @@ function Directory() {
         }
       } catch (error) {
         console.log(error);
-        if (error.response.status === 404) {
+        if (error.response && error.response.status === 404) {
           router.push("/directoryNotFound");
         }
       }
@@ -294,29 +324,13 @@ function Directory() {
     return sections;
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      tabs.forEach((tab) => {
-        const sectionId = tab.toLowerCase().replace(/\s+/g, '-').replace('/', '').replace('comparison', 'comparison');
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const bounding = section.getBoundingClientRect();
-          if (bounding.top >= 0 && bounding.top <= window.innerHeight / 2) {
-            setActiveTab(tab);
-          }
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [tabs]);
-
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    const sectionId = tab.toLowerCase().replace(/\s+/g, '-').replace('/', '').replace('comparison', 'comparison');
+    const sectionId = tab
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/\//g, '')
+      .replace('proscons-comparison', 'pros-cons-comparison');
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -327,8 +341,8 @@ function Directory() {
     <>
       {tabs.map((tab) => (
         <section
-          id={tab.toLowerCase().replace(/\s+/g, '-').replace('/', '').replace('comparison', 'comparison')}
-          className="mt-4 lg:mt-0 lg:p-4"
+          id={tab.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '').replace('proscons-comparison', 'pros-cons-comparison')}
+          className="mt-4 lg:mt-0 lg:p-4 scroll-section"
           key={tab}
         >
           {tab !== 'About' && <h2 className="text-2xl font-bold mb-4">{tab}</h2>}
@@ -357,8 +371,6 @@ function Directory() {
     </>
   );
 
-
-
   const handleToggleSaved = async (event) => {
     event.stopPropagation();
     if (!user) {
@@ -385,7 +397,7 @@ function Directory() {
   return (
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
       <div className="min-h-screen text-white w-full">
-        <h1 className='text-wrap lg:max-w-[59%] text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<span className="text-main-purple"> Learn about</span> our rigorous approval and verification process.</h1>
+        <h1 className='text-wrap lg:max-w-[75%] text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<br className='hidden 2xl:block' /><span className="text-main-purple"> Learn about</span> our rigorous approval and verification process.</h1>
         <div className={`${isFixed ? 'bg-[#181C1F] h-[200px] w-full fixed lg:hidden top-[70px] z-20' : 'hidden'}`} style={{
           background: 'linear-gradient(to bottom, #1e1e1e, #181C1F)',
         }} />
@@ -538,7 +550,7 @@ function Directory() {
                     </div>
                   </div>
                   <div
-                    className={`w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] py-4 px-2 lg:rounded-lg ${isMobile && isFixed ? 'fixed top-[190px] z-20' : ''
+                    className={`tabs-container w-full lg:w-1/4 bg-[#1e1e1e] lg:bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-[6px] py-4 px-2 lg:rounded-lg ${isMobile && isFixed ? 'fixed top-[190px] z-20' : ''
                       } lg:sticky lg:top-10 lg:h-[280px]`}
                   >
                     <ul className="lg:space-y-2 hidden lg:block ">
@@ -553,12 +565,12 @@ function Directory() {
                         </li>
                       ))}
                     </ul>
-                    <ul className="lg:hidden flex space-x-2 overflow-x-auto no-scrollbar">
+                    <ul className="lg:hidden flex overflow-x-auto no-scrollbar pr-4">
                       {tabs.map((tab) => (
                         <li key={tab} className="flex-shrink-0">
                           <button
                             ref={(el) => { tabRefs.current[tab] = el; }}
-                            className={`lg:w-full text-left py-2 px-4 text-xs rounded-lg ${activeTab === tab && 'bg-[#8B60B2] text-white'}`}
+                            className={`lg:w-full text-left py-2 px-4 text-xs rounded-lg ${activeTab === tab ? 'bg-[#8B60B2] text-white' : ''}`}
                             onClick={() => handleTabClick(tab)}
                           >
                             {tab}
@@ -569,7 +581,7 @@ function Directory() {
                   </div>
 
                   {/* Main Content */}
-                  <div className="w-full lg:w-3/4 lg:ml-8 sticky">
+                  <div className="w-full lg:w-3/4 lg:ml-8">
                     {renderContent()}
                   </div>
                 </div>
