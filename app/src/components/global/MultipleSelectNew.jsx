@@ -84,14 +84,13 @@ const MultipleSelect = ({
           {selected.length > 1
             ? selected[0].name + ", ..."
             : selected.length > 0
-            ? selected[0].name
-            : "Select"}
+              ? selected[0].name
+              : "Select"}
         </span>
         {/* Custom SVG Icon with Rotation */}
         <svg
-          className={`h-2 w-2 text-white transform transition-transform ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
+          className={`h-2 w-2 text-white transform transition-transform ${isOpen ? "rotate-180" : "rotate-0"
+            }`}
           width="8"
           height="5"
           viewBox="0 0 8 5"
@@ -161,7 +160,10 @@ const MultipleSelect = ({
                 <div className="w-4 h-4 bg-transparent border border-white peer-checked:bg-[#8B60B2] peer-checked:border-transparent relative flex items-center justify-center">
                   {/* Checkmark Icon */}
                   <svg
-                    className="w-3 h-3 text-white opacity-0 peer-checked:opacity-100"
+                    className={`w-3 h-3 text-white opacity-0 ${selected.some(
+                      (selectedOption) =>
+                        selectedOption.name === option.name
+                    ) && 'opacity-100'}`}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
                     fill="currentColor"
