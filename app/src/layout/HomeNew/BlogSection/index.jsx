@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Link from 'next/link';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -102,7 +103,7 @@ const BlogSection = () => {
 
             {/* View More Button */}
             <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
-                <button className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider">View More</button>
+                <Link href='/blogs' className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider">View More</Link>
             </div>
         </section >
     );

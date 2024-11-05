@@ -157,7 +157,7 @@ const LoginForm = () => {
           />
         </Link>
 
-        <div className="space-y-3 w-full text-center flex flex-col items-center">
+        <div className="space-y-6 w-full text-center flex flex-col items-center">
           <h2 className="text-white text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8">Sign in</h2>
           <div className="space-y-3 w-full flex flex-col items-center">
             {/* Email Input with Floating Label */}

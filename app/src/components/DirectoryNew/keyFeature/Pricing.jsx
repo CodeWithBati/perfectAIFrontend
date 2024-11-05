@@ -15,7 +15,7 @@ export default function Pricing({ pricingData, directory }) {
 
   return (
     <section className="text-white">
-      <p className="mb-4 font-bold">{directory?.name} AI offers several pricing plans:</p>
+      <p className="mb-4 font-bold">{directory?.name} offers several pricing plans:</p>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {pricingData.map((plan, index) => (
           <div className="bg-[#323639] p-5 rounded" key={index}>

@@ -32,7 +32,6 @@ const MainSection = () => {
 
     const handleFocus = () => {
         if (!user) {
-            toast.error(toastText.error.loginFirst);
             router.push('/login');
             return;
         }
@@ -40,7 +39,6 @@ const MainSection = () => {
 
     const handleSearchChatbot = async () => {
         if (!user) {
-            toast.error(toastText.error.loginFirst);
             router.push("/login");
             return;
         }
@@ -77,7 +75,7 @@ const MainSection = () => {
     const closeModal = () => setIsOpen(false);
 
     return (
-        <section className="text-white bg-contain bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull.png')]" >
+        <section className="text-white bg-contain bg-no-repeat bg-[url('/images/mobileHomeBg.png')] lg:bg-[url('/images/homeBgFull1.png')]" >
             <div className="relative flex flex-col items-center justify-center min-w-screen sm:pt-32 pt-20 pb-8">
                 <h1 className="text-[32px] sm:text-[80px] font-bold text-center tracking-tight">Unlock the <span className="text-additional-purple">Power of AI</span></h1>
                 <h5 className="text-base sm:text-2xl font-bold text-center mb-8 w-[85%] sm:w-[50%]">Don&apos;t waste time researching AI tools for your business. Our AI system does it all in a matter of seconds. For free.</h5>
@@ -106,7 +104,7 @@ const MainSection = () => {
                             w-full 
                             border 
                             border-[rgba(255,255,255,0.2)] 
-                            focus-within:border-red-500 
+                            focus-within:border-[#8B60B2] 
                             max-w-[85%] 
                             sm:max-w-[570px] 
                             p-2 

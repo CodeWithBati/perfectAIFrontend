@@ -236,7 +236,7 @@ const PersonReviews = ({ directory }) => {
 
               {/* Star Rating */}
               {showStars && (
-                <div className="mt-2">
+                <div className="flex justify-center items-center">
                   <Rating
                     itemStyles={myStyles}
                     style={{ maxWidth: 100 }}

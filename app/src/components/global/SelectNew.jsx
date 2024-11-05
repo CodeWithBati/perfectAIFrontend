@@ -82,7 +82,7 @@ function SelectNew({
           {/* Custom Arrow */}
           <svg
             className={`h-2 w-2 text-white transform transition-transform ${
-              isOpen ? 'rotate-180' : 'rotate-0'
+              isOpen ? 'rotate-0' : 'rotate-180'
             }`}
             width="8"
             height="5"

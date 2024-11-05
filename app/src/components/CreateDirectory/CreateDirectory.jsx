@@ -350,7 +350,7 @@ function CreateDirectory({
         </div>
 
         {/* Form */}
-        <div className="w-full lg:w-[570px] space-y-4 flex justify-center items-center flex-col rounded-lg">
+        <div className="w-full lg:w-[570px] space-y-5 flex justify-center items-center flex-col rounded-lg">
           <div className="flex flex-col w-full lg:flex-row space-y-[20px] lg:space-y-0 lg:space-x-[20px]">
             {/* First Name */}
             <div className="relative w-full lg:w-[275px]">
@@ -571,7 +571,7 @@ function CreateDirectory({
 
           <div className="relative w-full">
             <h3 className="text-lg font-bold mb-2">Documents</h3>
-            <p className="text-white text-xs mb-2">This document will be used to inform the chatbot to make more accurate AI tool recommendations. It will not be published. </p>
+            <p className="text-white text-xs mb-4" style={{fontWeight: "400"}}>This document will be used to inform the chatbot to make more accurate AI tool recommendations. It will not be published. </p>
             {
               docs.length === 0 ?
                 <div onClick={() => document.getElementById('document-upload').click()} className="flex justify-center items-center max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">

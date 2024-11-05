@@ -82,7 +82,7 @@ const FeatureSection = () => {
         if (categories.length > 0) {
             categories.forEach((cat) => filterParams.push(`category=${cat}`));
         }
-        if (isVerified !== undefined) filterParams.push(`isVerified=${isVerified}`);
+        if (isVerified !== undefined && isVerified !== false) filterParams.push(`isVerified=${isVerified}`);
         if (search.length !== 0) filterParams.push(`search=${search}`);
 
         const filterQueryString = filterParams.join("&");

@@ -98,7 +98,7 @@ function EditDirectory({
   const [images, setImages] = useState([]);
   const [imagesList, setImagesList] = useState([]);
 
-  console.log(images,imagesLink)
+  console.log(images, imagesLink)
 
   const [videosLink, setVideosLink] = useState([]);
   const [docsLink, setDocsLink] = useState([]);
@@ -294,10 +294,6 @@ function EditDirectory({
   };
 
   const handleImagesChange = async (event) => {
-    const newImages = Array.from(event.target.files).map((file) =>
-      URL.createObjectURL(file)
-    );
-    setImagesList((prevImages) => [...prevImages, ...newImages]);
     setImages([...images, ...event.target.files]);
   };
 
@@ -315,7 +311,6 @@ function EditDirectory({
 
   const removeSelectedImageFile = (fileToRemove) => {
     setImages(images.filter((image) => image !== fileToRemove));
-    setImagesList(images.filter((image) => image !== fileToRemove));
   };
 
   const removeUploadedVideo = (videoLink) => {
@@ -485,13 +480,33 @@ function EditDirectory({
         {/* Upload Icon */}
         <div className="relative w-40 h-40 rounded-full bg-[#1e1e1e] border border-[rgba(255,255,255,0.2)] mb-8 flex items-center justify-center">
           {formData.icon.length !== 0 ? (
-            <Image
-              className="w-full h-full object-cover rounded-full"
-              src={formData.icon}
-              width={100}
-              height={100}
-              alt="Directory Icon"
-            />
+            <>
+              <Image
+                className="w-full h-full object-cover rounded-full"
+                src={formData.icon}
+                width={100}
+                height={100}
+                alt="Directory Icon"
+              />
+              <div className="absolute bottom-1 right-1">
+                <label
+                  className="cursor-pointer flex items-center justify-center min-w-7 min-h-7 bg-[#1E1E1E] p-2 border border-gray-700 rounded-md font-bold"
+                  onChange={(e) => handleIconUpload(e.target.files[0])}
+                  htmlFor="mobileImageUpload"
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="mobileImageUpload"
+                    hidden
+                    onChange={(e) => handleIconUpload(e.target.files[0])}
+                  />
+                  <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.5007 0.333336L12.1569 2.33334H15.0007H16.5007V3.83334V12.8333V14.3333H15.0007H2.00065H0.500652V12.8333V3.83334V2.33334H2.00065H4.81315L5.50065 0.333336H11.5007ZM12.1569 3.83334H11.0632L10.7194 2.83334L10.4069 1.83334H6.56315L6.25065 2.83334L5.9069 3.83334H4.81315H2.00065V12.8333H15.0007V3.83334H12.1569ZM8.50065 4.83334C9.75065 4.83334 10.8757 5.52084 11.5007 6.58334C12.1569 7.67709 12.1569 9.02084 11.5007 10.0833C10.8757 11.1771 9.75065 11.8333 8.50065 11.8333C7.2194 11.8333 6.0944 11.1771 5.4694 10.0833C4.81315 9.02084 4.81315 7.67709 5.4694 6.58334C6.0944 5.52084 7.2194 4.83334 8.50065 4.83334ZM10.5007 8.33334C10.5007 7.64584 10.0944 6.98959 9.50065 6.61459C8.87565 6.27084 8.0944 6.27084 7.50065 6.61459C6.87565 6.98959 6.50065 7.64584 6.50065 8.33334C6.50065 9.05209 6.87565 9.70834 7.50065 10.0833C8.0944 10.4271 8.87565 10.4271 9.50065 10.0833C10.0944 9.70834 10.5007 9.05209 10.5007 8.33334Z" fill="white" />
+                  </svg>
+                </label>
+              </div>
+            </>
           ) : (
             <div className="text-center text-white">
               <label htmlFor="upload" className="cursor-pointer">
@@ -514,7 +529,7 @@ function EditDirectory({
         </div>
 
         {/* Form */}
-        <div className="w-full lg:w-[570px] space-y-3 flex justify-center items-center flex-col rounded-lg">
+        <div className="w-full lg:w-[570px] space-y-5 flex justify-center items-center flex-col rounded-lg">
           <div className="flex flex-col w-full lg:flex-row space-y-3 lg:space-y-0 lg:space-x-[20px]">
             {/* First Name */}
             <div className="relative w-full lg:w-[275px]">
@@ -622,7 +637,7 @@ function EditDirectory({
           <div className="relative w-full">
             <h3 className="text-lg font-bold mb-2">Images</h3>
             {
-              imagesLink.length === 0 ?
+              imagesLink.length === 0 && images.length === 0 ?
                 <div onClick={() => document.getElementById('image-upload').click()} className="flex justify-center items-center mx-auto max-w-auto max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">
                   <label lassName="cursor-pointer flex justify-center">
                     <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -660,7 +675,7 @@ function EditDirectory({
                       <div key={index} className="relative min-w-[90px]">
                         <img src={img} alt={`Uploaded ${index}`} className="h-[90px] w-[140px] rounded-[5px] object-cover" />
                         <button
-                          onClick={() => removeSelectedImageFile(img)}
+                          onClick={() => removeUploadedImage(img)}
                           className="absolute top-2 right-2 bg-black text-white rounded-[5px] p-1"
                         >
                           <svg width="10" height="11" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -670,9 +685,9 @@ function EditDirectory({
                         </button>
                       </div>
                     ))}
-                    {imagesList.map((img, index) => (
+                    {images.map((img, index) => (
                       <div key={index} className="relative min-w-[90px]">
-                        <img src={img} alt={`Uploaded ${index}`} className="h-[90px] w-[140px] rounded-[5px] object-cover" />
+                        <img src={URL.createObjectURL(img)} alt={`Uploaded ${index}`} className="h-[90px] w-[140px] rounded-[5px] object-cover" />
                         <button
                           onClick={() => removeSelectedImageFile(img)}
                           className="absolute top-2 right-2 bg-black text-white rounded-[5px] p-1"
@@ -692,7 +707,7 @@ function EditDirectory({
           <div className="relative w-full">
             <h3 className="text-lg font-bold mb-2">Videos</h3>
             {
-              videosLink.length === 0 ?
+              videosLink.length === 0 && videos.length === 0 ?
                 <div onClick={() => document.getElementById('video-upload').click()} className="flex justify-center items-center max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">
                   <label className="cursor-pointer flex justify-center">
                     <svg width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -732,7 +747,7 @@ function EditDirectory({
                       <div key={index} className="relative min-w-[90px]">
                         <video className="h-[90px] w-[140px] rounded-[5px] object-cover" controls src={vid}></video>
                         <button
-                          onClick={() => removeSelectedVideoFile(vid)}
+                          onClick={() => removeUploadedVideo(vid)}
                           className="absolute top-2 right-2 bg-black text-white rounded-[5px] p-1"
                         >
                           <svg width="10" height="11" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -762,9 +777,9 @@ function EditDirectory({
 
           <div className="relative w-full">
             <h3 className="text-lg font-bold mb-2">Documents</h3>
-            <p className="text-white text-xs mb-2">This document will be used to inform the chatbot to make more accurate AI tool recommendations. It will not be published. </p>
+            <p className="text-white text-xs mb-4" style={{ fontWeight: "400" }}>This document will be used to inform the chatbot to make more accurate AI tool recommendations. It will not be published. </p>
             {
-              docsLink.length === 0 ?
+              docsLink.length === 0 && docs.length === 0 ?
                 <div onClick={() => document.getElementById('document-upload').click()} className="flex justify-center items-center max-h-[150px] w-full border-[1px] border-[rgba(255,255,255,0.5)] bg-[#323639] rounded-[10px] p-6 text-center cursor-pointer ">
                   <label className="cursor-pointer flex justify-center">
                     <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -812,7 +827,7 @@ function EditDirectory({
                           {doc.name}
                         </span>
                         <button
-                          onClick={() => removeSelectedDocumentFile(doc)}
+                          onClick={() => removeUploadedDocument(doc)}
                           className="bg-black text-white rounded-[5px] p-1 ml-4"
                         >
                           <svg width="14" height="14" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">

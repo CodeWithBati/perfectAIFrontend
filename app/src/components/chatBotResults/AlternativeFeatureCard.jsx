@@ -21,7 +21,7 @@ const AlternativeFeatureCard = ({ data }) => {
 
     return (
         <Link href={`/directories/${data?.directory?.slug}`}>
-            <div className="relative bg-[#323639] p-4 rounded-lg shadow-lg border border-[rgba(255,255,255,0.2)] mb-4">
+            <div className="relative bg-[#323639] p-4 rounded-lg flex flex-col justify-between shadow-lg border border-[rgba(255,255,255,0.2)] mb-4 min-h-[205px]">
 
                 {data?.directory?.isFeatured && <div className="absolute top-2 right-0 flex items-center">
                     <div className="relative inline-block">

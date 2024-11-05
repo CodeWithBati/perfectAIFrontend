@@ -33,12 +33,12 @@ const PublicChatBotPage = (props) => {
     }
   }, [input]);
 
-  useEffect(() => {
-    if (!user) {
-      router.push("/login");
-      toast.error(toastText.error.loginFirst);
-    }
-  }, [user, router]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     router.push("/login");
+  //     toast.error(toastText.error.loginFirst);
+  //   }
+  // }, [user, router]);
 
   useEffect(() => {
     (async () => {

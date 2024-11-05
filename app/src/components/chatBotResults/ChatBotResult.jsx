@@ -50,8 +50,6 @@ function ChatBotResult({ ChatKey }) {
   const router = useRouter();
   const loadingRef = useRef(false);
 
-  console.log(input)
-
 
   const fetchSites = useCallback(async () => {
     if (page > totalPages || loadingRef.current) return;

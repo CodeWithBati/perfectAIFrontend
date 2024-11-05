@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 import EntertainmentModel from '../global/EntertainmentModel';
 
-const Slider = ({ videos }) => {
+const Slider = ({ directory }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null); // To store the content to display in modal
 
@@ -25,7 +25,7 @@ const Slider = ({ videos }) => {
 
   return (
     <div className="w-full grid grid-cols-1 py-4 lg:py-8 lg:mb-8 lg:border-b lg:border-b-[rgba(255,255,255,0.2)]">
-      {videos?.length > 0 &&
+      {directory?.images?.length > 0 &&
         <div className="relative w-full">
           <Swiper
             spaceBetween={30}
@@ -51,34 +51,36 @@ const Slider = ({ videos }) => {
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
-            {/* <SwiperSlide className="rounded-lg shadow-lg" style={{ height: '236px' }}>
+            {directory?.images?.map((image, i) => 
+            <SwiperSlide key={i} className="rounded-lg shadow-lg" style={{ height: '236px' }}>
             <div
               className="cursor-pointer"
               onClick={() =>
                 handleOpenModal(
                   <Image
-                    src="/images/slider1.jpeg"
+                    src={image}
                     alt="First Slide"
-                    className="rounded-lg w-full h-full" // Set height to full
+                    className="rounded-lg w-full h-full"
                     width={800}
                     height={500}
-                    style={{ objectFit: 'cover' }} // Ensure the image fits the container
+                    style={{ objectFit: 'contain' }}
                   />
                 )
               }
             >
               <Image
-                src="/images/slider1.jpeg"
+                src={image}
                 alt="First Slide"
-                className="rounded-lg w-full h-full" // Set height to full
+                className="rounded-lg w-full h-full"
                 width={370}
                 height={236}
-                style={{ objectFit: 'cover' }} // Ensure the image fits the container
+                style={{ objectFit: 'contain' }}
               />
             </div>
-          </SwiperSlide> */}
+          </SwiperSlide>
+          )}
 
-            {videos?.map((video, i) =>
+            {directory?.videos?.map((video, i) =>
               <SwiperSlide className="rounded-lg shadow-lg" style={{ height: '236px' }} key={i}>
                 <div
                   className="cursor-pointer"
@@ -87,7 +89,7 @@ const Slider = ({ videos }) => {
                       <video
                         src={video}
                         controls
-                        className="rounded-lg w-full h-full" // Set height to full
+                        className="rounded-lg w-full h-full"
                         style={{ objectFit: 'cover' }} // Ensure the video fits the container
                       />
                     )
@@ -95,7 +97,7 @@ const Slider = ({ videos }) => {
                 >
                   <video
                     src={video}
-                    className="rounded-lg w-full h-full" // Set height to full
+                    className="rounded-lg w-full h-full"
                     muted
                     loop
                     playsInline

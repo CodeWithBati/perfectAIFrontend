@@ -17,7 +17,7 @@ function Cards({ directory }) {
       }}
     >
       <div className='flex flex-col items-center justify-center w-full p-0 lg:p-6'>
-        <Image className='w-[50px] h-[50px] rounded-[10px] mb-4' src='/images/defaulticon-dark.png' width={100} height={100} alt='' />
+        <Image className='w-[50px] h-[50px] rounded-[10px] mb-4' src='/images/defaulticon5.png' width={200} height={200} alt='' />
         <h2 className='text-2xl font-bold text-white mb-4'>Wondering if {directory?.name} is suitable for your use case?</h2>
         <Link href='/' className='bg-[#8B60B2] p-2 rounded-md mt-2 font-bold text-white'>Try using our Chatbot</ Link>
       </div>

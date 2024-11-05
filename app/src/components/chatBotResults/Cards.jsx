@@ -12,7 +12,7 @@ function Cards() {
       }}
     >
       <div className='flex flex-col items-center justify-center w-full px-4'>
-        <Image className='w-[40px] h-[40px] rounded-[10px] mb-4' src='/images/defaulticon-dark.png' width={40} height={40} alt='' />
+        <Image className='w-[40px] h-[40px] rounded-[10px] mb-4' src='/images/defaulticon5.png' width={100} height={100} alt='' />
         <p className='text-lg font-semibold text-white'>Let&apos;s us heard from you</p>
         <h2 className='text-sm text-white mb-4'>Send your feedback via our email: feedback@myperfectai. app</h2>
         {/* <button className='bg-[#8B60B2] p-2 rounded-md mt-2 font-bold text-white'>Feedback Now</button> */}
