@@ -47,9 +47,16 @@ function ChatBotResult({ ChatKey }) {
   const [isFixed, setIsFixed] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const { user, token } = useSelector((state) => state.auth);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+
+  const textRef = useRef(null);
   const router = useRouter();
   const loadingRef = useRef(false);
 
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   const fetchSites = useCallback(async () => {
     if (page > totalPages || loadingRef.current) return;
@@ -157,8 +164,13 @@ function ChatBotResult({ ChatKey }) {
       <Spinner />
     </div>
   ) : (
-    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
-      <div className={`${isFixed ? 'fixed z-10 top-[70px] lg:hidden w-[88%] bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'hidden'}`} >
+    <section className={`
+    relative flex flex-col items-center justify-center min-w-screen min-h-screen 
+    sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] 
+    lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]
+    ${isFixed ? 'pt-[300px]' : 'pt-20'}
+  `}>
+      <div className={`${isFixed ? 'fixed z-10 top-[70px] lg:hidden w-[85%] bg-[#323639] border border-[rgba(255,255,255,0.2)] px-[30px] rounded-lg' : 'hidden'}`} >
         <div className='flex items-center justify-between mt-4'>
           <Link href='/' className="mb-4 py-[10px] text-sm font-bold text-white hover:text-white">
             <svg
@@ -180,14 +192,9 @@ function ChatBotResult({ ChatKey }) {
         </div>
 
         <div className="bg-[#323639] rounded-lg mb-4">
-          {input &&
-            <p className="text-white text-sm mb-4 line-clamp-2">
-              {input}
-            </p>
-          }
           {/* Recommendations */}
-          <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">
-            <h3 className="text-sm font-semibold text-lg mb-2 mt-4 font-bold text-white">AI tool recommendations:</h3>
+          <div className="mt-0">
+            <h3 className="font-semibold text-lg mb-2 font-bold text-white">AI tool recommendations:</h3>
             <div className="flex space-x-2 text-sm overflow-x-auto no-scrollbar">
               {chatData.map((rec, index) => (
                 <button
@@ -226,9 +233,17 @@ function ChatBotResult({ ChatKey }) {
               </Link>
               <div className="bg-[#323639] p-6 rounded-lg">
                 {input &&
-                  <p className="text-white text-sm mb-4">
-                    {input}
-                  </p>
+                  <div className="mb-4">
+                    <p className={`text-white text-sm ${isExpanded ? '' : 'line-clamp-2'}`}>
+                      {input}
+                    </p>
+                    <button
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      className="text-[#BF96E4] text-sm font-bold focus:outline-none"
+                    >
+                      {isExpanded ? 'Show less' : 'Show more'}
+                    </button>
+                  </div>
                 }
 
                 {/* Share link button */}
@@ -286,9 +301,19 @@ function ChatBotResult({ ChatKey }) {
               </div>
 
               <div className="bg-[#323639] rounded-lg mb-4">
-                {input && <p className="text-white text-sm mb-4 line-clamp-2">
-                  {input}
-                </p>}
+                {input &&
+                  <div className="mb-4">
+                    <p className={`text-white text-sm ${isExpanded ? '' : 'line-clamp-2'}`}>
+                      {input}
+                    </p>
+                    <button
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      className="text-[#BF96E4] text-sm font-bold focus:outline-none"
+                    >
+                      {isExpanded ? 'Show less' : 'Show more'}
+                    </button>
+                  </div>
+                }
 
                 {/* Recommendations */}
                 <div className="mt-4 border-t border-t-[rgba(255,255,255,0.2)]">

@@ -30,7 +30,7 @@ const Terms = ({ isOpen, onClose }) => {
             />
           </svg>
         </button>
-        <div dangerouslySetInnerHTML={{ __html: htmlContentDark }} />
+        <div className='text-left' dangerouslySetInnerHTML={{ __html: htmlContentDark }} />
       </div>
     </div>
   );

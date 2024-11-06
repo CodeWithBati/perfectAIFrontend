@@ -15,7 +15,6 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
 
     const handlePayment = () => {
         if (!user) {
-            toast.error(toastText.error.loginFirst);
             router.push('/registerCreatePartner');
             return;
         } else {
