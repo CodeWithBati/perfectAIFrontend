@@ -69,6 +69,14 @@ const BlogList = () => {
             date: "29 Jul 2024",
             author: "Darrell Steward",
             imageUrl: "/images/blog3.jpeg"
+        },
+        {
+            id: 8,
+            title: "Role of AI In Fashion Industry",
+            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
+            date: "29 Jul 2024",
+            author: "Darrell Steward",
+            imageUrl: "/images/blog3.jpeg"
         }
     ];
 
@@ -77,10 +85,13 @@ const BlogList = () => {
             <div className="px-[30px] bg-[#181C1F] lg:px-[135px] min-h-[100%] pb-16">
                 {/* Header Section */}
                 <div className="text-center mb-4 lg:mb-16 flex flex-col justify-center items-center tracking-wide">
-                    <h1 className="text-[32px] lg:text-5xl font-bold">Welcome to our blogs</h1>
+                    <h1 className="text-[32px] lg:text-5xl font-bold">AI Insights</h1>
                     <p className="text-base lg:text-2xl mt-4 lg:max-w-[900px] text-center">
-                        Don&apos;t know which AI tool to use for your task? MyPerfectAI recommends the best AI tools for your task,
-                        by giving step-by-step, personalized instructions.
+                        We provide expert analysis and practical guidance for professionals
+                        and SMEs on selecting and utilizing AI tools effectively. Explore
+                        curated articles that give insights into AI developments and offer
+                        strategies to help you make informed decisions in a fast-evolving AI
+                        landscape.
                     </p>
                 </div>
 

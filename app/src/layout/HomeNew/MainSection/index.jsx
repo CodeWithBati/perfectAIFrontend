@@ -148,7 +148,7 @@ const MainSection = () => {
                 )}
 
                 <div onClick={openModal} className="bg-[#323639] text-white p-[20px] mx-[30px] border border-[rgba(255,255,255,0.2)] rounded-lg max-w-full sm:hidden relative">
-                    <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
+                    <h5 className="font-bold text-2xl mr-[6px] mb-2">HOW TO PROMPT OUR CHATBOT EFFECTIVELY</h5>
                     <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                     {/* Question mark icon for opening modal */}
                     <div
@@ -165,7 +165,7 @@ const MainSection = () => {
                 <CustomModel isOpen={isOpen} onClose={closeModal} className="relative z-50">
                     <div className="grid grid-cols-1 rounded-[5px] bg-[#323639] p-[20px_10px_20px_10px] border-bottom-except-last">
                         <div className="px-[10px] py-[25px]">
-                            <h5 className="font-bold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
+                            <h5 className="font-bold text-2xl mr-[6px] mb-2">HOW TO PROMPT OUR CHATBOT EFFECTIVELY</h5>
                             <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                         </div>
                         <div className="px-[10px] py-[25px] flex justify-between">
@@ -202,7 +202,7 @@ const MainSection = () => {
                 {/* Desktop version: Full content */}
                 <div className="hidden sm:grid sm:grid-cols-5 mx-[30px] tracking-wide sm:mx-[135px] rounded-[5px] bg-[#323639] border border-[rgba(255,255,255,0.2)] p-[20px_10px_20px_10px] border-right-except-last overflow-hidden">
                     <div className="p-4 sm:col-span-1">
-                        <h5 className="font-semibold text-2xl mr-[6px] mb-2">How to prompt our chatbot effectively</h5>
+                        <h5 className="font-semibold text-2xl mr-[6px] mb-2">HOW TO PROMPT OUR CHATBOT EFFECTIVELY</h5>
                         <p className="text-sm">We’ve designed our chatbot to provide accurate, relevant AI tool recommendations. <Link href='/about' className="text-[#BF96E4]"> Learn more</Link></p>
                     </div>
                     <div className="p-4 sm:col-span-1">

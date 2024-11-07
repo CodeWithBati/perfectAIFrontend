@@ -158,7 +158,7 @@ const Header = ({ className }) => {
         <div className="hidden sm:flex items-center space-x-8 text-white">
           <Link href="/" className="hover:text-additional-purple tracking-wider text-sm">Home</Link>
           <Link href="/about" className="hover:text-additional-purple tracking-wider text-sm">About</Link>
-          <Link href="/blogs" className="hover:text-additional-purple tracking-wider text-sm">Blogs</Link>
+          <Link href="/blogs" className="hover:text-additional-purple tracking-wider text-sm">AI Insights</Link>
           <Link href="/pricing" className="hover:text-additional-purple tracking-wider text-sm">Pricing</Link>
         </div>
 
@@ -253,7 +253,7 @@ const Header = ({ className }) => {
                 </p>
               </Link>
               <Link href="/blogs" className="block py-2 hover:text-additional-purple px-[30px] py-[20px] flex items-center justify-between">
-                <p className="tracking-wider text-sm">Blog</p>
+                <p className="tracking-wider text-sm">AI Insights</p>
                 <p>
                   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.4062 6.53125L8.625 11.3438L8.09375 11.875L7.03125 10.8125L7.5625 10.2812L11.0625 6.75H0.75H0V5.25H0.75H11.0625L7.5625 1.75L7.03125 1.21875L8.09375 0.15625L8.625 0.6875L13.4062 5.46875L13.9375 6L13.4062 6.53125Z" fill="white" />

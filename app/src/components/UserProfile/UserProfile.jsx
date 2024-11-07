@@ -152,7 +152,7 @@ const UserProfile = () => {
                 </Tab>
                 <Tab className="flex items-center mx-3 py-3 text-sm text-slate-600 dark:text-slate-200 font-medium ui-selected:text-blue-600 ui-selected:dark:text-blue-600 -mb-[1px] border-b-2 border-b-transparent ui-selected:border-blue-600 focus-visible:outline-none">
                   <FontAwesomeIcon icon={faList} />
-                  <span className="block ms-2">Chats</span>
+                  <span className="block ms-2">History</span>
                 </Tab>
                 <Tab className="flex items-center mx-3 py-3 text-sm text-slate-600 dark:text-slate-200 font-medium ui-selected:text-blue-600 ui-selected:dark:text-blue-600 -mb-[1px] border-b-2 border-b-transparent ui-selected:border-blue-600 focus-visible:outline-none">
                   <FontAwesomeIcon icon={faSave} />

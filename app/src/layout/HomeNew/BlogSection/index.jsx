@@ -48,7 +48,7 @@ const BlogSection = () => {
 
     return (
         <section className="py-8 sm:py-16">
-            <h2 className="text-[32px] sm:text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center tracking-wide">Blogs</h2>
+            <h2 className="text-[32px] sm:text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center tracking-wide">AI Insights</h2>
 
             <div className="relative">
                 <Swiper

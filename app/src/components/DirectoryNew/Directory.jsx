@@ -431,7 +431,11 @@ function Directory() {
 
   return (
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
-      <div className="min-h-screen text-white w-full bg-[#181C1F] min-h-[100%] pb-8">
+      <div className="min-h-screen text-white w-full pb-8"
+        style={{
+          backgroundImage:
+            'linear-gradient(to bottom, transparent 0px, transparent 700px, #181C1F 500px, #181C1F 100%)',
+        }}>
         <h1 className='text-wrap lg:max-w-[75%] text-base lg:text-2xl mx-[30px] lg:mx-auto mb-8 lg:font-bold text-center tracking-wider'>We only include high-quality, business-grade AI tools & software in our directory.<br className='hidden 2xl:block' /><span className="text-main-purple"> Learn more</span> about our rigorous approval and verification process.</h1>
         <div className={`${isFixed ? 'bg-[#181C1F] h-[200px] w-full fixed lg:hidden top-[70px] z-10' : 'hidden'}`} style={{
           background: 'linear-gradient(to bottom, #1e1e1e, #181C1F)',

@@ -41,7 +41,7 @@ const Footer = () => {
             </Link>
           </div>
           <p className="text-xs max-w-[390px] tracking-wider text-center sm:text-start">
-            FindMyAITool ss is a website dedicated to providing a comprehensive list of AI tools to assist individuals and businesses in finding the most suitable AI tool for their specific requirements.
+          MyPerfectAI, powered by our advanced AI system, delivers trusted AI tool recommendations to professionals and businesses, helping them navigate the AI landscape confidently and empowering them to adopt solutions that drive real impact.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="flex sm:flex-row flex-col items-center sm:items-end sm:space-x-10 space-y-6 mb-4 mt-4 sm:mt-0  tracking-wide">
             <Link href="/" className="text-sm hover:underline">Home</Link>
             <Link href="/about" className="text-sm hover:underline">About</Link>
-            <Link href="/blogs" className="text-sm hover:underline">Blogs</Link>
+            <Link href="/blogs" className="text-sm hover:underline">AI Insights</Link>
             <Link href="/pricing" className="text-sm hover:underline">Pricing</Link>
             <p onClick={openModalPrivacy} className="text-sm hover:underline">Privacy Policy</p>
             <p onClick={openModalTerms} className="text-sm hover:underline">Terms and Conditions</p>

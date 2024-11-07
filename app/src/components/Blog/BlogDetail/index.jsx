@@ -56,8 +56,8 @@ const BlogDetail = () => {
                     {/* Blog Title Section */}
 
                     <p className="text-sm mb-4">29 Jul 2024</p>
-                    <h1 className="text-[32px] md:text-5xl font-bold mb-4">Best AI Art Generators In 2024</h1>
-                    <p className="text-base">The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons of modern AI-powered and advanced tools that help us quickly and efficiently perform hectic tasks.</p>
+                    <h1 className="text-[32px] md:text-5xl font-bold mb-4">Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task</h1>
+                    <p className="text-base">Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs. Our mission: to empower users with unbiased, high-quality insights and connect them to the best AI solutions effortlessly.</p>
                     {/* Date and Author */}
                     <div className="flex items-center justify-center mt-4 mb-8">
                         <div className="flex items-center">
@@ -68,7 +68,7 @@ const BlogDetail = () => {
                                 width={50}
                                 height={50}
                             />
-                            <p className="text-white text-lg font-bold">Darrell Steward</p>
+                            <p className="text-white text-lg font-bold">Joshua Grant</p>
                         </div>
                     </div>
 
@@ -85,8 +85,10 @@ const BlogDetail = () => {
 
                     {/* Blog Content */}
                     <div className="text-sx text-left leading-relaxed">
+                        <h2 className="text-2xl font-semibold mb-4">Introducing MyPerfectAI: Your Trusted Guide in the World of AI Tools</h2>
                         <p className="mb-8">
-                            Moreover, technological marvels have transformed our behavior. For instance, many of us now prefer online shopping over buying products from brick-and-mortar stores. Basically, people don’t have enough time to physically visit local markets, explore dozens of shops, and purchase the required products. Although online shopping was already convenient and stress-free, the incorporation of modern technologies, especially visual search, has made it much easier than ever. This article will discuss visual search technology and how it’s transforming the online shopping experience.
+                            The AI landscape is rapidly expanding, and navigating it effectively has become a daunting task for many professionals and small to medium-sized enterprises (SMEs). With countless AI tools hitting the market daily, finding the right solution for a specific task often requires combing through directories, vetting recommendations, or relying on sponsored content. For Fortune 500 companies, the answer to this complexity is simple: they have teams of consultants dedicated to selecting and implementing the best AI solutions. But what about everyone else? 
+                            This is where MyPerfectAI comes in.
                         </p>
 
                         <h2 className="text-2xl font-semibold mb-4">What is Visual Search?</h2>
@@ -103,7 +105,7 @@ const BlogDetail = () => {
             </section>
             <div className="px-[30px] lg:px-[135px] bg-[#181C1F]">
                 <section className="py-16 border-t border-[rgba(255,255,255,0.2)]">
-                    <h2 className="hidden lg:block text-5xl text-white font-bold mb-8 text-center">Related Blogs</h2>
+                    <h2 className="hidden lg:block text-5xl text-white font-bold mb-8 text-center">Related Insights</h2>
 
                     <div className="relative">
                         <Swiper

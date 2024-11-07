@@ -108,7 +108,7 @@ const UserProfile = () => {
                 className={`px-[10px] py-[5px] ${activeTab === 'Chats' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}
                 onClick={() => handleTabChange('Chats')}
               >
-                Chats
+                History
               </button>
               <button
                 className={`px-[10px] py-[5px] ${activeTab === 'Saved' ? 'bg-[#8B60B2] text-xs font-bold text-white' : 'bg-transparent text-white text-xs hover:bg-gray-700'} rounded-md mx-2`}

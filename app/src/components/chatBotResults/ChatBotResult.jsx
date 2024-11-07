@@ -212,7 +212,11 @@ function ChatBotResult({ ChatKey }) {
           </div>
         </div>
       </div>
-      <div className="min-h-screen text-white w-full">
+      <div className="min-h-screen text-white w-full"
+        style={{
+          backgroundImage:
+            'linear-gradient(to bottom, transparent 0px, transparent 700px, #181C1F 500px, #181C1F 100%)',
+        }}>
         <h4 className="text-wrap lg:max-w-4xl text-base lg:text-2xl mx-[30px] lg:mx-auto tracking-wider text-center lg:font-bold">We’ve designed our AI system to provide accurate, relevant AI tool recommendations.<Link href='/about' className="text-[#BF96E4] font-bold"> Learn more</Link> </h4>
         <div className="px-[30px] lg:px-[135px] w-full mt-8 rounded-lg text-white">
 

@@ -1,6 +1,6 @@
 export default async function sitemap() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/directories?limit=100`
+    `${process.env.NEXT_PUBLIC_API_URL}/directories?limit=10000`
   );
   const { results } = await response.json();
 
