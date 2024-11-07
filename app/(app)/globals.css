@@ -23,13 +23,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #181C1F;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #181C1F;
 }
 
 body {
@@ -64,9 +64,9 @@ body {
 
 /* Custom Quill editor styling */
 .quill-editor-custom .ql-toolbar {
-  background-color: #333333;
+  background-color: #181C1F;
   border: none !important;
-  background: #323639 !important;
+  background: #181C1F !important;
   color: #ffffff;
   border-radius: 6.56px 6.56px 0 0;
 }
@@ -81,7 +81,7 @@ body {
 .quill-editor-custom .ql-toolbar button:hover,
 .quill-editor-custom .ql-toolbar button:focus,
 .quill-editor-custom .ql-toolbar button.ql-active {
-  background-color: #4a4a4a;
+  background-color: #181C1F;
   color: #ffffff;
 }
 
@@ -91,11 +91,11 @@ body {
   margin: 0px 10px 0 10px;
   border: none !important;
   border-top: 1px solid rgba(255,255,255,0.2) !important;
-  background: #323639 !important;
+  background: #181C1F !important;
   border-radius: 0 0 6.56px 6.56px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #4a4a4a #2a2a2a;
+  scrollbar-color: #181C1F #2a2a2a;
 }
 
 /* Style the text inside the editor */
@@ -123,7 +123,7 @@ body {
 }
 
 .quill-editor-custom .ql-container::-webkit-scrollbar-thumb {
-  background: #323639 !important;
+  background: #181C1F !important;
   border-radius: 10px;
 }
 
@@ -137,14 +137,14 @@ body {
 }
 
 .ql-picker-options{
-  background-color: #323639 !important;
+  background-color: #181C1F !important;
   color: white !important;
   border: none !important;
 }
 
 .ql-snow.ql-toolbar .ql-picker-item:hover {
   color: white !important;
-  background-color: #4a4a4a !important;
+  background-color: #181C1F !important;
 }
 
 .ql-snow.ql-toolbar .ql-picker-label:hover {

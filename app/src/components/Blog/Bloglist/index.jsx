@@ -73,8 +73,8 @@ const BlogList = () => {
     ];
 
     return (
-        <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')] tracking-wide">
-            <div className="px-[30px] lg:px-[135px]">
+        <section className="relative flex flex-col items-center justify-center min-w-screen min-h-[screen] pt-32 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover  bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')] tracking-wide">
+            <div className="px-[30px] bg-[#181C1F] lg:px-[135px] min-h-[100%] pb-16">
                 {/* Header Section */}
                 <div className="text-center mb-4 lg:mb-16 flex flex-col justify-center items-center tracking-wide">
                     <h1 className="text-[32px] lg:text-5xl font-bold">Welcome to our blogs</h1>
