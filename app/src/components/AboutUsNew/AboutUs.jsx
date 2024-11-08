@@ -12,22 +12,27 @@ function AboutUs() {
       <div className="min-h-screen text-white">
         <div className="lg:max-w-4xl w-full mx-auto px-[30px] lg:px-6">
           {/* About Us Section */}
-          <section className="text-center mb-8 lg:mb-16">
-            <h1 className="text-4xl font-bold mb-6">About us</h1>
+          <section className="text-center mb-8">
+            <h1 className="text-4xl font-bold mb-6">About MyPerfectAI</h1>
             <p className="text-lg">
-              Moreover, technological marvels have transformed our behavior. For instance, many of us now prefer online
-              shopping over buying products from brick-and-mortar stores. Basically, people don&apos;t have enough time to
-              physically visit local markets, explore dozens of shops, and purchase the required products.
+              MyPerfectAI is redefining how professionals and SMEs discover and
+              implement AI tools, offering a uniquely curated, reliable, and
+              easy-to-navigate platform. We believe that access to powerful AI
+              solutions should be seamless and trustworthy, guiding users to
+              impactful solutions that genuinely fit their needs.
             </p>
+            <h2 className="text-2xl lg:text-3xl font-bold mb-6 mt-6">Uncompromising Approval and Verification Process</h2>
             <p className="text-lg mt-4">
-              Although online shopping was already convenient and stress-free, the incorporation of modern technologies,
-              especially visual search, has made it much easier than ever. This article will discuss visual search
-              technology and how it&apos;s transforming the online shopping experience.
+              At MyPerfectAI, quality is non-negotiable. Our Approval and
+              Verification Process is crafted to ensure that every tool in our directory
+              meets the highest standards in business value, technical robustness,
+              and user experience. Unlike many AI directories that focus on
+              quantity, we prioritize relevance, credibility, and effectiveness.
             </p>
           </section>
 
           {/* Image */}
-          <div className=" mb-8 lg:mb-16">
+          {/* <div className=" mb-8 lg:mb-16">
             <Image
               src={blog1} // Assuming the image is located in the public folder
               alt="Visual Search"
@@ -35,42 +40,105 @@ function AboutUs() {
               height={550}
               className="w-full object-cover rounded-lg"
             />
-          </div>
+          </div> */}
 
           {/* Visual Search Section */}
-          <section>
-            <h2 className="text-2xl lg:text-3xl font-bold mb-6">What is Visual Search?</h2>
+          <section className="text-center">
+            <p className="text-xl lg:text-2xl mb-4">Here’s a look at our criteria:</p>
             <p className="text-base lg:text-lg mb-4">
-              Visual search is a modern method of retrieving data from search engines and other databases. In this method,
-              netizens use a digital image instead of text-based keywords as a search query.
+              Business Impact: Every tool must provide clear, measurable
+              value, addressing real business challenges across industries and
+              showcasing a solid ROI. We evaluate documented case studies
+              and gather industry feedback to validate each tool’s potential
+              impact.
             </p>
             <p className="text-base lg:text-lg mb-4">
-              Once a user uploads a photo on a visual search engine, it analyzes all the elements of the source photo and
-              searches for similar images uploaded online. This particular technology has made online searches quicker and
-              more accurate.
+              Technical Excellence: Only tools with proven accuracy,
+              scalability, and adherence to top security standards make the
+              cut. We leverage industry benchmarks to ensure each tool can
+              handle demanding, real-world applications.
             </p>
             <p className="text-base lg:text-lg mb-4">
-              For instance, if you have a photo of an unknown bird and want to know about it, just upload the source photo
-              to an AI-powered reverse image search engine. That engine will analyze the photo elements and show you links
-              to web pages where similar images have been uploaded.
+              User-Friendly Design: Intuitive interfaces, comprehensive
+              documentation, and ease of integration with common enterprise
+              platforms (like ERP and CRM systems) are essential. We
+              prioritize tools that make implementation straightforward and
+              productivity-enhancing.
             </p>
             <p className="text-base lg:text-lg mb-4">
-              Visual search engines use AI technology, especially computer vision, deep neural networks, and machine
-              learning technology, to analyze and interpret photos. These subsets of AI help them perfectly identify all
-              the elements and show you the correct output on your screens.
+              Vendor Credibility: We select tools from providers with strong
+              track records, industry recognition, and positive client
+              testimonials. This ensures that our users are working with tools
+              backed by reputable vendors invested in continuous
+              improvement.
+            </p>
+            <p className="text-base lg:text-lg mb-4">
+              Innovation and Future-Readiness: The AI landscape is
+              fast-moving, and we prioritize tools that demonstrate a
+              commitment to ongoing R&D, frequent updates, and a clear
+              future roadmap.
             </p>
           </section>
-          <section>
+          <p className="text-base lg:text-lg mb-4 text-center">
+            Through this meticulous multi-stage vetting process, only the highest
+            quality AI tools are selected to be featured in the MyPerfectAI
+            directory. This ensures that our users can trust the recommendations
+            they receive, knowing that each tool has passed our rigorous
+            standards.
+          </p>
 
-            <h2 className="text-2xl lg:text-3xl font-bold mb-6">Impact of Visual Search on Online Shopping</h2>
+          <section className="text-center">
+
+            <h2 className="text-2xl lg:text-3xl font-bold mb-6">Our Advanced AI System: Your Personal AI Consultant</h2>
             <p className="text-base lg:text-lg mb-4">
-              Visual search has significantly improved online shoppers shopping experience. From finding the right products to comparing prices and avoiding scams, it offers consumers many benefits. Have a look at a few of the blessings of visual search in online shopping.
-
-
+              At the heart of MyPerfectAI is a powerful AI system, built on advanced
+              ChatGPT-4o architecture. It’s more than just a recommendation
+              engine—it’s a virtual AI consultant designed to understand and
+              respond to your unique needs with speed and accuracy. Our AI
+              analyzes user prompts with exceptional precision, transforming
+              complex requirements into tailored, high-quality recommendations in
+              seconds.
             </p>
-            <h3 className="text-xl font-bold mb-6" >1. Discover Reviews</h3>
-            <p className="text-base lg:text-lg mb-4 ">
-              Online shoppers can easily find authentic and detailed reviews about different products using a modern reverse im search tool. Generally, e-commerce store owners add fake reviews to their websites to win consumer&apos;s trust. These
+            <p className="text-base lg:text-lg mb-4">
+              Users can leverage our 4-Step Prompt Guide to communicate their
+              requirements clearly, allowing our AI to provide highly relevant
+              recommendations across a wide array of use cases. Until now, finding
+              the right AI tools has often required a time-consuming and confusing
+              process, involving searches on Google, navigating overpopulated AI
+              directories, sorting through paid promotions, or relying on sponsoredcontent—often without a clear understanding of what truly suits their
+              needs. MyPerfectAI changes that by delivering focused, unbiased
+              solutions in seconds, providing clarity in a complex market.
+            </p>
+          </section>
+
+          <section className="text-center">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-6">Our Vision: Leading the AI Adoption Journey</h2>
+            <p className="text-base lg:text-lg mb-4">
+              As AI continues to transform industries, MyPerfectAI is committed to
+              being a leader in guiding professionals and SMEs through this
+              evolution. We are focused on continuous platform enhancements,
+              including expanding our directory to encompass the latest and most
+              innovative tools.
+            </p>
+            <p className="text-base lg:text-lg mb-4">
+              In addition, we are preparing to launch an exclusive newsletter that
+              will provide insights into AI advancements, tips on maximizing AI in
+              business, and updates on industry trends. This newsletter will serve
+              as an essential resource for our users, equipping them with the
+              knowledge to make informed decisions and stay ahead of the curve.
+            </p>
+            <p className="text-base lg:text-lg mb-4">
+              And there’s even more to come—our team is hard at work on several
+              exciting developments that will elevate MyPerfectAI’s capabilities and
+              further enhance our users’ experience. While we can’t share all the
+              details just yet, rest assured that we have big plans in store, aiming to
+              push the boundaries of AI discovery and application.
+            </p>
+            <p className="text-base lg:text-lg mb-4">
+              Join us on this journey as we build the future of AI accessibility,
+              transforming how businesses of all sizes discover, implement, and
+              benefit from AI technology. With MyPerfectAI, the power of AI is within
+              reach—trustworthy, tailored, and always advancing.
             </p>
           </section>
         </div>
