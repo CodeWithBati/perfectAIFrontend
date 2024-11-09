@@ -63,7 +63,7 @@ function PricingNew() {
 
   return (
     <>
-      <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-16 lg:pt-32 pb-16 text-white bg-center bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
+      <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-16 lg:pt-32 pb-16 text-white bg-contain bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
         <div className=" text-white mb-8 lg:mb-10 px-[30px] lg:px-[135px] w-full lg:w-auto">
           <h1 className="text-2xl lg:text-5xl mt-6 lg:mt-0 font-bold mb-6 lg:mb-8 text-center">Pricing</h1>
           <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 w-full lg:w-auto">

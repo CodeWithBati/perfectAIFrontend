@@ -127,7 +127,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                     <ul className="lg:hidden space-y-4">
                         {detail?.features.map((feature, index) => (
                             <li key={index} className="flex items-start">
-                                <Image width={200} height={200} quality={100} src='/images/check1.png' alt='check' className='w-[18px] h-[18px] rounded-full' style={{ flexShrink: 0, border: '2px solid white', borderRadius: '50%', }} />
+                                <Image width={200} height={200} quality={100} src='/images/check1.png' alt='check' className='w-[18px] h-[18px] rounded-full' style={{ flexShrink: 0 }} />
                                 <span className='ml-4'>{feature}</span>
                             </li>
                         ))}
@@ -136,7 +136,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                 <ul className="lg:block hidden space-y-4">
                     {detail?.features.map((feature, index) => (
                         <li key={index} className="flex items-start">
-                            <Image width={200} height={200} quality={100} src='/images/check1.png' alt='check' className='w-[18px] h-[18px] rounded-full' style={{ flexShrink: 0}} />
+                            <Image width={200} height={200} quality={100} src='/images/check1.png' alt='check' className='w-[18px] h-[18px] rounded-full' style={{ flexShrink: 0 }} />
                             <span className='ml-4'>{feature}</span>
                         </li>
                     ))}
