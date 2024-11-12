@@ -14,7 +14,7 @@ const FAQ = () => {
   const faqs = [
     {
       question: 'What is MyPerfectAI?',
-      answer: 'MyPerfectAI is an advanced image generation tool that uses sophisticated AI algorithms to produce realistic and unique images by transforming inputs or concepts into visually compelling artwork.',
+      answer: 'MyPerfectAI, powered by our advanced AI system, delivers trusted AI tool recommendations to professionals and businesses, helping them navigate the AI landscape confidently and empowering them to adopt solutions that drive real impact.',
     },
     {
       question: 'After clicking "Subscribe", what happens next?',

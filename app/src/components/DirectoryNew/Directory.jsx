@@ -430,7 +430,7 @@ function Directory() {
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 text-white bg-no-repeat bg-[#181C1F] lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
+    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen sm:pt-32 pt-20 text-white bg-no-repeat bg-[#181C1F] lg:bg-contain bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]">
       <div className="min-h-screen text-white w-full pb-8"
         style={{
           backgroundImage:

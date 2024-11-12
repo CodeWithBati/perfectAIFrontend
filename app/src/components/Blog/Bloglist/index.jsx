@@ -16,67 +16,67 @@ const BlogList = () => {
     const blogData = [
         {
             id: 1,
-            title: "Best AI Art Generators In 2024",
-            description: "The te­ch world has been buzzing with Artificial Intellige­nce (AI) for a while now—it's quite e­xciting! AI makes sense of huge­ chunks of data and makes smart choices. This has bee­n a big shift for many fields, SaaS included.",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog1.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 2,
-            title: "Revolutionize Your Marketing Strategy with AI",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog2.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 3,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 4,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 5,
-            title: "Revolutionize Your Marketing Strategy with AI",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog2.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 6,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 7,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 8,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         }
     ];
 

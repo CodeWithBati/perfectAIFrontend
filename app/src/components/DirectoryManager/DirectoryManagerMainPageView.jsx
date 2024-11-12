@@ -11,6 +11,7 @@ import Spinner from "../../ui/Spinner";
 import DisabledForm from "./DisabledFormNew";
 import CreateDirectory from "../CreateDirectory/CreateDirectory";
 import EditDirectory from "../EditDirectory/EditDirectory";
+import { useSearchParams } from 'next/navigation';
 
 const DirectoryManagerMainPageView = () => {
   const { user, token } = useSelector((state) => state.auth);
@@ -19,6 +20,9 @@ const DirectoryManagerMainPageView = () => {
   const [spinner, setSpinner] = useState(true);
 
   const [isActive, setIsActive] = useState(false);
+
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type'); 
 
   useEffect(() => {
     (async () => {
@@ -81,6 +85,7 @@ const DirectoryManagerMainPageView = () => {
                       type="directoryRequest"
                       setIsNew={setIsNew}
                       setIsActive={setIsActive}
+                      planType={type}
                     />
                   )}
 

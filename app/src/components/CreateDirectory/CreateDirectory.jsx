@@ -28,6 +28,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 import MultipleSelectNew from "@/app/src/components/global/MultipleSelectNew";
 import TextArea from "../global/TextArea";
+import { SP } from "next/dist/shared/lib/utils";
 
 
 
@@ -68,6 +69,7 @@ function CreateDirectory({
   type,
   setIsNew = () => {},
   setIsActive = () => {},
+  planType = ""
 }) {
 
   const defaultState = {
@@ -295,7 +297,14 @@ function CreateDirectory({
         setIsNew(false);
         setIsActive(false);
         setFormData(defaultState);
-        router.push('/ThankYou')
+        if (planType === 'bronze') {
+          router.push('https://buy.stripe.com/3cs17DbzUdrcaacdQW')
+        } else if (planType === 'silver') {
+          router.push('https://buy.stripe.com/cN25nTdI22My82414b')
+        }
+        else {
+          router.push('/ThankYou')
+        }
       } else {
         toast.error("Error, creating the record");
       }
@@ -306,6 +315,8 @@ function CreateDirectory({
 
     setSpinner(false);
   };
+
+  console.log(planType)
 
   return (
     <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] bg-center lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
@@ -638,7 +649,8 @@ function CreateDirectory({
           <div />
 
           <Button variant="primary" size="small" onClick={handleSubmit}>
-            Create directory
+            {planType === undefined || planType === '' || planType === null || planType === 'gold' ? 'Submit & Pay Later' : `Submit & Pay (${planType})`}
+            
           </Button>
         </div>
       </div>

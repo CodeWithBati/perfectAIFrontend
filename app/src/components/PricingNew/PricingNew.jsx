@@ -17,31 +17,32 @@ function PricingNew() {
       "id": "1",
       "plan": "Bronze Partnership",
       "planType": "bronze",
-      "price": "$4.99",
-      "duration": "month",
+      "price": "$299.99",
+      "duration": "year",
       "button": "Get started",
       "features": [
-        "Create trust with a verified listing",
-        "Increase MyPerfectAI chatbot recommendations & SEO ranking by creating a detailed, custom tool description",
-        "Add photos, videos & pricing information",
-        "Monthly data insights",
-        "Update listing details anytime",
-        "Indexed on Google"
+        "FREE for AI tools with affiliate programs, contact partners@myperfectai.app",
+        "Verified badge demonstraing credibility and relevance",
+        "Access to update your directory listing at any time, subject to editorial approval",
+        "Add images, videos, and documents",
+        "Continuous partnership with MyPerfectAI to help find customers for your AI tool",
+        "Boost SEO with backlinks and indexing on Google",
+        "Monthly reports on how our users interact with your directory listing"
       ]
     },
     {
       "id": "2",
       "plan": "Silver Partnership",
       "planType": "silver",
-      "price": "Custom Pricing",
-      "button": "Coming Soon",
-      "duration": "month",
+      "price": "$449.99",
+      "duration": "year",
+      "button": "Get Started",
       "features": [
-        "Increase exposure with placement on the MyPerfectAI home screen",
-        "Priority ranking in directory",
-        "All customized listing features included",
-        "Pricing is unique to your tool's category size & your promotional objectives",
-        "Priority when contacting us & updating listing details"
+        "$149.99/year for AI tools with affiliate programs, contact partners@myperfectai.app",
+        "Discounted access to additional promotional opportunities across our network",
+        "All Bronze Partnership features included",
+        "Priority support and liaison with MyPerfectAI",
+        "AI Insights spotlight article included"
       ]
     },
     {
@@ -49,14 +50,10 @@ function PricingNew() {
       "plan": "Gold Partnership",
       "planType": "gold",
       "price": "Custom Pricing",
-      "button": "Coming Soon",
+      "button": "Get Started",
       "duration": "month",
       "features": [
-        "Gain exposure for your tool with customized promotion including:",
-        "Newsletter promotion",
-        "Social media promotion",
-        "Blog promotion",
-        "Sponsorship"
+        "Fully custom-built partnership. For AI startups with limitless ambition. Contact partners@myperfectai.app",
       ]
     }
   ]

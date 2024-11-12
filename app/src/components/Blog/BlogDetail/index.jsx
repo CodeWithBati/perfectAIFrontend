@@ -17,35 +17,35 @@ const BlogDetail = () => {
     const blogData = [
         {
             id: 1,
-            title: "Best AI Art Generators In 2024",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog1.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 2,
-            title: "Revolutionize Your Marketing Strategy with AI",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog2.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 3,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         },
         {
             id: 4,
-            title: "Role of AI In Fashion Industry",
-            description: "The technological revolution has made lots of tasks much simpler than ever. In fact, these days, we have tons...",
-            date: "29 Jul 2024",
-            author: "Darrell Steward",
-            imageUrl: "/images/blog3.jpeg"
+            title: "Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task",
+            description: "Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs...",
+            date: "8 Nov 2024",
+            author: "Joshua Grant",
+            imageUrl: "/images/blogimagetemp.png"
         }
     ];
 
@@ -55,7 +55,7 @@ const BlogDetail = () => {
                 <div className="container max-w-4xl mx-auto px-8 md:px-16 text-center lg:text-left">
                     {/* Blog Title Section */}
 
-                    <p className="text-sm mb-4">29 Jul 2024</p>
+                    <p className="text-sm mb-4">8 Nov 2024</p>
                     <h1 className="text-[32px] md:text-5xl font-bold mb-4">Introducing MyPerfectAI: Your Unbiased Guide to Finding the Right AI Tools for Every Task</h1>
                     <p className="text-base">Finding the right AI tool shouldn’t be a struggle. Introducing MyPerfectAI—a platform delivering fast, personalized AI recommendations for professionals and SMEs. Our mission: to empower users with unbiased, high-quality insights and connect them to the best AI solutions effortlessly.</p>
                     {/* Date and Author */}
@@ -75,7 +75,7 @@ const BlogDetail = () => {
                     {/* Blog Main Image */}
                     <div className="rounded-lg overflow-hidden mb-8">
                         <Image
-                            src="/images/blog1.jpeg"
+                            src="/images/blogimagetemp.png"
                             alt="Blog Main"
                             width={900}
                             height={500}
@@ -88,17 +88,43 @@ const BlogDetail = () => {
                         <h2 className="text-2xl font-semibold mb-4">Introducing MyPerfectAI: Your Trusted Guide in the World of AI Tools</h2>
                         <p className="mb-8">
                             The AI landscape is rapidly expanding, and navigating it effectively has become a daunting task for many professionals and small to medium-sized enterprises (SMEs). With countless AI tools hitting the market daily, finding the right solution for a specific task often requires combing through directories, vetting recommendations, or relying on sponsored content. For Fortune 500 companies, the answer to this complexity is simple: they have teams of consultants dedicated to selecting and implementing the best AI solutions. But what about everyone else? 
-                            This is where MyPerfectAI comes in.
                         </p>
-
-                        <h2 className="text-2xl font-semibold mb-4">What is Visual Search?</h2>
                         <p className="mb-8">
-                            Visual search is a modern method of retrieving data from search engines and other databases. In this method, netizens use a digital image instead of text-based keywords as a search query.
+                            This is where MyPerfectAI comes in.
+                        </p>    
+
+                        <h2 className="text-2xl font-semibold mb-4">Why We Built MyPerfectAI</h2>
+                        <p className="mb-8">
+                            At MyPerfectAI, we recognized that professionals and SMEs need reliable AI recommendations without spending hours researching or paying for advice. Our mission is to democratize access to high-quality AI insights, giving every user the power to leverage AI as effectively as the industry giants.
+                        </p>
+                        <p className="mb-8">
+                            By simply describing their task or use case, users of MyPerfectAI receive precise, task-specific AI tool recommendations in seconds—completely free of charge.
                         </p>
 
-                        <h2 className="text-2xl font-semibold mb-4">Impact of Visual Search on Online Shopping</h2>
-                        <p>
-                            Visual search has significantly improved online shoppers&apos; shopping experience. From finding the right products to comparing prices and reading reviews, it offers many benefits. Let&apos;s have a look at a few of them.
+                        <h2 className="text-2xl font-semibold mb-4">How It Works: Your Personal AI Advisor</h2>
+                        <p className="mb-8">
+                            MyPerfectAI is powered by ChatGPT-4o, trained to understand the diverse needs of professionals across industries. With a brief description of the task at hand, our system sifts through a curated database of high-quality, business-grade AI tools to recommend the most relevant solutions. The goal is simple: to cut through the clutter and help our users make decisions they can trust.
+                        </p>
+                        <p className="mb-8">
+                            Unlike traditional AI directories, we emphasize credibility. Rather than showcasing every tool on the market, we focus on trusted, performance-proven AI tools that meet the standards of businesses and professionals alike.
+                        </p>
+
+                        <h2 className="text-2xl font-semibold mb-4">A Unique Value Proposition for AI Tool Companies</h2>
+                        <p className="mb-8">
+                            For AI tool providers, MyPerfectAI isn’t just a listing site—it’s a dedicated sales channel. We connect AI companies directly to potential customers by making tailored recommendations to users already interested in specific solutions. By bridging the gap between tools and users, we offer an efficient route to market that amplifies exposure and engagement.
+                        </p>
+
+                        <h2 className="text-2xl font-semibold mb-4">Revenue Model: A Partnership-Driven, Non-Partisan Approach</h2>
+                        <p className="mb-8">
+                            Our initial revenue model is based on affiliate marketing commissions. However, at MyPerfectAI, our priority is always to serve our users with impartial, high-quality recommendations. We are committed to remaining non-partisan; commission incentives will never interfere with our duty to provide unbiased, task-specific AI solutions. By focusing on value and trustworthiness, we aim to build long-lasting relationships with both users and AI tool providers who share our commitment to integrity.
+                        </p>
+
+                        <h2 className="text-2xl font-semibold mb-4">The Future of AI is Here—And It’s Big</h2>
+                        <p className="mb-8">
+                            As AI technology evolves, it’s no longer just about finding tools; it’s about finding the right tools that bring immediate value. MyPerfectAI exists to provide that clarity, empowering professionals, SMEs, and tool providers to capitalize on AI’s potential without getting lost in the noise.
+                        </p>
+                        <p className="mb-8">
+                            Whether you’re an AI tool provider looking for exposure or a professional seeking reliable AI recommendations, MyPerfectAI is here to help you thrive in the AI era. Join us on our journey, and let’s make the future of AI accessible to everyone.
                         </p>
                     </div>
                 </div>
