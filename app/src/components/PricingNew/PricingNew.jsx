@@ -19,7 +19,7 @@ function PricingNew() {
       "planType": "bronze",
       "price": "$299.99",
       "duration": "year",
-      "button": "Get started",
+      "button": "Get Started",
       "features": [
         "FREE for AI tools with affiliate programs, contact partners@myperfectai.app",
         "Verified badge demonstraing credibility and relevance",

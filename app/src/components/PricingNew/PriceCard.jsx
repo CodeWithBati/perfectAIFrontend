@@ -119,7 +119,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                 }
                 <button
                     onClick={handlePayment}
-                    className={`w-full text-white font-semibold px-[20px] py-[10px] rounded-lg mb-6 ${detail?.button === 'Get started' ? 'bg-[#8B60B2]' : 'bg-[#1E1E1E] border border-[#FFFFFF33]'}`}
+                    className={`w-full text-white font-semibold px-[20px] py-[10px] rounded-lg mb-6 ${detail?.planType === 'silver' ? 'bg-[#8B60B2]' : 'bg-[#1E1E1E] border border-[#FFFFFF33]'}`}
                 >
                     {detail?.button}
                 </button>
