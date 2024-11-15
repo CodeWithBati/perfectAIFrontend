@@ -61,6 +61,7 @@
     "react-table": "^7.8.0",
     "react-tag-input-component": "^2.0.2",
     "redux-persist": "^6.0.0",
+    "sharp": "^0.33.5",
     "simplebar-react": "^3.2.4",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.14",
@@ -69,6 +70,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/node": "22.9.0",
     "@types/react": "^18.2.61",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

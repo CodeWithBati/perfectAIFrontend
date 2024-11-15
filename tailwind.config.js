@@ -139,6 +139,14 @@ module.exports = {
           },
         },
       }),
+      letterSpacing: {
+        '5percent': '0.05em',
+      },
+    },
+  },
+  variants: {
+    extend: {
+      position: ['responsive'],
     },
   },
   plugins: [
