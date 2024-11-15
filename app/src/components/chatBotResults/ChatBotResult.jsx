@@ -166,7 +166,7 @@ function ChatBotResult({ ChatKey }) {
   ) : (
     <section className={`
     relative flex flex-col items-center justify-center min-w-screen min-h-screen 
-    sm:pt-32 pt-20 pb-8 text-white bg-no-repeat bg-[#181C1F] 
+    sm:pt-32 pt-20 text-white bg-no-repeat bg-[#181C1F] 
     lg:bg-cover bg-[url('/images/mobileAllBg.png')] lg:bg-[url('/images/allPageBg.png')]
     ${isFixed ? 'pt-[300px]' : 'pt-20'}
   `}>
@@ -212,7 +212,7 @@ function ChatBotResult({ ChatKey }) {
           </div>
         </div>
       </div>
-      <div className="min-h-screen text-white w-full"
+      <div className="min-h-screen text-white w-full pb-8"
         style={{
           backgroundImage:
             'linear-gradient(to bottom, transparent 0px, transparent 1000px, #181C1F 500px, #181C1F 100%)',

@@ -60,6 +60,7 @@ body {
 .dark .ql-container {
   @apply bg-quill-dark-background text-slate-200 !important;
   @apply border-slate-800 overflow-hidden border-t-0 !important;
+  background-color: transparent !important;
 }
 
 /* Customize the toolbar */

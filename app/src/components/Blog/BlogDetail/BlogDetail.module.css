@@ -1,0 +1,10 @@
+
+
+.dark .text-white-prose .prose {
+  color: white;
+}
+
+.prose :where(strong) {
+  color: white !important;
+  font-weight: 600;
+}

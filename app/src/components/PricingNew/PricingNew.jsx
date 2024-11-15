@@ -16,7 +16,7 @@ function PricingNew() {
     {
       "id": "1",
       "plan": "Bronze Partnership",
-      "planType": "bronze",
+      "planType": "Bronze",
       "price": "$299.99",
       "duration": "year",
       "button": "Get Started",
@@ -33,7 +33,7 @@ function PricingNew() {
     {
       "id": "2",
       "plan": "Silver Partnership",
-      "planType": "silver",
+      "planType": "Silver",
       "price": "$449.99",
       "duration": "year",
       "button": "Get Started",
@@ -48,7 +48,7 @@ function PricingNew() {
     {
       "id": "3",
       "plan": "Gold Partnership",
-      "planType": "gold",
+      "planType": "Gold",
       "price": "Custom Pricing",
       "button": "Get Started",
       "duration": "month",

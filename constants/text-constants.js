@@ -52,11 +52,13 @@ const toastText = {
     reviewUpdated: 'Your review has been updated',
     reviewDeleted: 'Your review has been removed',
     removedFromSaveList: 'Removed from Saved list',
-    addToSaveList: 'Added to Saved list'
+    addToSaveList: 'Added to Saved list',
+    blogRemoved: 'Blog has been removed',
   },
   error: {
     loginFirst: 'Log in or create an account to use our chatbot',
     recordNotDeleted: 'Error removing directory listing',
+    blogRemoveError: 'Error removing the Blog',
     directoryNotApproved: 'Your directory listing has not yet been approved',
     directoryNotDeleted: 'Error removing directory listing',
     dircetoryCannotDelete: 'This directory listing cannot be removed',

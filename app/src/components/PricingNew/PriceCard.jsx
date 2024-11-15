@@ -1,8 +1,9 @@
 
-import { useState } from 'react';
+
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { toastText } from "@/constants/text-constants";
+import { useAppDispatch } from "@/lib/hooks";
+import { clearUser } from "@/lib/features/auth/authSlice";
 import Image from "next/image";
 
 import { useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import { useSelector } from "react-redux";
 const PriceCard = ({ detail, toggleOpen, openIndex }) => {
 
     const { user, token } = useSelector((state) => state.auth);
+    const dispatch = useAppDispatch();
 
     const router = useRouter();
 
@@ -17,15 +19,20 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
         if (!user) {
             router.push('/registerCreatePartner');
             return;
-        } else {
+        } else if (user?.role === "creator") {
             router.push(`/directory-manager?type=${detail?.planType}`);
+        } else {
+            Cookies.remove("token");
+            Cookies.remove("user");
+            dispatch(clearUser());
+            router.push(`/registerCreatePartner`);
         }
     };
 
     return (
         <div className="bg-[#323639] border border-[rgba(255,255,255,0.2)] rounded-lg shadow-lg min-w-full lg:min-w-auto">
 
-            {detail?.planType === 'bronze' ?
+            {detail?.planType === 'Bronze' ?
                 <div className='flex justify-between items-center mt-8'>
                     <div className="relative inline-block lg:w-full">
                         <svg viewBox="0 0 320 44" preserveAspectRatio="none" className="w-full lg:w-auto min-h-[44px] max-h-[44px]" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +60,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                         }
                     </button>
                 </div>
-                : detail?.planType === 'silver' ?
+                : detail?.planType === 'Silver' ?
                     <div className='flex justify-between items-center mt-8'>
                         <div className="relative inline-block lg:w-full">
                             <svg viewBox="0 0 320 44" preserveAspectRatio="none" className="w-full lg:w-auto min-h-[44px] max-h-[44px]" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +126,7 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                 }
                 <button
                     onClick={handlePayment}
-                    className={`w-full text-white font-semibold px-[20px] py-[10px] rounded-lg mb-6 ${detail?.planType === 'silver' ? 'bg-[#8B60B2]' : 'bg-[#1E1E1E] border border-[#FFFFFF33]'}`}
+                    className={`w-full text-white font-semibold px-[20px] py-[10px] rounded-lg mb-6 ${detail?.planType === 'Silver' ? 'bg-[#8B60B2]' : 'bg-[#1E1E1E] border border-[#FFFFFF33]'}`}
                 >
                     {detail?.button}
                 </button>

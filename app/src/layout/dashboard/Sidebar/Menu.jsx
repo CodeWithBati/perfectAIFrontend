@@ -33,6 +33,11 @@ const menuData = [
     text: "Directory Requests",
     link: "/dashboard/requests",
   },
+  {
+    icon: <Ticket />,
+    text: "Blogs",
+    link: "/dashboard/blogs",
+  },
 ];
 function Menu({ setVisibility }) {
   // const theme = useTheme();

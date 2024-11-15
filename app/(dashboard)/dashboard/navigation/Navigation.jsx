@@ -99,7 +99,7 @@ const Navigation = ({ setSidebarVisibility }) => {
                   />
                 ) : (
                   <Image
-                    src={"/images/defaulticon4.png"}
+                    src={"/images/LightLogo.png"}
                     alt="website Logo"
                     width={200}
                     height={200}

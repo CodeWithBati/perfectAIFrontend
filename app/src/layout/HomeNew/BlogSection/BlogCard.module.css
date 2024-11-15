@@ -1,0 +1,7 @@
+.text-black-prose .prose {
+  color: black;
+}
+
+.dark .text-white-prose .prose {
+  color: white;
+}
