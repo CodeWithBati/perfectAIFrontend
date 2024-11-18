@@ -226,8 +226,8 @@ function ChatBotResult({ ChatKey }) {
                   key={index}
                   onClick={() => setSelectedTaskIndex(index)}
                   className={clsx(
-                    "flex-shrink-0 w-1/2 text-center bg-[#8B60B2] font-bold text-xs py-2 px-4 rounded-[5px] text-white transition-colors duration-200",
-                    selectedTaskIndex === index ? "bg-[#8B60B2]" : "bg-[#323639]"
+                    "flex-shrink-0 w-1/2 text-center font-bold text-xs py-2 px-4 rounded-[5px] text-white transition-colors duration-200",
+                    selectedTaskIndex === index ? "bg-[#8B60B2]" : "bg-[#1e1e1e]"
                   )}
                 >
                   {rec?.taskTitle}
@@ -353,8 +353,8 @@ function ChatBotResult({ ChatKey }) {
                         key={index}
                         onClick={() => setSelectedTaskIndex(index)}
                         className={clsx(
-                          "flex-shrink-0 w-1/2 text-center bg-[#8B60B2] font-bold text-xs py-2 px-4 rounded-[5px] text-white transition-colors duration-200",
-                          selectedTaskIndex === index ? "bg-[#8B60B2]" : "bg-[#323639]"
+                          "flex-shrink-0 w-1/2 text-center font-bold text-xs py-2 px-4 rounded-[5px] text-white transition-colors duration-200",
+                          selectedTaskIndex === index ? "bg-[#8B60B2]" : "bg-[#1e1e1e]"
                         )}
                       >
                         {rec?.taskTitle}
