@@ -55,7 +55,7 @@ const DirectoryManagerMainPageView = () => {
   return (
     <>
       {user?.role === "creator" ? (
-        <div className="flex bg-[#181C1F] bg-no-repeat bg-center lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
+        <div className="flex bg-[#181C1F] bg-no-repeat lg:bg-center lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
           <div className="flex flex-col min-h-screen flex-grow overflow-x-hidden max-w-full">
             <main>
               {spinner ? (

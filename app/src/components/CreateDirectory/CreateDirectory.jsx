@@ -297,9 +297,9 @@ function CreateDirectory({
         setIsNew(false);
         setIsActive(false);
         setFormData(defaultState);
-        if (planType === 'bronze') {
+        if (planType === 'Bronze') {
           router.push('https://buy.stripe.com/3cs17DbzUdrcaacdQW')
-        } else if (planType === 'silver') {
+        } else if (planType === 'Silver') {
           router.push('https://buy.stripe.com/cN25nTdI22My82414b')
         }
         else {
@@ -319,7 +319,7 @@ function CreateDirectory({
   console.log(planType)
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] bg-center lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
+    <section className="relative flex flex-col items-center justify-center min-w-screen min-h-screen pt-32 pb-16 text-white bg-no-repeat bg-[#181C1F] lg:bg-center bg-contain lg:bg-cover bg-[url('/images/mobileSomeBg.png')] lg:bg-[url('/images/someBg.png')]">
 
 
       <div className="lg:w-[770px] w-full px-[30px] lg:px-0">

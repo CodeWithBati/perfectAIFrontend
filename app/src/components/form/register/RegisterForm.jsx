@@ -285,7 +285,7 @@ const RegisterForm = () => {
                 onClick={() => router.push('/registerCreate')}
               >
                 <div className="flex items-start lg:items-center">
-                  <div className="w-[40px] flex justify-center items-center">
+                  <div className="w-[40px] hidden lg:flex justify-center items-center">
                     <svg width="22" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="hidden lg:block">
                       <path d="M14.75 7C14.75 5.6875 14 4.46875 12.875 3.76562C11.7031 3.10938 10.25 3.10938 9.125 3.76562C7.95312 4.46875 7.25 5.6875 7.25 7C7.25 8.35938 7.95312 9.57812 9.125 10.2812C10.25 10.9375 11.7031 10.9375 12.875 10.2812C14 9.57812 14.75 8.35938 14.75 7ZM5 7C5 4.89062 6.125 2.92188 8 1.84375C9.82812 0.765625 12.125 0.765625 14 1.84375C15.8281 2.92188 17 4.89062 17 7C17 9.15625 15.8281 11.125 14 12.2031C12.125 13.2812 9.82812 13.2812 8 12.2031C6.125 11.125 5 9.15625 5 7ZM3.54688 22.75H18.4531L16.8125 17.5H5.14062L3.54688 22.75ZM3.5 15.25H18.5L20.7969 22.75L21.5 25H19.1094H2.84375H0.5L1.15625 22.75L3.5 15.25Z" fill="white" />
                     </svg>
@@ -311,10 +311,10 @@ const RegisterForm = () => {
                 onClick={() => router.push('/registerCreatePartner')}
               >
                 <div className="flex items-start lg:items-center">
-                <div className="w-[40px] flex justify-center items-center">
-                  <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="hidden lg:block">
-                    <path d="M9.5 0H22.5H24V1.5V6H29H32V9V17.5V27V30H29H3H0V27V17.5V9V6H3H8V1.5V0H9.5ZM29 16V9H22.5H9.5H3V16H12H20H29ZM20 19V22H12V19H3V27H29V19H20ZM21 6V3H11V6H21Z" fill="white" />
-                  </svg>
+                  <div className="w-[40px] hidden lg:flex flex justify-center items-center">
+                    <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="hidden lg:block">
+                      <path d="M9.5 0H22.5H24V1.5V6H29H32V9V17.5V27V30H29H3H0V27V17.5V9V6H3H8V1.5V0H9.5ZM29 16V9H22.5H9.5H3V16H12H20H29ZM20 19V22H12V19H3V27H29V19H20ZM21 6V3H11V6H21Z" fill="white" />
+                    </svg>
                   </div>
 
                   <div className="lg:hidden bg-[#4B4B4B] rounded-full p-[10px]">

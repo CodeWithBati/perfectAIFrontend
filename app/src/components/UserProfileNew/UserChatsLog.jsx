@@ -6,7 +6,7 @@ import axios from "axios";
 import ChatShareCard from "../ChatShareCard";
 
 const UserChatsLog = () => {
-  
+
   const listRef = useRef(null);
   const { token } = useSelector((state) => state.auth);
   const [chatHistoryLog, setChatHistoryLog] = useState([]);
@@ -52,6 +52,19 @@ const UserChatsLog = () => {
     fetchSites();
   }, [page, fetchSites]);
 
+  const handleScroll = useCallback(() => {
+    if (listRef.current && !loadingRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listRef.current;
+      if (scrollHeight - scrollTop <= clientHeight + 100) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSites();
+  }, [page, fetchSites]);
+
 
   const chatData = [
     {
@@ -88,10 +101,24 @@ const UserChatsLog = () => {
           No Chat History
         </h2>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {chatHistoryLog?.map((chat, i) => (
-            <ChatShareCard chat={chat} key={i} />
-          ))}
+        <div className="flex flex-col">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {chatHistoryLog?.map((chat, i) => (
+              <ChatShareCard chat={chat} key={i} />
+            ))}
+
+          </div>
+          {page < totalPages && chatHistoryLog.length > 0 && (
+            <div className="sm:flex sm:justify-center mt-8 w-full sm:w-auto">
+              <button
+                onClick={() => setPage((prevPage) => prevPage + 1)}
+                className="px-[20px] py-[10px] bg-none text-white text-sm font-semibold rounded-[5px] border border-[rgba(255,255,255,0.2)] w-full sm:w-auto bg-[#1e1e1e] tracking-wider hover:bg-[#323639]"
+                disabled={extractMoreSpinner}
+              >
+                {extractMoreSpinner ? "Loading..." : "View More"}
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

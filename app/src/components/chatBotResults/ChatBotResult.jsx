@@ -7,6 +7,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
+import { BookmarkIcon as FillBookMarkIcon } from "@heroicons/react/24/solid";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/app/src/components/global/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -41,6 +43,7 @@ function ChatBotResult({ ChatKey }) {
   const [input, setInput] = useState("");
   const [shareableLink, setShareableLink] = useState("");
   const [directories, setDirectories] = useState([]);
+  const [directorySaveStatus, setDirectorySaveStatus] = useState(false);
   const [extractMoreSpinner, setExtractMoreSpinner] = useState(false);
   const [page, setPage] = useState(1);
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(0);
@@ -56,6 +59,28 @@ function ChatBotResult({ ChatKey }) {
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleToggleSaved = async (event) => {
+    event.stopPropagation();
+    if (!user) {
+      toast.error(toastText.error.savingWithoutLogin);
+      router.push("/login");
+      return;
+    }
+
+    const response = await axios.patch(
+      `${process.env.NEXT_PUBLIC_API_URL}/directories/${chatData[selectedTaskIndex]?.recommended?.directory?.id}/saves`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.status === 200) {
+      setDirectorySaveStatus(!directorySaveStatus);
+      toast.success(directorySaveStatus ? "Save removed from your list" : "Save added to your list");
+    } else {
+      toast.error(toastText.error.directoryNotSaved);
+    }
   };
 
   const fetchSites = useCallback(async () => {
@@ -184,11 +209,11 @@ function ChatBotResult({ ChatKey }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5l-7-7m0 0l7-7m-7 7h16.5" />
             </svg>
           </Link>
-          <Link href='/' className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
+          <div onClick={() => copyTextToClipboard(shareableLink)} className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
             </svg>
-          </Link>
+          </div>
         </div>
 
         <div className="bg-[#323639] rounded-lg mb-4">
@@ -297,11 +322,11 @@ function ChatBotResult({ ChatKey }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5l-7-7m0 0l7-7m-7 7h16.5" />
                   </svg>
                 </Link>
-                <Link href='/' className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
+                <div onClick={() => copyTextToClipboard(shareableLink)} className='mb-4 bg-[#8B60B2] p-[10px] rounded-[5px] text-sm font-bold text-white hover:text-white'>
                   <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 0.5V11.5H5V0.5H16ZM2 5.5H4V7.5H2V14.5H9V12.5H11V14.5V16.5H9H2H0V14.5V7.5V5.5H2Z" fill="white" />
                   </svg>
-                </Link>
+                </div>
               </div>
 
               <div className="bg-[#323639] rounded-lg mb-4">
@@ -355,10 +380,14 @@ function ChatBotResult({ ChatKey }) {
 
                 {/* Action buttons */}
                 <div className="save w-full flex gap-4 mb-4">
-                  <button className='flex items-center w-full lg:w-auto p-2 h-[41px] justify-center text-white font-bold rounded-[5px] bg-[#323639]'>
-                    <svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg" className='mr-2'>
-                      <path d="M6.5 11.2812L7.25 11.7188L11 13.9062V2H2V13.9062L5.71875 11.7188L6.5 11.2812ZM2 15.625L0.5 16.5V14.7812V2V0.5H2H11H12.5V2V14.7812V16.5L11 15.625L6.5 13L2 15.625Z" fill="white" />
-                    </svg>
+                  <button className='flex items-center w-full lg:w-auto p-2 h-[41px] justify-center text-white font-bold rounded-[5px] bg-[#323639]' onClick={handleToggleSaved}>
+                    {directorySaveStatus ?
+                      <FillBookMarkIcon width={18} height={20} className='mr-2' />
+                      :
+                      <svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg" className='mr-2'>
+                        <path d="M6.5 11.2812L7.25 11.7188L11 13.9062V2H2V13.9062L5.71875 11.7188L6.5 11.2812ZM2 15.625L0.5 16.5V14.7812V2V0.5H2H11H12.5V2V14.7812V16.5L11 15.625L6.5 13L2 15.625Z" fill="white" />
+                      </svg>}
+
 
                     Save
                   </button>

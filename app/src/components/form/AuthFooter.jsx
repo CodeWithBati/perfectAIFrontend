@@ -23,7 +23,7 @@ const AuthFooter = () => {
             </p>
             <div className="flex space-x-4">
                 <p onClick={openModalPrivacy} className="text-white text-xs mt-0 cursor-pointer">Privacy Policy</p>
-                <p onClick={openModalPrivacy} className="text-white text-xs mt-0 cursor-pointer">Terms and Conditions</p>
+                <p onClick={openModalTerms} className="text-white text-xs mt-0 cursor-pointer">Terms and Conditions</p>
             </div>
 
             <Terms isOpen={termModalOpen} onClose={closeModalTerms} />
