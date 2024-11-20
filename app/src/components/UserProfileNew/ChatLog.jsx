@@ -8,16 +8,17 @@ import { toastText } from "@/constants/text-constants";
 
 const ChatLog = ({ historyLog }) => {
   const copyTextToClipboard = async (textToCopy) => {
-    if ("clipboard" in navigator) {
-      try {
-        await navigator.clipboard.writeText(textToCopy);
-        toast.success(toastText.success.linkCopied);
-      } catch (err) {
-        console.error("Failed to copy: ", err);
-      }
-    } else {
-      console.error("Clipboard API not available.");
-    }
+    toast.error("Share link is currently unavailable");
+    // if ("clipboard" in navigator) {
+    //   try {
+    //     await navigator.clipboard.writeText(textToCopy);
+    //     toast.success(toastText.success.linkCopied);
+    //   } catch (err) {
+    //     console.error("Failed to copy: ", err);
+    //   }
+    // } else {
+    //   console.error("Clipboard API not available.");
+    // }
   };
 
   return (
@@ -25,7 +26,7 @@ const ChatLog = ({ historyLog }) => {
       <Link href={`chat/${historyLog.id}`} className="text-slate-900 hover:text-blue-600 transition-all dark:text-gray-500">{historyLog.input}</Link>
       <div className=" my-2 flex justify-end">
         <Button
-          className={"bg-blue-600 text-white hover:bg-blue-800 "}
+          className={"bg-blue-600 text-white hover:bg-blue-800 z-20"}
           onClick={() => copyTextToClipboard(historyLog.shareableLink)}
         >
           Share Link <FontAwesomeIcon icon={faCopy} />

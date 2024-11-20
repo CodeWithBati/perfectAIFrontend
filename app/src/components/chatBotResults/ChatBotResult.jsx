@@ -171,16 +171,17 @@ function ChatBotResult({ ChatKey }) {
   }, [ChatKey, token, router]);
 
   const copyTextToClipboard = async (textToCopy) => {
-    if ("clipboard" in navigator) {
-      try {
-        await navigator.clipboard.writeText(textToCopy);
-        toast.success(toastText.success.linkCopied);
-      } catch (err) {
-        console.error("Failed to copy: ", err);
-      }
-    } else {
-      console.error("Clipboard API not available.");
-    }
+    toast.error("Share link is currently unavailable");
+    // if ("clipboard" in navigator) {
+    //   try {
+    //     await navigator.clipboard.writeText(textToCopy);
+    //     toast.success(toastText.success.linkCopied);
+    //   } catch (err) {
+    //     console.error("Failed to copy: ", err);
+    //   }
+    // } else {
+    //   console.error("Clipboard API not available.");
+    // }
   };
 
 

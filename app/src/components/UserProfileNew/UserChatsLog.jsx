@@ -66,34 +66,6 @@ const UserChatsLog = () => {
   }, [page, fetchSites]);
 
 
-  const chatData = [
-    {
-      id: 1,
-      description: "I own a small B2B consulting firm specializing in digital transformation. I need an Al tool to help with lead generation by identifying potential clients in my target industry and automating outreach efforts. My goal is to increase the number of qualified leads and grow my client base.",
-      link: "https://www.google.com",
-    },
-    {
-      id: 2,
-      description: "I want to a way to create engaging and original content for your website, blog, or social media",
-      link: "https://www.google.com",
-    },
-    {
-      id: 3,
-      description: "I own a small B2B consulting firm specializing in digital transformation. I need an Al tool to help with lead generation by identifying potential clients in my target industry and automating outreach efforts. My goal is to increase the number of qualified leads and grow my client base.",
-      link: "https://www.google.com",
-    },
-    {
-      id: 4,
-      description: "I own a small B2B consulting firm specializing in digital transformation. I need an Al tool to help with lead generation by identifying potential clients in my target industry and automating outreach efforts. My goal is to increase the number of qualified leads and grow my client base.",
-      link: "https://www.google.com",
-    },
-    {
-      id: 5,
-      description: "I own a small B2B consulting firm specializing in digital transformation. I need an Al tool to help with lead generation by identifying potential clients in my target industry and automating outreach efforts. My goal is to increase the number of qualified leads and grow my client base.",
-      link: "https://www.google.com",
-    }
-  ]
-
   return (
     <div className="w-full">
       {chatHistoryLog?.length && !extractMoreSpinner === 0 ? (
