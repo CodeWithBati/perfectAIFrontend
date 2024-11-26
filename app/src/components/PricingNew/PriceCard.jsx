@@ -41,10 +41,11 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                         <div className="flex items-center absolute top-0 left-4 lg:w-full h-full ml-1">
                             <Image
                                 alt="GetGenie"
-                                width={40}
-                                height={40}
+                                width={100}
+                                height={100}
                                 src='/images/bronze.png'
-                                className="rounded-[6.56px]"
+                                className="rounded-[6.56px] w-12 h-12"
+                                quality={100}
                             />
 
                             <span className="text-white text-lg font-semibold ml-4">{detail?.plan}</span>
@@ -69,10 +70,11 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                             <div className="flex items-center absolute top-0 left-4 lg:w-full h-full ml-1">
                                 <Image
                                     alt="GetGenie"
-                                    width={40}
-                                    height={40}
+                                    width={100}
+                                    height={100}
                                     src='/images/silver.png'
-                                    className="rounded-[6.56px]"
+                                    className="rounded-[6.56px] w-12 h-12"
+                                    quality={100}
                                 />
 
                                 <span className="text-black text-lg font-semibold ml-4">{detail?.plan}</span>
@@ -98,10 +100,11 @@ const PriceCard = ({ detail, toggleOpen, openIndex }) => {
                             <div className="flex items-center absolute top-0 left-4 lg:w-full h-full ml-1">
                                 <Image
                                     alt="GetGenie"
-                                    width={40}
-                                    height={40}
+                                    width={100}
+                                    height={100}
                                     src='/images/gold.png'
-                                    className="rounded-[6.56px]"
+                                    className="rounded-[6.56px] w-12 h-12"
+                                    quality={100}
                                 />
 
                                 <span className="text-white text-lg font-semibold ml-4">{detail?.plan}</span>
