@@ -164,7 +164,7 @@ const VerifyEmail = () => {
         severity={snackbar.severity}
         onClose={handleCloseSnackbar}
       />
-      <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
+      <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-contain lg:bg-contain bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
 
         <SideBar />
         <div className="relative z-10 lg:w-[60%] w-full lg:min-h-[1024px] :bg-dark-bg flex flex-col justify-between items-center px-[30px] lg:px-0">

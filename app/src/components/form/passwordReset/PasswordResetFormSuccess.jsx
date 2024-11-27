@@ -9,7 +9,7 @@ const PasswordResetFormSuccess = () => {
   return (
     <>
 
-      <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
+      <div className="flex flex-col lg:flex-row bg-[#181C1F] bg-contain lg:bg-contain bg-no-repeat bg-[url('/images/mobileAuthBg.png')] lg:bg-none">
         <SideBar />
 
         {/* Right Side with Sign-Up Options */}
