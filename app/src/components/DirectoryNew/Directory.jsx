@@ -224,6 +224,14 @@ function Directory() {
   }, [directory?.description]);
 
   const parseDescription = (htmlString) => {
+    const tabs = [
+      'Key Features',
+      'Use Cases',
+      'Pricing Information',
+      'Pros/Cons Comparison',
+      'Reviews',
+      'Summary',
+    ];
     const cleanHTML = DOMPurify.sanitize(htmlString);
     const parser = new DOMParser();
     const doc = parser.parseFromString(cleanHTML, 'text/html');
@@ -231,11 +239,15 @@ function Directory() {
     let currentSection = 'About'; // Default section
     sections[currentSection] = [];
     let currentSubSection = null;
-
+  
     const childNodes = Array.from(doc.body.childNodes);
-
+  
     childNodes.forEach((node) => {
-      if (node.nodeType === Node.ELEMENT_NODE && node.tagName.match(/^H[1-6]$/i)) {
+      if (
+        node.nodeType === Node.ELEMENT_NODE &&
+        (node.tagName.match(/^H[1-6]$/i) ||
+          (node.tagName === 'P' && node.querySelector('strong.ql-size-huge')))
+      ) {
         const title = node.textContent.trim();
         if (tabs.includes(title) || title === 'About') {
           currentSection = title;
